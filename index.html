@@ -1,38 +1,49 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Study Quest</title>
 
 <style>
+
+/* =========================
+   GENERAL
+========================= */
+
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
 }
 
-:root{
-    --primary:#6c63d9;
-    --primary2:#8b83ec;
-    --bg:#eef2ff;
-    --card:#ffffff;
-    --text:#25304a;
-    --muted:#77809a;
-    --border:#e5e8f2;
-    --success:#45b887;
-    --danger:#e85d75;
-    --shadow:0 12px 35px rgba(45,55,100,.10);
-}
-
 body{
-    font-family:Arial,"Tahoma",sans-serif;
-    background:var(--bg);
-    color:var(--text);
     min-height:100vh;
+    font-family:Arial,Tahoma,sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%,#ffffff 0,transparent 28%),
+        linear-gradient(135deg,#dff4e8,#dceeff 50%,#eee5ff);
+    color:#20382d;
 }
 
-/* ===================== WELCOME ===================== */
+button,input,select,textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none !important;
+}
+
+
+/* =========================
+   WELCOME
+========================= */
 
 #welcome{
     min-height:100vh;
@@ -40,387 +51,386 @@ body{
     align-items:center;
     justify-content:center;
     padding:25px;
-    background:
-        radial-gradient(circle at 10% 20%,rgba(139,131,236,.22),transparent 30%),
-        radial-gradient(circle at 90% 80%,rgba(69,184,135,.18),transparent 30%),
-        linear-gradient(135deg,#eef2ff,#f7f4ff);
 }
 
 .welcome-card{
-    width:min(560px,95%);
-    background:rgba(255,255,255,.94);
-    padding:55px 40px;
-    border-radius:35px;
-    box-shadow:0 25px 70px rgba(50,50,100,.15);
+    width:min(760px,95%);
     text-align:center;
+    background:rgba(255,255,255,.9);
+    backdrop-filter:blur(15px);
+    border-radius:35px;
+    padding:55px 35px;
+    box-shadow:0 25px 70px rgba(31,60,50,.16);
 }
 
-.welcome-logo{
-    width:110px;
-    height:110px;
-    margin:auto auto 20px;
-    border-radius:32px;
-    background:linear-gradient(135deg,var(--primary),var(--primary2));
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:58px;
-    box-shadow:0 15px 30px rgba(108,99,217,.25);
+.logo{
+    font-size:65px;
+    margin-bottom:10px;
 }
 
 .welcome-card h1{
-    font-size:42px;
-    margin-bottom:12px;
+    font-size:48px;
+    margin-bottom:10px;
 }
 
 .welcome-card p{
-    color:var(--muted);
-    font-size:18px;
+    color:#60776b;
+    font-size:19px;
     line-height:1.7;
     margin-bottom:30px;
 }
 
-/* ===================== BUTTONS ===================== */
-
-button{
-    font-family:inherit;
-}
-
-.primary-btn{
+.main-btn{
     border:0;
-    background:linear-gradient(135deg,var(--primary),var(--primary2));
+    background:linear-gradient(135deg,#287b59,#3b9a72);
     color:white;
-    padding:15px 25px;
-    border-radius:15px;
-    font-size:16px;
+    padding:16px 38px;
+    border-radius:17px;
+    font-size:19px;
     font-weight:bold;
-    cursor:pointer;
+    box-shadow:0 12px 25px rgba(40,123,89,.25);
     transition:.2s;
 }
 
-.primary-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:0 10px 25px rgba(108,99,217,.25);
+.main-btn:hover{
+    transform:translateY(-3px);
 }
 
-.secondary-btn{
-    border:1px solid var(--border);
-    background:var(--card);
-    color:var(--text);
-    padding:13px 20px;
-    border-radius:13px;
-    font-weight:bold;
-    cursor:pointer;
+.lang-top{
+    position:fixed;
+    top:20px;
+    left:20px;
+    z-index:50;
 }
 
-.danger-btn{
+.lang-top button{
     border:0;
-    background:#fff0f2;
-    color:var(--danger);
-    padding:13px 20px;
+    background:white;
+    padding:12px 17px;
     border-radius:13px;
+    box-shadow:0 8px 25px rgba(0,0,0,.12);
     font-weight:bold;
-    cursor:pointer;
 }
 
-/* ===================== LOGIN ===================== */
 
-.login-card{
-    width:min(560px,95%);
-    background:var(--card);
-    padding:40px;
+/* =========================
+   SETUP
+========================= */
+
+.setup{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+}
+
+.setup-card{
+    width:min(720px,95%);
+    background:white;
     border-radius:30px;
-    box-shadow:var(--shadow);
+    padding:38px;
+    box-shadow:0 20px 55px rgba(0,0,0,.12);
 }
 
-.login-card h2{
+.setup-card h1{
     text-align:center;
+    margin-bottom:8px;
+}
+
+.setup-sub{
+    text-align:center;
+    color:#6a7d73;
     margin-bottom:25px;
 }
 
-.field{
-    margin-bottom:18px;
-}
-
-.field label{
+label{
     display:block;
-    margin-bottom:8px;
     font-weight:bold;
+    margin:17px 0 8px;
 }
 
-.field input,
-.field select{
+input,select,textarea{
     width:100%;
-    padding:14px;
-    border:2px solid var(--border);
+    border:2px solid #e1ebe5;
     border-radius:13px;
+    padding:13px;
+    font-size:16px;
     outline:none;
-    background:var(--card);
-    color:var(--text);
-    font-size:15px;
+    background:white;
 }
 
-.field input:focus,
-.field select:focus{
-    border-color:var(--primary);
+input:focus,select:focus,textarea:focus{
+    border-color:#3b9a72;
 }
 
-.gender-row{
+.gender{
     display:flex;
-    gap:10px;
+    gap:12px;
 }
 
-.gender-btn{
+.gender button{
     flex:1;
     padding:14px;
-    border:2px solid var(--border);
-    background:var(--card);
+    border:2px solid #e1ebe5;
     border-radius:13px;
-    cursor:pointer;
-    font-weight:bold;
+    background:white;
+    font-size:17px;
 }
 
-.gender-btn.selected{
-    border-color:var(--primary);
-    background:#efeeff;
+.gender button.active{
+    border-color:#2e855f;
+    background:#e8f7ef;
 }
 
-/* ===================== CHARACTER ===================== */
+.setup-next{
+    width:100%;
+    margin-top:25px;
+}
+
+
+/* =========================
+   CHARACTER
+========================= */
 
 .character-preview{
-    width:210px;
     height:300px;
-    position:relative;
-    margin:15px auto 25px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-.char-head{
+.person{
+    position:relative;
+    width:180px;
+    height:280px;
+    filter:drop-shadow(0 12px 12px rgba(0,0,0,.12));
+}
+
+.person-head{
     position:absolute;
     width:88px;
     height:88px;
     border-radius:50%;
-    background:#d99a78;
-    left:61px;
+    background:#d99a76;
     top:15px;
+    left:46px;
     z-index:3;
 }
 
-.char-hair{
+.person-hair{
     position:absolute;
     width:94px;
-    height:50px;
+    height:52px;
     border-radius:55px 55px 25px 25px;
-    background:#382820;
-    left:58px;
+    background:#35251d;
     top:8px;
+    left:43px;
     z-index:4;
 }
 
-.char-eye{
+.person-eye{
     position:absolute;
     width:8px;
     height:8px;
-    border-radius:50%;
     background:#222;
+    border-radius:50%;
     top:57px;
     z-index:5;
 }
 
-.char-eye.one{left:84px}
-.char-eye.two{left:119px}
+.person-eye.one{left:69px;}
+.person-eye.two{left:104px;}
 
-.char-body{
+.person-body{
     position:absolute;
-    width:120px;
-    height:115px;
-    border-radius:35px 35px 20px 20px;
-    background:#6c8ee8;
-    left:45px;
-    top:100px;
+    width:110px;
+    height:105px;
+    border-radius:30px 30px 18px 18px;
+    background:#5c9ed4;
+    top:97px;
+    left:35px;
 }
 
-.char-arm{
+.person-arm{
     position:absolute;
-    width:27px;
-    height:90px;
-    background:#d99a78;
+    width:25px;
+    height:88px;
+    background:#d99a76;
     border-radius:20px;
-    top:110px;
+    top:108px;
 }
 
-.char-arm.one{
-    left:25px;
+.person-arm.one{
+    left:14px;
     transform:rotate(10deg);
 }
 
-.char-arm.two{
-    right:25px;
+.person-arm.two{
+    right:14px;
     transform:rotate(-10deg);
 }
 
-.char-leg{
+.person-leg{
     position:absolute;
-    width:43px;
-    height:85px;
+    width:40px;
+    height:82px;
+    background:#303943;
     border-radius:10px;
-    background:#34394a;
-    top:205px;
+    top:190px;
 }
 
-.char-leg.one{left:64px}
-.char-leg.two{right:64px}
+.person-leg.one{left:48px;}
+.person-leg.two{right:48px;}
 
-.hijab{
-    display:none;
-    position:absolute;
-    width:108px;
-    height:112px;
-    background:#8b83ec;
-    border-radius:55px 55px 30px 30px;
-    left:51px;
-    top:5px;
-    z-index:6;
-}
-
-.character-preview.girl .hijab{
-    display:block;
-}
-
-.character-preview.girl .char-hair{
-    display:none;
-}
-
-.character-options{
+.outfit-options{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:12px;
 }
 
-.char-option{
-    border:2px solid var(--border);
-    background:var(--card);
-    padding:15px;
-    border-radius:15px;
-    cursor:pointer;
+.outfit-options button{
+    padding:14px;
+    background:white;
+    border:2px solid #e0e9e3;
+    border-radius:14px;
     font-weight:bold;
 }
 
-.char-option.selected{
-    border-color:var(--primary);
-    background:#efeeff;
+.outfit-options button.active{
+    border-color:#2e855f;
+    background:#e8f7ef;
 }
 
-/* ===================== APP ===================== */
 
-#app{
-    display:none;
-    min-height:100vh;
+/* =========================
+   SUBJECTS
+========================= */
+
+.subjects{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+    margin-top:20px;
 }
 
-.sidebar{
-    position:fixed;
-    top:0;
-    right:0;
-    width:270px;
-    height:100vh;
-    background:var(--card);
-    border-left:1px solid var(--border);
-    padding:22px 15px;
-    z-index:1000;
-    transition:.25s;
-    overflow-y:auto;
-}
-
-body[dir="ltr"] .sidebar{
-    right:auto;
-    left:0;
-    border-left:0;
-    border-right:1px solid var(--border);
-}
-
-.brand{
+.subject{
+    padding:15px;
+    border:2px solid #e0e9e3;
+    border-radius:14px;
+    background:white;
     display:flex;
+    gap:10px;
     align-items:center;
-    gap:12px;
-    padding:10px;
-    margin-bottom:25px;
 }
 
-.brand-icon{
-    width:45px;
-    height:45px;
-    border-radius:13px;
-    background:linear-gradient(135deg,var(--primary),var(--primary2));
-    color:white;
+.subject.active{
+    background:#e9f8f0;
+    border-color:#32916a;
+}
+
+.subject-check{
+    width:23px;
+    height:23px;
+    border:2px solid #cbd9d1;
+    border-radius:7px;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:24px;
 }
 
-.brand strong{
-    font-size:19px;
+.subject.active .subject-check{
+    background:#32916a;
+    color:white;
+    border-color:#32916a;
 }
 
-.nav-title{
-    color:var(--muted);
-    font-size:12px;
-    margin:18px 12px 8px;
+
+/* =========================
+   APP
+========================= */
+
+#app{
+    min-height:100vh;
+    display:flex;
+}
+
+.sidebar{
+    width:250px;
+    min-height:100vh;
+    background:rgba(255,255,255,.92);
+    border-left:1px solid #e2ebe6;
+    padding:22px 15px;
+    position:fixed;
+    right:0;
+    top:0;
+    bottom:0;
+    z-index:20;
+}
+
+.sidebar-logo{
+    text-align:center;
+    font-size:23px;
+    font-weight:bold;
+    margin-bottom:25px;
+}
+
+.profile-mini{
+    text-align:center;
+    background:#eff8f3;
+    padding:16px;
+    border-radius:18px;
+    margin-bottom:18px;
+}
+
+.avatar-mini{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#6fa8dc;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    margin-bottom:8px;
 }
 
 .nav-btn{
     width:100%;
     border:0;
     background:transparent;
-    color:var(--text);
-    text-align:right;
-    padding:13px 14px;
+    padding:13px 15px;
     border-radius:13px;
-    cursor:pointer;
-    margin-bottom:3px;
-    font-size:14px;
-}
-
-body[dir="ltr"] .nav-btn{
-    text-align:left;
+    margin-bottom:5px;
+    text-align:right;
+    font-size:16px;
+    color:#40564b;
 }
 
 .nav-btn:hover,
 .nav-btn.active{
-    background:#efeeff;
-    color:var(--primary);
+    background:#e8f6ef;
+    color:#24734f;
     font-weight:bold;
 }
 
-.account-mini{
-    margin-top:20px;
-    padding:15px;
-    border-radius:17px;
-    background:linear-gradient(135deg,#f1f0ff,#edf9f5);
-    display:flex;
-    align-items:center;
-    gap:10px;
+.sidebar-bottom{
+    position:absolute;
+    bottom:20px;
+    right:15px;
+    left:15px;
 }
 
-.mini-avatar{
-    width:43px;
-    height:43px;
-    border-radius:50%;
-    background:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:25px;
-}
+
+/* =========================
+   MAIN
+========================= */
 
 .main{
-    margin-right:270px;
+    margin-right:250px;
+    width:calc(100% - 250px);
     padding:25px;
-}
-
-body[dir="ltr"] .main{
-    margin-right:0;
-    margin-left:270px;
 }
 
 .topbar{
@@ -428,671 +438,405 @@ body[dir="ltr"] .main{
     justify-content:space-between;
     align-items:center;
     margin-bottom:25px;
-    gap:15px;
 }
 
-.top-actions{
-    display:flex;
-    gap:8px;
-}
-
-.icon-btn{
-    width:45px;
-    height:45px;
-    border:1px solid var(--border);
-    background:var(--card);
-    border-radius:13px;
-    cursor:pointer;
-    font-size:19px;
-}
-
-/* ===================== PAGES ===================== */
-
-.page{
-    display:none;
-}
-
-.page.active{
-    display:block;
-}
-
-.page-title{
-    margin-bottom:6px;
-    font-size:28px;
-}
-
-.page-subtitle{
-    color:var(--muted);
-    margin-bottom:25px;
-}
-
-/* ===================== DASHBOARD ===================== */
-
-.greeting{
-    background:linear-gradient(135deg,#7470df,#9188ed);
-    color:white;
-    border-radius:25px;
-    padding:28px;
-    margin-bottom:20px;
-    position:relative;
-    overflow:hidden;
-}
-
-.greeting h1{
-    margin-bottom:8px;
-}
-
-.greeting p{
-    opacity:.9;
-}
-
-.dashboard-stats{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:15px;
-    margin-bottom:20px;
-}
-
-.stat-card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:20px;
-    box-shadow:var(--shadow);
-}
-
-.stat-icon{
-    font-size:28px;
-    margin-bottom:10px;
-}
-
-.stat-card strong{
-    display:block;
-    font-size:24px;
+.welcome-title h1{
+    font-size:29px;
     margin-bottom:5px;
 }
 
-.stat-card span{
-    color:var(--muted);
-    font-size:13px;
+.welcome-title p{
+    color:#718178;
+}
+
+.today{
+    background:white;
+    padding:12px 18px;
+    border-radius:15px;
+    box-shadow:0 7px 22px rgba(0,0,0,.07);
+    font-weight:bold;
 }
 
 .dashboard-grid{
     display:grid;
-    grid-template-columns:1.3fr .7fr;
-    gap:20px;
-}
-
-.card{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:22px;
-    padding:22px;
-    box-shadow:var(--shadow);
-    margin-bottom:20px;
-}
-
-.card-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
-}
-
-.card-header h3{
-    font-size:18px;
-}
-
-.empty{
-    text-align:center;
-    color:var(--muted);
-    padding:25px;
-}
-
-/* ===================== TODO ===================== */
-
-.add-task{
-    display:grid;
-    grid-template-columns:1fr 150px 120px auto;
-    gap:10px;
-    margin-bottom:20px;
-}
-
-.add-task input,
-.add-task select{
-    padding:13px;
-    border:2px solid var(--border);
-    border-radius:12px;
-    background:var(--card);
-    color:var(--text);
-}
-
-.task{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:15px;
-    border:1px solid var(--border);
-    border-radius:15px;
-    margin-bottom:10px;
-}
-
-.task-check{
-    width:25px;
-    height:25px;
-    border-radius:8px;
-    border:2px solid #ccd1df;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex:none;
-}
-
-.task.done .task-check{
-    background:var(--success);
-    color:white;
-    border-color:var(--success);
-}
-
-.task.done .task-name{
-    text-decoration:line-through;
-    opacity:.5;
-}
-
-.task-content{
-    flex:1;
-}
-
-.task-name{
-    font-weight:bold;
-}
-
-.task-meta{
-    color:var(--muted);
-    font-size:12px;
-    margin-top:5px;
-}
-
-/* ===================== CALENDAR ===================== */
-
-.calendar-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
-}
-
-.calendar-nav{
-    display:flex;
-    gap:8px;
-}
-
-.calendar-nav button{
-    width:40px;
-    height:40px;
-    border:1px solid var(--border);
-    background:var(--card);
-    border-radius:10px;
-    cursor:pointer;
-}
-
-.calendar-grid{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    gap:7px;
-}
-
-.day-name{
-    text-align:center;
-    color:var(--muted);
-    font-size:12px;
-    padding:8px 2px;
-    font-weight:bold;
-}
-
-.day{
-    min-height:85px;
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:9px;
-    background:var(--card);
-    cursor:pointer;
-}
-
-.day:hover{
-    border-color:var(--primary);
-}
-
-.day.today{
-    border:2px solid var(--primary);
-    background:#f3f2ff;
-}
-
-.day-number{
-    font-weight:bold;
-    margin-bottom:7px;
-}
-
-.day-event{
-    font-size:10px;
-    padding:4px;
-    border-radius:5px;
-    background:#ecebff;
-    color:var(--primary);
-    margin-top:3px;
-    overflow:hidden;
-}
-
-/* ===================== WEEK ===================== */
-
-.week-grid{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    gap:10px;
-}
-
-.week-day{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:17px;
-    min-height:220px;
-    padding:12px;
-}
-
-.week-day.today{
-    border:2px solid var(--primary);
-}
-
-.week-day-name{
-    font-weight:bold;
-    text-align:center;
-    margin-bottom:4px;
-}
-
-.week-date{
-    color:var(--muted);
-    font-size:12px;
-    text-align:center;
-    margin-bottom:12px;
-}
-
-.schedule-item{
-    background:#efeeff;
-    color:#5550a9;
-    padding:9px;
-    border-radius:10px;
-    margin-bottom:7px;
-    font-size:12px;
-}
-
-/* ===================== FOCUS ===================== */
-
-.focus-box{
-    max-width:600px;
-    margin:auto;
-    text-align:center;
-}
-
-.focus-selects{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-    margin-bottom:25px;
-}
-
-.focus-selects select{
-    padding:14px;
-    border:2px solid var(--border);
-    border-radius:12px;
-    background:var(--card);
-    color:var(--text);
-}
-
-.timer{
-    font-size:75px;
-    font-weight:bold;
-    letter-spacing:3px;
-    margin:25px 0;
-}
-
-.focus-status{
-    color:var(--muted);
-    margin-bottom:20px;
-}
-
-.focus-buttons{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-}
-
-/* ===================== SUBJECTS ===================== */
-
-.subject-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(4,1fr);
     gap:15px;
 }
 
-.subject{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:18px;
+.stat{
+    background:white;
     padding:20px;
-    cursor:pointer;
-    box-shadow:var(--shadow);
-    transition:.2s;
-}
-
-.subject:hover{
-    transform:translateY(-3px);
-    border-color:var(--primary);
-}
-
-.subject-icon{
-    font-size:32px;
-    margin-bottom:12px;
-}
-
-.subject-name{
-    font-weight:bold;
-}
-
-.subject-progress{
-    height:7px;
-    background:#edf0f5;
     border-radius:20px;
-    margin-top:12px;
-    overflow:hidden;
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
 }
 
-.subject-progress div{
-    height:100%;
-    background:linear-gradient(90deg,var(--primary),var(--primary2));
-    border-radius:20px;
+.stat-icon{
+    font-size:27px;
+    margin-bottom:10px;
 }
 
-/* ===================== PROGRESS ===================== */
-
-.progress-big{
-    display:flex;
-    align-items:center;
-    gap:25px;
-}
-
-.circle-progress{
-    width:145px;
-    height:145px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:conic-gradient(var(--primary) 0deg,#edf0f5 0deg);
-    position:relative;
-}
-
-.circle-progress::after{
-    content:"";
-    position:absolute;
-    width:110px;
-    height:110px;
-    border-radius:50%;
-    background:var(--card);
-}
-
-.circle-progress span{
-    position:relative;
-    z-index:2;
+.stat strong{
     font-size:25px;
-    font-weight:bold;
+    display:block;
 }
 
-/* ===================== SETTINGS ===================== */
+.stat span{
+    color:#738178;
+    font-size:14px;
+}
 
-.setting-row{
+.content-grid{
+    display:grid;
+    grid-template-columns:1.3fr .7fr;
+    gap:18px;
+    margin-top:20px;
+}
+
+.card{
+    background:white;
+    border-radius:22px;
+    padding:22px;
+    box-shadow:0 8px 25px rgba(0,0,0,.06);
+}
+
+.card-title{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:20px;
-    padding:18px 0;
-    border-bottom:1px solid var(--border);
+    margin-bottom:18px;
 }
 
-.setting-row:last-child{
+.card-title h2{
+    font-size:20px;
+}
+
+.small-btn{
+    border:0;
+    background:#eaf7f0;
+    color:#287b59;
+    padding:9px 13px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+
+/* =========================
+   TODO
+========================= */
+
+.todo-add{
+    display:flex;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.todo-add input{
+    flex:1;
+}
+
+.todo-add button{
+    border:0;
+    background:#2e855f;
+    color:white;
+    width:48px;
+    border-radius:12px;
+    font-size:22px;
+}
+
+.todo-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px;
+    border-bottom:1px solid #edf1ee;
+}
+
+.todo-item:last-child{
     border-bottom:0;
 }
 
-.setting-info strong{
-    display:block;
-    margin-bottom:5px;
+.todo-item input{
+    width:20px;
+    height:20px;
 }
 
-.setting-info span{
-    color:var(--muted);
-    font-size:13px;
+.todo-item.done span{
+    text-decoration:line-through;
+    color:#9ba8a1;
 }
 
-.toggle{
-    width:52px;
-    height:29px;
-    border:0;
-    border-radius:30px;
-    background:#d5d9e4;
-    cursor:pointer;
-    position:relative;
+
+/* =========================
+   SESSION
+========================= */
+
+.session{
+    text-align:center;
 }
 
-.toggle::after{
-    content:"";
-    position:absolute;
-    width:23px;
-    height:23px;
-    border-radius:50%;
-    background:white;
-    top:3px;
-    right:3px;
-    transition:.2s;
+.timer{
+    font-size:54px;
+    font-weight:bold;
+    margin:15px 0;
+    color:#287b59;
 }
 
-body[dir="ltr"] .toggle::after{
-    right:auto;
-    left:3px;
-}
-
-.toggle.on{
-    background:var(--primary);
-}
-
-.toggle.on::after{
-    right:26px;
-}
-
-body[dir="ltr"] .toggle.on::after{
-    right:auto;
-    left:26px;
-}
-
-/* ===================== MODAL ===================== */
-
-.modal{
-    position:fixed;
-    inset:0;
-    background:rgba(20,25,45,.45);
-    display:none;
-    align-items:center;
+.timer-btns{
+    display:flex;
     justify-content:center;
-    z-index:2000;
-    padding:20px;
+    gap:8px;
 }
 
-.modal.show{
-    display:flex;
+.timer-btns button{
+    border:0;
+    padding:11px 17px;
+    border-radius:11px;
+    font-weight:bold;
 }
 
-.modal-box{
-    width:min(500px,100%);
-    background:var(--card);
-    border-radius:25px;
-    padding:30px;
-    max-height:90vh;
-    overflow:auto;
+.start-session{
+    background:#2e855f;
+    color:white;
 }
 
-.modal-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.pause-session{
+    background:#edf2ef;
+}
+
+
+/* =========================
+   CALENDAR
+========================= */
+
+.page-title{
+    font-size:29px;
+    margin-bottom:7px;
+}
+
+.page-subtitle{
+    color:#718178;
     margin-bottom:20px;
 }
 
-/* ===================== DARK ===================== */
-
-body.dark{
-    --bg:#151827;
-    --card:#202437;
-    --text:#f0f2fa;
-    --muted:#a5abc0;
-    --border:#30364d;
-    --shadow:0 12px 35px rgba(0,0,0,.25);
+.week{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:9px;
 }
 
-body.dark .nav-btn.active,
-body.dark .nav-btn:hover{
-    background:#30304f;
+.day{
+    background:white;
+    min-height:190px;
+    border-radius:18px;
+    padding:13px;
+    box-shadow:0 7px 22px rgba(0,0,0,.06);
 }
 
-body.dark .day.today{
-    background:#2a2945;
+.day.today-day{
+    outline:3px solid #72b996;
 }
 
-body.dark .schedule-item,
-body.dark .day-event{
-    background:#302f50;
+.day-name{
+    font-weight:bold;
+    margin-bottom:5px;
 }
 
-/* ===================== MOBILE ===================== */
-
-.mobile-menu{
-    display:none;
+.day-date{
+    color:#89968f;
+    font-size:13px;
+    margin-bottom:12px;
 }
 
-@media(max-width:1000px){
-
-    .dashboard-stats{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .dashboard-grid{
-        grid-template-columns:1fr;
-    }
-
-    .subject-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .add-task{
-        grid-template-columns:1fr 1fr;
-    }
+.lesson{
+    background:#edf8f2;
+    color:#287b59;
+    padding:8px;
+    border-radius:9px;
+    margin-bottom:6px;
+    font-size:13px;
 }
 
-@media(max-width:700px){
+
+/* =========================
+   SUBJECT PAGE
+========================= */
+
+.subject-list{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:13px;
+}
+
+.subject-box{
+    background:white;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 7px 22px rgba(0,0,0,.06);
+}
+
+.subject-box h3{
+    margin-bottom:10px;
+}
+
+.progress{
+    height:9px;
+    background:#edf1ee;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:55%;
+    background:#3b9a72;
+}
+
+
+/* =========================
+   SETTINGS
+========================= */
+
+.settings-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.setting-card{
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 7px 22px rgba(0,0,0,.06);
+}
+
+.setting-card h3{
+    margin-bottom:10px;
+}
+
+.setting-card button{
+    border:0;
+    background:#edf7f1;
+    padding:10px 14px;
+    border-radius:10px;
+    margin:4px;
+}
+
+.account-box{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.account-box button{
+    background:#f4f5f5;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
 
     .sidebar{
-        transform:translateX(110%);
+        width:75px;
+        padding:15px 8px;
     }
 
-    body[dir="ltr"] .sidebar{
-        transform:translateX(-110%);
+    .sidebar-logo{
+        font-size:0;
     }
 
-    .sidebar.open{
-        transform:translateX(0);
+    .sidebar-logo:first-letter{
+        font-size:25px;
     }
 
-    .main,
-    body[dir="ltr"] .main{
-        margin:0;
-        padding:15px;
-    }
-
-    .mobile-menu{
-        display:block;
-    }
-
-    .dashboard-stats{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .subject-grid{
-        grid-template-columns:1fr;
-    }
-
-    .week-grid{
-        overflow-x:auto;
-        grid-template-columns:repeat(7,150px);
-    }
-
-    .calendar-grid{
-        gap:3px;
-    }
-
-    .day{
-        min-height:65px;
-        padding:5px;
-    }
-
-    .day-event{
+    .profile-mini p,
+    .nav-btn span,
+    .sidebar-bottom span{
         display:none;
     }
 
-    .timer{
-        font-size:55px;
+    .nav-btn{
+        text-align:center;
+        font-size:21px;
+    }
+
+    .main{
+        margin-right:75px;
+        width:calc(100% - 75px);
+    }
+
+    .dashboard-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .content-grid{
+        grid-template-columns:1fr;
+    }
+
+    .week{
+        grid-template-columns:1fr;
+    }
+
+    .subject-list{
+        grid-template-columns:1fr 1fr;
     }
 }
 
-@media(max-width:500px){
-
-    .welcome-card{
-        padding:40px 22px;
-    }
+@media(max-width:600px){
 
     .welcome-card h1{
-        font-size:34px;
+        font-size:36px;
     }
 
-    .login-card{
-        padding:25px 20px;
-    }
-
-    .dashboard-stats{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .add-task{
+    .subjects,
+    .outfit-options,
+    .settings-grid,
+    .subject-list{
         grid-template-columns:1fr;
     }
 
-    .focus-selects{
-        grid-template-columns:1fr;
+    .dashboard-grid{
+        grid-template-columns:1fr 1fr;
     }
 
-    .character-options{
-        grid-template-columns:1fr 1fr;
+    .main{
+        padding:14px;
+    }
+
+    .topbar{
+        align-items:flex-start;
+        gap:10px;
+    }
+
+    .today{
+        font-size:12px;
     }
 }
+
 </style>
 </head>
 
+
 <body>
 
-<!-- ================= WELCOME ================= -->
+
+<!-- ==================================================
+     WELCOME
+================================================== -->
 
 <section id="welcome">
 
+    <div class="lang-top">
+        <button onclick="toggleStartLanguage()" id="startLangBtn">
+            🌐 العربية
+        </button>
+    </div>
+
     <div class="welcome-card">
 
-        <div class="welcome-logo">📚</div>
+        <div class="logo">📚</div>
 
         <h1>Study Quest</h1>
 
@@ -1102,80 +846,137 @@ body.dark .day-event{
             نظم وقتك، ذاكر بتركيز، وشوف تقدمك.
         </p>
 
-        <button class="primary-btn" onclick="showLogin()">
-            <span id="welcomeButton">ابدأ رحلتك 🚀</span>
+        <button class="main-btn" onclick="startJourney()" id="startBtn">
+            ابدأ رحلتك 🚀
         </button>
-
-        <div style="margin-top:18px">
-            <button class="secondary-btn" onclick="changeWelcomeLanguage()">
-                🌐 <span id="welcomeLang">العربية</span>
-            </button>
-        </div>
 
     </div>
 
 </section>
 
 
-<!-- ================= LOGIN ================= -->
+<!-- ==================================================
+     PROFILE
+================================================== -->
 
-<section id="loginScreen" style="display:none;min-height:100vh;align-items:center;justify-content:center;padding:25px;">
+<section id="profileSetup" class="setup hidden">
 
-    <div class="login-card">
+    <div class="setup-card">
 
-        <div style="text-align:center;font-size:45px;margin-bottom:10px">👋</div>
+        <h1 id="profileTitle">👋 أهلاً بيك!</h1>
 
-        <h2 id="loginTitle">إنشاء حسابك</h2>
+        <p class="setup-sub" id="profileSub">
+            خلينا نجهز حسابك الأول
+        </p>
 
-        <div class="field">
-            <label id="nameLabel">👤 اسمك</label>
-            <input id="userName" placeholder="اكتب اسمك">
+        <label id="nameLabel">👤 اسمك</label>
+        <input id="nameInput" placeholder="اكتب اسمك">
+
+        <label id="ageLabel">🎂 سنك</label>
+        <input id="ageInput" type="number" placeholder="اكتب سنك">
+
+        <label id="genderLabel">🧑 أنت</label>
+
+        <div class="gender">
+            <button onclick="chooseGender('boy')" id="boyBtn">
+                👦 ولد
+            </button>
+
+            <button onclick="chooseGender('girl')" id="girlBtn">
+                👧 بنت
+            </button>
         </div>
 
-        <div class="field">
-            <label id="ageLabel">🎂 سنك</label>
-            <input id="userAge" type="number" min="5" max="100" placeholder="اكتب سنك">
-        </div>
+        <label id="gradeLabel">🎓 صفك الدراسي</label>
 
-        <div class="field">
+        <select id="gradeInput">
 
-            <label id="genderLabel">🧑 النوع</label>
+            <option value="">اختار الصف</option>
+            <option>أولى إعدادي</option>
+            <option>تانية إعدادي</option>
+            <option>تالتة إعدادي</option>
 
-            <div class="gender-row">
+        </select>
 
-                <button class="gender-btn" id="boyGender" onclick="chooseGender('boy')">
-                    👦 ولد
-                </button>
+        <button
+            class="main-btn setup-next"
+            onclick="goCharacter()"
+            id="profileNext">
 
-                <button class="gender-btn" id="girlGender" onclick="chooseGender('girl')">
-                    👧 بنت
-                </button>
+            التالي ➜
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     CHARACTER
+================================================== -->
+
+<section id="characterSetup" class="setup hidden">
+
+    <div class="setup-card">
+
+        <h1 id="characterTitle" style="text-align:center">
+            🧍 اختار شخصيتك
+        </h1>
+
+        <p class="setup-sub" id="characterSub">
+            اختار الشكل واللبس اللي يمثلك
+        </p>
+
+        <div class="character-preview">
+
+            <div class="person">
+
+                <div class="person-head"></div>
+                <div class="person-hair"></div>
+
+                <div class="person-eye one"></div>
+                <div class="person-eye two"></div>
+
+                <div class="person-body"></div>
+
+                <div class="person-arm one"></div>
+                <div class="person-arm two"></div>
+
+                <div class="person-leg one"></div>
+                <div class="person-leg two"></div>
 
             </div>
 
         </div>
 
-        <div class="field">
+        <div class="outfit-options">
 
-            <label id="gradeLabel">🎓 الصف الدراسي</label>
+            <button onclick="chooseCharacter('boy1')" id="charBoy1">
+                👦 ولد — كاجوال
+            </button>
 
-            <select id="userGrade">
-                <option value="">اختار الصف</option>
-                <option value="prep1">أولى إعدادي</option>
-                <option value="prep2">تانية إعدادي</option>
-                <option value="prep3">تالتة إعدادي</option>
-            </select>
+            <button onclick="chooseCharacter('boy2')" id="charBoy2">
+                👦 ولد — رياضي
+            </button>
+
+            <button onclick="chooseCharacter('girl1')" id="charGirl1">
+                👧 بنت — حجاب
+            </button>
+
+            <button onclick="chooseCharacter('girl2')" id="charGirl2">
+                👧 بنت — كاجوال
+            </button>
 
         </div>
 
-        <button class="primary-btn" style="width:100%;margin-top:10px" onclick="createAccount()">
-            <span id="createAccountText">إنشاء الحساب والبدء</span>
-        </button>
+        <button
+            class="main-btn setup-next"
+            onclick="goSubjects()"
+            id="characterNext">
 
-        <div id="existingAccounts" style="margin-top:25px"></div>
+            التالي ➜
 
-        <button class="secondary-btn" style="width:100%;margin-top:12px" onclick="backWelcome()">
-            ← رجوع
         </button>
 
     </div>
@@ -1183,132 +984,176 @@ body.dark .day-event{
 </section>
 
 
-<!-- ================= CHARACTER ================= -->
+<!-- ==================================================
+     SUBJECTS
+================================================== -->
 
-<section id="characterScreen" style="display:none;min-height:100vh;align-items:center;justify-content:center;padding:25px;">
+<section id="subjectsSetup" class="setup hidden">
 
-    <div class="login-card">
+    <div class="setup-card">
 
-        <div style="text-align:center">
+        <h1 style="text-align:center" id="subjectsTitle">
+            📚 موادك الدراسية
+        </h1>
 
-            <div style="font-size:45px">🧑‍🎨</div>
+        <p class="setup-sub" id="subjectsSub">
+            اختار المواد اللي بتدرسها
+        </p>
 
-            <h2 id="characterTitle">اختار شخصيتك</h2>
+        <div class="subjects">
 
-            <p style="color:var(--muted);margin:10px 0 20px" id="characterText">
-                اختار الشخصية واللبس اللي يمثلّك ✨
+            <div class="subject" onclick="toggleSubject(this)">
+                <div class="subject-check">✓</div>
+                القرآن الكريم وتجويده
+            </div>
+
+            <div class="subject" onclick="toggleSubject(this)">
+                <div class="subject-check">✓</div>
+                أصول الدين
+            </div>
+
+            <div class="subject" onclick="toggleSubject(this)">
+                <div class="subject-check">✓</div>
+                الفقه
+            </div>
+
+            <div class="subject" onclick="toggleSubject(this)">
+                <div class="subject-check">✓</div>
+                النحو
+            </div>
+
+            <div class="subject" onclick="toggleSubject(this)">
+                <div class="subject-check">✓</div>
+                الصرف
+            </div>
+
+            <div class="subject" onclick="toggleSubject(this)">
+                <div class="subject-check">✓</div>
+                المطالعة والنصوص والقصة
+            </div>
+
+            <div class="subject" onclick="toggleSubject(this)">
+                <div class="subject-check">✓</div>
+                الإنشاء
+            </div>
+
+            <div class="subject" onclick="toggleSubject(this)">
+                <div class="subject-check">✓</div>
+                الإملاء
+            </div>
+
+            <div class="subject" onclick="toggleSubject(this)">
+                <div class="subject-check">✓</div>
+                الخط
+            </div>
+
+            <div class="subject" onclick="toggleSubject(this)">
+                <div class="subject-check">✓</div>
+                الدراسات الاجتماعية
+            </div>
+
+            <div class="subject" onclick="toggleSubject(this)">
+                <div class="subject-check">✓</div>
+                العلوم
+            </div>
+
+            <div class="subject" onclick="toggleSubject(this)">
+                <div class="subject-check">✓</div>
+                الرياضيات
+            </div>
+
+            <div class="subject" onclick="toggleSubject(this)">
+                <div class="subject-check">✓</div>
+                اللغة الإنجليزية
+            </div>
+
+            <div class="subject" onclick="toggleSubject(this)">
+                <div class="subject-check">✓</div>
+                الحاسب الآلي
+            </div>
+
+            <div class="subject" onclick="toggleSubject(this)">
+                <div class="subject-check">✓</div>
+                التربية الفنية
+            </div>
+
+        </div>
+
+        <button
+            class="main-btn setup-next"
+            onclick="finishSetup()">
+
+            ابدأ استخدام Study Quest 🚀
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     APP
+================================================== -->
+
+<section id="app" class="hidden">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            📚 Study Quest
+        </div>
+
+        <div class="profile-mini">
+
+            <div class="avatar-mini" id="miniAvatar">
+                👦
+            </div>
+
+            <b id="miniName">الطالب</b>
+
+            <p style="font-size:13px;color:#738178;margin-top:5px">
+                Level 1 ⭐
             </p>
 
         </div>
 
-        <div class="character-preview" id="characterPreview">
 
-            <div class="char-head"></div>
-            <div class="char-hair"></div>
-
-            <div class="char-eye one"></div>
-            <div class="char-eye two"></div>
-
-            <div class="hijab"></div>
-
-            <div class="char-body"></div>
-
-            <div class="char-arm one"></div>
-            <div class="char-arm two"></div>
-
-            <div class="char-leg one"></div>
-            <div class="char-leg two"></div>
-
-        </div>
-
-        <div class="character-options">
-
-            <button class="char-option" onclick="chooseCharacter('boy1',this)">
-                👦 ولد 1
-            </button>
-
-            <button class="char-option" onclick="chooseCharacter('boy2',this)">
-                👦 ولد 2
-            </button>
-
-            <button class="char-option" onclick="chooseCharacter('girl1',this)">
-                👧 بنت 1
-            </button>
-
-            <button class="char-option" onclick="chooseCharacter('girl2',this)">
-                👧 بنت 2
-            </button>
-
-        </div>
-
-        <button class="primary-btn" style="width:100%;margin-top:20px" onclick="finishCharacter()">
-            <span id="characterNext">التالي ➜</span>
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- ================= APP ================= -->
-
-<div id="app">
-
-    <!-- SIDEBAR -->
-
-    <aside class="sidebar" id="sidebar">
-
-        <div class="brand">
-            <div class="brand-icon">📚</div>
-            <strong>Study Quest</strong>
-        </div>
-
-        <div class="nav-title" id="mainNavTitle">الرئيسية</div>
-
-        <button class="nav-btn active" onclick="showPage('dashboard',this)">
-            🏠 <span data-ar="الرئيسية" data-en="Home">الرئيسية</span>
+        <button class="nav-btn active" onclick="showPage('home',this)">
+            🏠 <span>الرئيسية</span>
         </button>
 
         <button class="nav-btn" onclick="showPage('calendar',this)">
-            📅 <span data-ar="Calendar" data-en="Calendar">Calendar</span>
+            📅 <span>Calendar</span>
         </button>
 
-        <button class="nav-btn" onclick="showPage('todo',this)">
-            📝 <span data-ar="قائمة المهام" data-en="To-Do List">قائمة المهام</span>
+        <button class="nav-btn" onclick="showPage('tasks',this)">
+            ✅ <span>To-do List</span>
         </button>
 
         <button class="nav-btn" onclick="showPage('subjects',this)">
-            📚 <span data-ar="المواد" data-en="Subjects">المواد</span>
+            📚 <span>المواد</span>
         </button>
 
         <button class="nav-btn" onclick="showPage('focus',this)">
-            ⏱️ <span data-ar="جلسة مذاكرة" data-en="Focus Session">جلسة مذاكرة</span>
+            🎯 <span>جلسة مذاكرة</span>
         </button>
 
-        <button class="nav-btn" onclick="showPage('progress',this)">
-            📊 <span data-ar="التقدم والإحصائيات" data-en="Progress & Stats">التقدم والإحصائيات</span>
+        <button class="nav-btn" onclick="showPage('stats',this)">
+            📊 <span>إحصائيات</span>
         </button>
 
-        <div class="nav-title" id="toolsNavTitle">أدوات</div>
+        <div class="sidebar-bottom">
 
-        <button class="nav-btn" onclick="showPage('week',this)">
-            🗓️ <span data-ar="جدول الأسبوع" data-en="Weekly Schedule">جدول الأسبوع</span>
-        </button>
+            <button class="nav-btn" onclick="showPage('accounts',this)">
+                👥 <span>الحسابات</span>
+            </button>
 
-        <button class="nav-btn" onclick="showPage('settings',this)">
-            ⚙️ <span data-ar="الإعدادات" data-en="Settings">الإعدادات</span>
-        </button>
-
-        <div class="account-mini">
-
-            <div class="mini-avatar" id="sideAvatar">👦</div>
-
-            <div style="overflow:hidden">
-                <strong id="sideName">الطالب</strong>
-                <div id="sideGrade" style="font-size:11px;color:var(--muted);margin-top:4px">
-                    طالب
-                </div>
-            </div>
+            <button class="nav-btn" onclick="showPage('settings',this)">
+                ⚙️ <span>الإعدادات</span>
+            </button>
 
         </div>
 
@@ -1319,1982 +1164,92 @@ body.dark .day-event{
 
     <main class="main">
 
-        <div class="topbar">
 
-            <div>
-                <button class="icon-btn mobile-menu" onclick="toggleSidebar()">☰</button>
-            </div>
+        <!-- HOME -->
 
-            <div class="top-actions">
+        <div id="page-home">
 
-                <button class="icon-btn" onclick="showNotifications()" title="Notifications">
-                    🔔
-                </button>
+            <div class="topbar">
 
-                <button class="icon-btn" onclick="showPage('settings')" title="Settings">
-                    ⚙️
-                </button>
+                <div class="welcome-title">
 
-            </div>
+                    <h1 id="dashWelcome">
+                        أهلاً! 👋
+                    </h1>
 
-        </div>
+                    <p>
+                        مستعد تكمل رحلتك؟
+                    </p>
 
-
-        <!-- ================= DASHBOARD ================= -->
-
-        <section class="page active" id="page-dashboard">
-
-            <div class="greeting">
-
-                <h1 id="dashboardGreeting">
-                    أهلاً 👋
-                </h1>
-
-                <p id="dashboardSub">
-                    جاهز تبدأ مذاكرتك النهارده؟
-                </p>
-
-            </div>
-
-            <div class="dashboard-stats">
-
-                <div class="stat-card">
-                    <div class="stat-icon">⏱️</div>
-                    <strong id="todayMinutes">0</strong>
-                    <span id="minutesLabel">دقيقة مذاكرة اليوم</span>
                 </div>
 
-                <div class="stat-card">
-                    <div class="stat-icon">🔥</div>
-                    <strong id="streakNumber">0</strong>
-                    <span id="streakLabel">يوم متتالي</span>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon">✅</div>
-                    <strong id="doneTasks">0</strong>
-                    <span id="doneLabel">مهام مكتملة</span>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon">🎯</div>
-                    <strong id="dailyPercent">0%</strong>
-                    <span id="goalLabel">هدف اليوم</span>
-                </div>
+                <div class="today" id="todayDate"></div>
 
             </div>
 
 
             <div class="dashboard-grid">
 
-                <div>
-
-                    <div class="card">
-
-                        <div class="card-header">
-
-                            <h3 id="todayPlanTitle">📅 خطة اليوم</h3>
-
-                            <button class="secondary-btn" onclick="showPage('todo')">
-                                + <span id="addTaskSmall">مهمة</span>
-                            </button>
-
-                        </div>
-
-                        <div id="dashboardTasks"></div>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <div class="card-header">
-                            <h3 id="quickActionsTitle">⚡ اختصارات سريعة</h3>
-                        </div>
-
-                        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
-
-                            <button class="secondary-btn" onclick="showPage('focus')">
-                                ⏱️ Focus
-                            </button>
-
-                            <button class="secondary-btn" onclick="showPage('calendar')">
-                                📅 Calendar
-                            </button>
-
-                            <button class="secondary-btn" onclick="showPage('todo')">
-                                📝 To-Do
-                            </button>
-
-                        </div>
-
-                    </div>
-
+                <div class="stat">
+                    <div class="stat-icon">🔥</div>
+                    <strong>1</strong>
+                    <span>أيام متتالية</span>
                 </div>
 
-
-                <div>
-
-                    <div class="card">
-
-                        <div class="card-header">
-                            <h3 id="goalTitle">🎯 هدف اليوم</h3>
-                        </div>
-
-                        <div style="text-align:center">
-
-                            <div class="circle-progress" id="dashboardCircle">
-                                <span id="dashboardCircleText">0%</span>
-                            </div>
-
-                            <p style="margin-top:15px;color:var(--muted)" id="goalText">
-                                0 من 120 دقيقة
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="card">
-
-                        <div class="card-header">
-                            <h3 id="nextStudyTitle">📌 التالي</h3>
-                        </div>
-
-                        <div id="nextStudy">
-                            <div class="empty">مفيش جلسات مجدولة حاليًا</div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= CALENDAR ================= -->
-
-        <section class="page" id="page-calendar">
-
-            <h1 class="page-title" id="calendarTitle">📅 Calendar</h1>
-
-            <p class="page-subtitle" id="calendarSubtitle">
-                شوف الشهر ورتب مواعيد مذاكرتك.
-            </p>
-
-            <div class="card">
-
-                <div class="calendar-head">
-
-                    <h2 id="calendarMonth"></h2>
-
-                    <div class="calendar-nav">
-                        <button onclick="changeMonth(-1)">‹</button>
-                        <button onclick="goToday()">●</button>
-                        <button onclick="changeMonth(1)">›</button>
-                    </div>
-
-                </div>
-
-                <div class="calendar-grid" id="calendarGrid"></div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= TODO ================= -->
-
-        <section class="page" id="page-todo">
-
-            <h1 class="page-title" id="todoTitle">📝 To-Do List</h1>
-
-            <p class="page-subtitle" id="todoSubtitle">
-                كل اللي عليك تعمله في مكان واحد.
-            </p>
-
-            <div class="card">
-
-                <div class="add-task">
-
-                    <input id="taskInput" placeholder="اكتب المهمة...">
-
-                    <select id="taskSubject"></select>
-
-                    <input id="taskDate" type="date">
-
-                    <button class="primary-btn" onclick="addTask()">
-                        + <span id="addTaskText">إضافة</span>
-                    </button>
-
-                </div>
-
-                <div id="taskList"></div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= SUBJECTS ================= -->
-
-        <section class="page" id="page-subjects">
-
-            <h1 class="page-title" id="subjectsTitle">📚 المواد الدراسية</h1>
-
-            <p class="page-subtitle" id="subjectsSubtitle">
-                كل مادة وليها تقدمها الخاص.
-            </p>
-
-            <div class="subject-grid" id="subjectGrid"></div>
-
-        </section>
-
-
-        <!-- ================= FOCUS ================= -->
-
-        <section class="page" id="page-focus">
-
-            <h1 class="page-title" id="focusTitle">⏱️ جلسة مذاكرة</h1>
-
-            <p class="page-subtitle" id="focusSubtitle">
-                اختار المادة والمدة وابدأ التركيز.
-            </p>
-
-            <div class="card focus-box">
-
-                <div class="focus-selects">
-
-                    <select id="focusSubject"></select>
-
-                    <select id="focusDuration">
-
-                        <option value="15">15 دقيقة</option>
-                        <option value="25" selected>25 دقيقة</option>
-                        <option value="30">30 دقيقة</option>
-                        <option value="45">45 دقيقة</option>
-                        <option value="50">50 دقيقة</option>
-                        <option value="60">60 دقيقة</option>
-                        <option value="90">90 دقيقة</option>
-
-                    </select>
-
-                </div>
-
-                <div class="focus-status" id="focusStatus">
-                    جاهز؟
-                </div>
-
-                <div class="timer" id="timer">
-                    25:00
-                </div>
-
-                <div class="focus-buttons">
-
-                    <button class="primary-btn" id="startFocusBtn" onclick="startFocus()">
-                        ▶️ ابدأ
-                    </button>
-
-                    <button class="secondary-btn" onclick="pauseFocus()">
-                        ⏸️ Pause
-                    </button>
-
-                    <button class="danger-btn" onclick="stopFocus()">
-                        ⏹️ إنهاء
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= PROGRESS ================= -->
-
-        <section class="page" id="page-progress">
-
-            <h1 class="page-title" id="progressTitle">📊 التقدم والإحصائيات</h1>
-
-            <p class="page-subtitle" id="progressSubtitle">
-                شوف رحلتك الدراسية بتتقدم إزاي.
-            </p>
-
-            <div class="card">
-
-                <div class="progress-big">
-
-                    <div class="circle-progress" id="bigCircle">
-                        <span id="bigPercent">0%</span>
-                    </div>
-
-                    <div>
-                        <h2 id="progressHeading">تقدمك ممتاز 👏</h2>
-                        <p id="progressDescription" style="color:var(--muted);margin-top:8px">
-                            ابدأ أول جلسة مذاكرة علشان يظهر تقدمك.
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="dashboard-stats">
-
-                <div class="stat-card">
+                <div class="stat">
                     <div class="stat-icon">⏱️</div>
-                    <strong id="allTimeMinutes">0</strong>
-                    <span>دقيقة مذاكرة إجمالي</span>
+                    <strong id="homeMinutes">0m</strong>
+                    <span>وقت المذاكرة</span>
                 </div>
 
-                <div class="stat-card">
-                    <div class="stat-icon">📚</div>
-                    <strong id="sessionsNumber">0</strong>
-                    <span>جلسة مذاكرة</span>
+                <div class="stat">
+                    <div class="stat-icon">✅</div>
+                    <strong id="homeTasks">0</strong>
+                    <span>مهام مكتملة</span>
                 </div>
 
-                <div class="stat-card">
-                    <div class="stat-icon">📝</div>
-                    <strong id="tasksNumber">0</strong>
-                    <span>كل المهام</span>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon">🏆</div>
-                    <strong id="xpNumber">0</strong>
-                    <span>XP</span>
+                <div class="stat">
+                    <div class="stat-icon">🎯</div>
+                    <strong>0%</strong>
+                    <span>هدف اليوم</span>
                 </div>
 
             </div>
 
-        </section>
+
+            <div class="content-grid">
 
 
-        <!-- ================= WEEK ================= -->
+                <!-- TODAY TASKS -->
 
-        <section class="page" id="page-week">
+                <div class="card">
 
-            <h1 class="page-title" id="weekTitle">🗓️ جدول الأسبوع</h1>
+                    <div class="card-title">
 
-            <p class="page-subtitle" id="weekSubtitle">
-                كل يوم والمواد اللي عليك فيه.
-            </p>
+                        <h2>📌 مهام اليوم</h2>
 
-            <div class="week-grid" id="weekGrid"></div>
+                        <button
+                            class="small-btn"
+                            onclick="showPageById('tasks')">
 
-            <div class="card" style="margin-top:20px">
+                            عرض الكل
 
-                <h3 style="margin-bottom:15px" id="scheduleAddTitle">
-                    ➕ إضافة مادة لليوم
-                </h3>
+                        </button>
 
-                <div class="add-task">
-
-                    <select id="scheduleDay"></select>
-
-                    <select id="scheduleSubject"></select>
-
-                    <input id="scheduleTime" type="time">
-
-                    <button class="primary-btn" onclick="addSchedule()">
-                        إضافة
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= SETTINGS ================= -->
-
-        <section class="page" id="page-settings">
-
-            <h1 class="page-title" id="settingsTitle">⚙️ الإعدادات</h1>
-
-            <p class="page-subtitle" id="settingsSubtitle">
-                ظبط Study Quest بالطريقة اللي تحبها.
-            </p>
-
-            <div class="card">
-
-                <div class="setting-row">
-
-                    <div class="setting-info">
-                        <strong>🌐 اللغة</strong>
-                        <span>اختار لغة البرنامج</span>
                     </div>
 
-                    <select id="languageSelect" onchange="setLanguage(this.value)" style="padding:10px;border-radius:10px">
-                        <option value="ar">العربية</option>
-                        <option value="en">English</option>
-                    </select>
+                    <div id="homeTodoList">
 
-                </div>
+                        <p style="color:#84928b">
+                            لسه مفيش مهام. أضف أول مهمة! ✨
+                        </p>
 
-
-                <div class="setting-row">
-
-                    <div class="setting-info">
-                        <strong>🔊 الصوت</strong>
-                        <span>أصوات انتهاء جلسة المذاكرة</span>
                     </div>
 
-                    <button class="toggle on" id="soundToggle" onclick="toggleSetting('sound')"></button>
-
                 </div>
 
 
-                <div class="setting-row">
+                <!-- SESSION -->
 
-                    <div class="setting-info">
-                        <strong>🌙 الوضع الداكن</strong>
-                        <span>تغيير إضاءة البرنامج</span>
-                    </div>
-
-                    <button class="toggle" id="darkToggle" onclick="toggleSetting('dark')"></button>
-
-                </div>
-
-
-                <div class="setting-row">
-
-                    <div class="setting-info">
-                        <strong>🔔 الإشعارات</strong>
-                        <span>تنبيهات المذاكرة والتذكيرات</span>
-                    </div>
-
-                    <button class="toggle on" id="notificationToggle" onclick="enableNotifications()"></button>
-
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3 style="margin-bottom:15px">🎨 الخلفية</h3>
-
-                <div style="display:flex;gap:10px;flex-wrap:wrap">
-
-                    <button class="secondary-btn" onclick="setBackground('blue')">
-                        💙 Blue
-                    </button>
-
-                    <button class="secondary-btn" onclick="setBackground('purple')">
-                        💜 Purple
-                    </button>
-
-                    <button class="secondary-btn" onclick="setBackground('green')">
-                        💚 Green
-                    </button>
-
-                    <button class="secondary-btn" onclick="setBackground('pink')">
-                        🩷 Pink
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <h3 style="margin-bottom:15px">👤 الحساب</h3>
-
-                <button class="secondary-btn" onclick="showLogin()">
-                    ➕ إنشاء / تبديل حساب
-                </button>
-
-                <button class="danger-btn" style="margin-right:8px" onclick="deleteCurrentAccount()">
-                    🗑️ حذف الحساب الحالي
-                </button>
-
-            </div>
-
-        </section>
-
-    </main>
-
-</div>
-
-
-<!-- ================= NOTIFICATION MODAL ================= -->
-
-<div class="modal" id="notificationModal">
-
-    <div class="modal-box">
-
-        <div class="modal-header">
-            <h2>🔔 Notifications</h2>
-            <button class="icon-btn" onclick="closeModal()">×</button>
-        </div>
-
-        <div id="notificationList"></div>
-
-    </div>
-
-</div>
-
-
-<script>
-
-/* =====================================================
-   DATA
-===================================================== */
-
-const subjects = [
-    "القرآن الكريم وتجويده",
-    "أصول الدين",
-    "الفقه",
-    "النحو",
-    "الصرف",
-    "المطالعة والنصوص والقصة",
-    "الإنشاء",
-    "الإملاء",
-    "الخط",
-    "الدراسات الاجتماعية",
-    "العلوم",
-    "الرياضيات",
-    "اللغة الإنجليزية",
-    "الحاسب الآلي",
-    "التربية الفنية"
-];
-
-const subjectIcons = [
-    "📖","☪️","⚖️","✍️","🔤",
-    "📚","📝","🔠","✒️","🌍",
-    "🧪","📐","🇬🇧","💻","🎨"
-];
-
-const subjectEnglish = [
-    "Quran & Tajweed",
-    "Islamic Studies",
-    "Fiqh",
-    "Arabic Grammar",
-    "Morphology",
-    "Reading & Texts",
-    "Composition",
-    "Spelling",
-    "Calligraphy",
-    "Social Studies",
-    "Science",
-    "Mathematics",
-    "English",
-    "Computer",
-    "Art"
-];
-
-const daysAr = [
-    "الأحد","الاثنين","الثلاثاء",
-    "الأربعاء","الخميس","الجمعة","السبت"
-];
-
-const daysEn = [
-    "Sunday","Monday","Tuesday",
-    "Wednesday","Thursday","Friday","Saturday"
-];
-
-let selectedGender = "";
-let selectedCharacter = "";
-
-let currentAccount = null;
-
-let calendarDate = new Date();
-
-let timerSeconds = 25 * 60;
-let timerInterval = null;
-let timerRunning = false;
-let timerStartedAt = null;
-let timerSelectedMinutes = 25;
-
-
-/* =====================================================
-   STORAGE
-===================================================== */
-
-function getAccounts(){
-
-    return JSON.parse(
-        localStorage.getItem("studyQuestAccounts") || "[]"
-    );
-
-}
-
-function saveAccounts(accounts){
-
-    localStorage.setItem(
-        "studyQuestAccounts",
-        JSON.stringify(accounts)
-    );
-
-}
-
-function saveCurrent(){
-
-    if(!currentAccount) return;
-
-    let accounts = getAccounts();
-
-    const index = accounts.findIndex(
-        a => a.id === currentAccount.id
-    );
-
-    if(index !== -1){
-
-        accounts[index] = currentAccount;
-
-        saveAccounts(accounts);
-
-    }
-
-}
-
-
-/* =====================================================
-   WELCOME
-===================================================== */
-
-function showLogin(){
-
-    document.getElementById("welcome").style.display="none";
-
-    document.getElementById("app").style.display="none";
-
-    const login=document.getElementById("loginScreen");
-
-    login.style.display="flex";
-
-    renderAccounts();
-
-}
-
-function backWelcome(){
-
-    document.getElementById("loginScreen").style.display="none";
-
-    document.getElementById("welcome").style.display="flex";
-
-}
-
-function changeWelcomeLanguage(){
-
-    const english =
-        document.documentElement.lang === "en";
-
-    if(english){
-
-        document.documentElement.lang="ar";
-        document.documentElement.dir="rtl";
-
-        document.getElementById("welcomeText").innerHTML=
-            "رحلتك في المذاكرة تبدأ من هنا ✨<br>نظم وقتك، ذاكر بتركيز، وشوف تقدمك.";
-
-        document.getElementById("welcomeButton").textContent=
-            "ابدأ رحلتك 🚀";
-
-        document.getElementById("welcomeLang").textContent=
-            "العربية";
-
-    }else{
-
-        document.documentElement.lang="en";
-        document.documentElement.dir="ltr";
-
-        document.getElementById("welcomeText").innerHTML=
-            "Your study journey starts here ✨<br>Organize, focus and track your progress.";
-
-        document.getElementById("welcomeButton").textContent=
-            "Start Your Journey 🚀";
-
-        document.getElementById("welcomeLang").textContent=
-            "English";
-
-    }
-
-}
-
-
-/* =====================================================
-   LOGIN / ACCOUNT
-===================================================== */
-
-function chooseGender(gender){
-
-    selectedGender=gender;
-
-    document.getElementById("boyGender")
-        .classList.remove("selected");
-
-    document.getElementById("girlGender")
-        .classList.remove("selected");
-
-    document.getElementById(
-        gender==="boy" ? "boyGender":"girlGender"
-    ).classList.add("selected");
-
-}
-
-function createAccount(){
-
-    const name=
-        document.getElementById("userName").value.trim();
-
-    const age=
-        document.getElementById("userAge").value;
-
-    const grade=
-        document.getElementById("userGrade").value;
-
-    if(!name || !age || !grade || !selectedGender){
-
-        alert(
-            currentLanguage()==="en"
-            ? "Please complete all information."
-            : "من فضلك كمّل كل البيانات."
-        );
-
-        return;
-
-    }
-
-    const account={
-
-        id:Date.now().toString(),
-
-        name:name,
-
-        age:Number(age),
-
-        gender:selectedGender,
-
-        grade:grade,
-
-        character:"",
-
-        tasks:[],
-
-        schedules:[],
-
-        sessions:[],
-
-        totalMinutes:0,
-
-        xp:0,
-
-        streak:0,
-
-        lastStudyDate:"",
-
-        settings:{
-            language:"ar",
-            sound:true,
-            dark:false,
-            background:"blue",
-            notifications:true
-        }
-
-    };
-
-    let accounts=getAccounts();
-
-    accounts.push(account);
-
-    saveAccounts(accounts);
-
-    currentAccount=account;
-
-    document.getElementById("loginScreen").style.display="none";
-
-    document.getElementById("characterScreen").style.display="flex";
-
-    selectedCharacter="";
-
-}
-
-
-/* existing accounts */
-
-function renderAccounts(){
-
-    const box=document.getElementById("existingAccounts");
-
-    const accounts=getAccounts();
-
-    if(!accounts.length){
-
-        box.innerHTML="";
-
-        return;
-
-    }
-
-    box.innerHTML=`
-
-        <div style="color:var(--muted);font-size:13px;margin-bottom:10px">
-            ${document.documentElement.lang==="en"
-                ?"Existing accounts"
-                :"الحسابات الموجودة على الجهاز"}
-        </div>
-
-    `;
-
-    accounts.forEach(account=>{
-
-        const button=document.createElement("button");
-
-        button.className="secondary-btn";
-
-        button.style.width="100%";
-
-        button.style.marginBottom="8px";
-
-        button.textContent=
-            `${account.gender==="boy"?"👦":"👧"} ${account.name}`;
-
-        button.onclick=()=>loginAccount(account.id);
-
-        box.appendChild(button);
-
-    });
-
-}
-
-function loginAccount(id){
-
-    const account=getAccounts()
-        .find(a=>a.id===id);
-
-    if(!account) return;
-
-    currentAccount=account;
-
-    document.getElementById("loginScreen").style.display="none";
-
-    if(!currentAccount.character){
-
-        document.getElementById("characterScreen").style.display="flex";
-
-    }else{
-
-        openApp();
-
-    }
-
-}
-
-
-/* =====================================================
-   CHARACTER
-===================================================== */
-
-function chooseCharacter(character,button){
-
-    selectedCharacter=character;
-
-    document.querySelectorAll(".char-option")
-        .forEach(b=>b.classList.remove("selected"));
-
-    button.classList.add("selected");
-
-    const preview=
-        document.getElementById("characterPreview");
-
-    if(character.startsWith("girl")){
-
-        preview.classList.add("girl");
-
-    }else{
-
-        preview.classList.remove("girl");
-
-    }
-
-    const body=
-        preview.querySelector(".char-body");
-
-    const hair=
-        preview.querySelector(".char-hair");
-
-    if(character==="boy1"){
-        body.style.background="#6c8ee8";
-        hair.style.background="#382820";
-    }
-
-    if(character==="boy2"){
-        body.style.background="#58ad83";
-        hair.style.background="#202020";
-    }
-
-    if(character==="girl1"){
-        body.style.background="#d88bb1";
-    }
-
-    if(character==="girl2"){
-        body.style.background="#e9a66a";
-    }
-
-}
-
-function finishCharacter(){
-
-    if(!selectedCharacter){
-
-        alert(
-            currentLanguage()==="en"
-            ?"Choose a character first."
-            :"اختار شخصيتك الأول."
-        );
-
-        return;
-
-    }
-
-    currentAccount.character=selectedCharacter;
-
-    saveCurrent();
-
-    document.getElementById("characterScreen").style.display="none";
-
-    openApp();
-
-}
-
-
-/* =====================================================
-   APP START
-===================================================== */
-
-function openApp(){
-
-    document.getElementById("welcome").style.display="none";
-
-    document.getElementById("loginScreen").style.display="none";
-
-    document.getElementById("characterScreen").style.display="none";
-
-    document.getElementById("app").style.display="block";
-
-    applySettings();
-
-    updateAll();
-
-}
-
-function currentLanguage(){
-
-    return currentAccount?.settings?.language || "ar";
-
-}
-
-
-/* =====================================================
-   NAVIGATION
-===================================================== */
-
-function showPage(page,button){
-
-    document.querySelectorAll(".page")
-        .forEach(p=>p.classList.remove("active"));
-
-    const target=
-        document.getElementById("page-"+page);
-
-    if(target) target.classList.add("active");
-
-    document.querySelectorAll(".nav-btn")
-        .forEach(b=>b.classList.remove("active"));
-
-    if(button) button.classList.add("active");
-
-    if(page==="calendar") renderCalendar();
-
-    if(page==="todo") renderTasks();
-
-    if(page==="subjects") renderSubjects();
-
-    if(page==="week") renderWeek();
-
-    if(page==="progress") renderProgress();
-
-    if(page==="focus") updateFocusSubjects();
-
-    if(window.innerWidth<=700){
-
-        document.getElementById("sidebar")
-            .classList.remove("open");
-
-    }
-
-}
-
-function toggleSidebar(){
-
-    document.getElementById("sidebar")
-        .classList.toggle("open");
-
-}
-
-
-/* =====================================================
-   UPDATE ALL
-===================================================== */
-
-function updateAll(){
-
-    updateAccountUI();
-
-    renderTasks();
-
-    renderSubjects();
-
-    renderCalendar();
-
-    renderWeek();
-
-    renderProgress();
-
-    updateDashboard();
-
-    updateFocusSubjects();
-
-    updateScheduleSubjects();
-
-}
-
-
-/* =====================================================
-   ACCOUNT UI
-===================================================== */
-
-function updateAccountUI(){
-
-    if(!currentAccount) return;
-
-    document.getElementById("sideName").textContent=
-        currentAccount.name;
-
-    document.getElementById("dashboardGreeting").textContent=
-        currentLanguage()==="en"
-        ?`Welcome, ${currentAccount.name} 👋`
-        :`أهلاً يا ${currentAccount.name} 👋`;
-
-    document.getElementById("dashboardSub").textContent=
-        currentLanguage()==="en"
-        ?"Ready to start studying today?"
-        :"جاهز تبدأ مذاكرتك النهارده؟";
-
-    document.getElementById("sideAvatar").textContent=
-        currentAccount.character?.startsWith("girl")
-        ?"👧":"👦";
-
-    document.getElementById("sideGrade").textContent=
-        getGradeName(currentAccount.grade);
-
-}
-
-function getGradeName(grade){
-
-    if(currentLanguage()==="en"){
-
-        if(grade==="prep1") return "1st Preparatory";
-
-        if(grade==="prep2") return "2nd Preparatory";
-
-        if(grade==="prep3") return "3rd Preparatory";
-
-    }else{
-
-        if(grade==="prep1") return "أولى إعدادي";
-
-        if(grade==="prep2") return "تانية إعدادي";
-
-        if(grade==="prep3") return "تالتة إعدادي";
-
-    }
-
-    return "";
-
-}
-
-
-/* =====================================================
-   TODO
-===================================================== */
-
-function fillSubjectSelect(selectId){
-
-    const select=document.getElementById(selectId);
-
-    if(!select) return;
-
-    select.innerHTML="";
-
-    subjects.forEach((subject,i)=>{
-
-        const option=document.createElement("option");
-
-        option.value=i;
-
-        option.textContent=
-            currentLanguage()==="en"
-            ?subjectEnglish[i]
-            :subject;
-
-        select.appendChild(option);
-
-    });
-
-}
-
-function addTask(){
-
-    const input=document.getElementById("taskInput");
-
-    const subject=document.getElementById("taskSubject");
-
-    const date=document.getElementById("taskDate");
-
-    const text=input.value.trim();
-
-    if(!text){
-
-        alert(
-            currentLanguage()==="en"
-            ?"Write the task first."
-            :"اكتب المهمة الأول."
-        );
-
-        return;
-
-    }
-
-    currentAccount.tasks.push({
-
-        id:Date.now(),
-
-        text:text,
-
-        subject:Number(subject.value),
-
-        date:date.value || todayString(),
-
-        done:false,
-
-        created:Date.now()
-
-    });
-
-    currentAccount.xp+=5;
-
-    saveCurrent();
-
-    input.value="";
-
-    renderTasks();
-
-    updateDashboard();
-
-    notify(
-        currentLanguage()==="en"
-        ?"New task added 📚"
-        :"تمت إضافة مهمة جديدة 📚"
-    );
-
-}
-
-function renderTasks(){
-
-    fillSubjectSelect("taskSubject");
-
-    const list=document.getElementById("taskList");
-
-    if(!list) return;
-
-    list.innerHTML="";
-
-    const tasks=currentAccount?.tasks || [];
-
-    if(!tasks.length){
-
-        list.innerHTML=`
-            <div class="empty">
-                ${currentLanguage()==="en"
-                ?"No tasks yet. Add your first task!"
-                :"لسه مفيش مهام. أضف أول مهمة!"}
-            </div>
-        `;
-
-        renderDashboardTasks();
-
-        return;
-
-    }
-
-    tasks
-    .slice()
-    .sort((a,b)=>{
-
-        if(a.done!==b.done) return a.done?1:-1;
-
-        return a.date.localeCompare(b.date);
-
-    })
-    .forEach(task=>{
-
-        const row=document.createElement("div");
-
-        row.className="task "+(task.done?"done":"");
-
-        const subjectName=
-            currentLanguage()==="en"
-            ?subjectEnglish[task.subject]
-            :subjects[task.subject];
-
-        row.innerHTML=`
-
-            <div class="task-check"
-                onclick="toggleTask(${task.id})">
-                ${task.done?"✓":""}
-            </div>
-
-            <div class="task-content">
-
-                <div class="task-name">
-                    ${escapeHTML(task.text)}
-                </div>
-
-                <div class="task-meta">
-                    ${subjectIcons[task.subject]}
-                    ${subjectName}
-                    •
-                    ${task.date || ""}
-                </div>
-
-            </div>
-
-            <button class="danger-btn"
-                onclick="deleteTask(${task.id})">
-                🗑️
-            </button>
-
-        `;
-
-        list.appendChild(row);
-
-    });
-
-    renderDashboardTasks();
-
-}
-
-function renderDashboardTasks(){
-
-    const box=document.getElementById("dashboardTasks");
-
-    if(!box) return;
-
-    const today=todayString();
-
-    const tasks=(currentAccount?.tasks||[])
-        .filter(t=>t.date===today);
-
-    if(!tasks.length){
-
-        box.innerHTML=`
-            <div class="empty">
-                ${currentLanguage()==="en"
-                ?"No tasks for today 🎉"
-                :"مفيش مهام لليوم 🎉"}
-            </div>
-        `;
-
-        return;
-
-    }
-
-    box.innerHTML="";
-
-    tasks.slice(0,5).forEach(task=>{
-
-        const div=document.createElement("div");
-
-        div.className="task "+(task.done?"done":"");
-
-        div.innerHTML=`
-
-            <div class="task-check"
-                onclick="toggleTask(${task.id})">
-                ${task.done?"✓":""}
-            </div>
-
-            <div class="task-content">
-                <div class="task-name">
-                    ${escapeHTML(task.text)}
-                </div>
-
-                <div class="task-meta">
-                    ${subjectIcons[task.subject]}
-                    ${
-                        currentLanguage()==="en"
-                        ?subjectEnglish[task.subject]
-                        :subjects[task.subject]
-                    }
-                </div>
-            </div>
-
-        `;
-
-        box.appendChild(div);
-
-    });
-
-}
-
-function toggleTask(id){
-
-    const task=currentAccount.tasks.find(t=>t.id===id);
-
-    if(!task) return;
-
-    task.done=!task.done;
-
-    if(task.done) currentAccount.xp+=10;
-
-    saveCurrent();
-
-    updateAll();
-
-}
-
-function deleteTask(id){
-
-    currentAccount.tasks=
-        currentAccount.tasks.filter(t=>t.id!==id);
-
-    saveCurrent();
-
-    updateAll();
-
-}
-
-
-/* =====================================================
-   DASHBOARD
-===================================================== */
-
-function updateDashboard(){
-
-    if(!currentAccount) return;
-
-    const today=todayString();
-
-    const todayMinutes=
-        currentAccount.sessions
-        .filter(s=>s.date===today)
-        .reduce((sum,s)=>sum+s.minutes,0);
-
-    const done=
-        currentAccount.tasks
-        .filter(t=>t.done).length;
-
-    const goal=120;
-
-    const percent=
-        Math.min(100,Math.round(todayMinutes/goal*100));
-
-    document.getElementById("todayMinutes").textContent=
-        todayMinutes;
-
-    document.getElementById("doneTasks").textContent=
-        done;
-
-    document.getElementById("dailyPercent").textContent=
-        percent+"%";
-
-    document.getElementById("streakNumber").textContent=
-        currentAccount.streak;
-
-    document.getElementById("goalText").textContent=
-        currentLanguage()==="en"
-        ?`${todayMinutes} of ${goal} minutes`
-        :`${todayMinutes} من ${goal} دقيقة`;
-
-    document.getElementById("dashboardCircleText").textContent=
-        percent+"%";
-
-    document.getElementById("dashboardCircle").style.background=
-        `conic-gradient(var(--primary) ${percent*3.6}deg,#edf0f5 0deg)`;
-
-    renderDashboardTasks();
-
-}
-
-
-/* =====================================================
-   CALENDAR
-===================================================== */
-
-function todayString(){
-
-    const d=new Date();
-
-    return formatDate(d);
-
-}
-
-function formatDate(date){
-
-    const y=date.getFullYear();
-
-    const m=String(date.getMonth()+1).padStart(2,"0");
-
-    const d=String(date.getDate()).padStart(2,"0");
-
-    return `${y}-${m}-${d}`;
-
-}
-
-function changeMonth(amount){
-
-    calendarDate.setMonth(
-        calendarDate.getMonth()+amount
-    );
-
-    renderCalendar();
-
-}
-
-function goToday(){
-
-    calendarDate=new Date();
-
-    renderCalendar();
-
-}
-
-function renderCalendar(){
-
-    const grid=document.getElementById("calendarGrid");
-
-    if(!grid) return;
-
-    grid.innerHTML="";
-
-    const lang=currentLanguage();
-
-    const monthNamesAr=[
-        "يناير","فبراير","مارس","أبريل",
-        "مايو","يونيو","يوليو","أغسطس",
-        "سبتمبر","أكتوبر","نوفمبر","ديسمبر"
-    ];
-
-    const monthNamesEn=[
-        "January","February","March","April",
-        "May","June","July","August",
-        "September","October","November","December"
-    ];
-
-    const monthName=
-        lang==="en"
-        ?monthNamesEn[calendarDate.getMonth()]
-        :monthNamesAr[calendarDate.getMonth()];
-
-    document.getElementById("calendarMonth").textContent=
-        `${monthName} ${calendarDate.getFullYear()}`;
-
-    const names=
-        lang==="en"
-        ?["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
-        :["الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
-
-    names.forEach(name=>{
-
-        const div=document.createElement("div");
-
-        div.className="day-name";
-
-        div.textContent=name;
-
-        grid.appendChild(div);
-
-    });
-
-    const year=calendarDate.getFullYear();
-
-    const month=calendarDate.getMonth();
-
-    const firstDay=
-        new Date(year,month,1).getDay();
-
-    const daysInMonth=
-        new Date(year,month+1,0).getDate();
-
-    for(let i=0;i<firstDay;i++){
-
-        const blank=document.createElement("div");
-
-        grid.appendChild(blank);
-
-    }
-
-    for(let day=1;day<=daysInMonth;day++){
-
-        const date=new Date(year,month,day);
-
-        const dateString=formatDate(date);
-
-        const div=document.createElement("div");
-
-        div.className="day";
-
-        if(dateString===todayString()){
-
-            div.classList.add("today");
-
-        }
-
-        div.innerHTML=`
-            <div class="day-number">${day}</div>
-        `;
-
-        const tasks=
-            currentAccount.tasks
-            .filter(t=>t.date===dateString);
-
-        tasks.slice(0,3).forEach(task=>{
-
-            const event=document.createElement("div");
-
-            event.className="day-event";
-
-            event.textContent=task.text;
-
-            div.appendChild(event);
-
-        });
-
-        div.onclick=()=>{
-
-            document.getElementById("taskDate").value=
-                dateString;
-
-            showPage("todo");
-
-        };
-
-        grid.appendChild(div);
-
-    }
-
-}
-
-
-/* =====================================================
-   WEEK SCHEDULE
-===================================================== */
-
-function updateScheduleSubjects(){
-
-    fillSubjectSelect("scheduleSubject");
-
-}
-
-function addSchedule(){
-
-    const day=
-        Number(document.getElementById("scheduleDay").value);
-
-    const subject=
-        Number(document.getElementById("scheduleSubject").value);
-
-    const time=
-        document.getElementById("scheduleTime").value;
-
-    if(!time){
-
-        alert(
-            currentLanguage()==="en"
-            ?"Choose a time."
-            :"اختار الوقت."
-        );
-
-        return;
-
-    }
-
-    currentAccount.schedules.push({
-
-        id:Date.now(),
-
-        day:day,
-
-        subject:subject,
-
-        time:time
-
-    });
-
-    saveCurrent();
-
-    renderWeek();
-
-    notify(
-        currentLanguage()==="en"
-        ?"Schedule updated 📅"
-        :"تم تحديث الجدول 📅"
-    );
-
-}
-
-function renderWeek(){
-
-    const grid=document.getElementById("weekGrid");
-
-    const daySelect=document.getElementById("scheduleDay");
-
-    if(!grid || !currentAccount) return;
-
-    const lang=currentLanguage();
-
-    const names=
-        lang==="en"?daysEn:daysAr;
-
-    if(daySelect){
-
-        daySelect.innerHTML="";
-
-        names.forEach((name,i)=>{
-
-            const option=document.createElement("option");
-
-            option.value=i;
-
-            option.textContent=name;
-
-            daySelect.appendChild(option);
-
-        });
-
-    }
-
-    grid.innerHTML="";
-
-    const today=new Date();
-
-    const todayDay=today.getDay();
-
-    names.forEach((name,i)=>{
-
-        const div=document.createElement("div");
-
-        div.className="week-day";
-
-        if(i===todayDay){
-
-            div.classList.add("today");
-
-        }
-
-        div.innerHTML=`
-
-            <div class="week-day-name">
-                ${name}
-            </div>
-
-            <div class="week-date">
-                ${i===todayDay
-                    ?(lang==="en"?"Today":"اليوم")
-                    :""
-                }
-            </div>
-
-        `;
-
-        currentAccount.schedules
-            .filter(s=>s.day===i)
-            .sort((a,b)=>a.time.localeCompare(b.time))
-            .forEach(schedule=>{
-
-                const item=document.createElement("div");
-
-                item.className="schedule-item";
-
-                item.innerHTML=`
-                    <strong>${schedule.time}</strong>
-                    <br>
-                    ${subjectIcons[schedule.subject]}
-                    ${
-                        lang==="en"
-                        ?subjectEnglish[schedule.subject]
-                        :subjects[schedule.subject]
-                    }
-                `;
-
-                div.appendChild(item);
-
-            });
-
-        grid.appendChild(div);
-
-    });
-
-}
-
-
-/* =====================================================
-   FOCUS TIMER
-===================================================== */
-
-function updateFocusSubjects(){
-
-    fillSubjectSelect("focusSubject");
-
-}
-
-function updateTimerDisplay(){
-
-    const minutes=
-        Math.floor(timerSeconds/60);
-
-    const seconds=
-        timerSeconds%60;
-
-    document.getElementById("timer").textContent=
-        `${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
-
-}
-
-document.getElementById("focusDuration")
-.addEventListener("change",function(){
-
-    if(timerRunning) return;
-
-    timerSelectedMinutes=
-        Number(this.value);
-
-    timerSeconds=
-        timerSelectedMinutes*60;
-
-    updateTimerDisplay();
-
-});
-
-function startFocus(){
-
-    if(timerRunning) return;
-
-    const select=
-        document.getElementById("focusDuration");
-
-    timerSelectedMinutes=
-        Number(select.value);
-
-    if(timerSeconds<=0){
-
-        timerSeconds=
-            timerSelectedMinutes*60;
-
-    }
-
-    timerRunning=true;
-
-    timerStartedAt=Date.now();
-
-    document.getElementById("focusStatus").textContent=
-        currentLanguage()==="en"
-        ?"Focus mode is ON 🎯"
-        :"وضع التركيز شغال 🎯";
-
-    timerInterval=setInterval(()=>{
-
-        timerSeconds--;
-
-        updateTimerDisplay();
-
-        if(timerSeconds<=0){
-
-            finishFocus(true);
-
-        }
-
-    },1000);
-
-}
-
-function pauseFocus(){
-
-    if(!timerRunning) return;
-
-    clearInterval(timerInterval);
-
-    timerRunning=false;
-
-    document.getElementById("focusStatus").textContent=
-        currentLanguage()==="en"
-        ?"Paused ⏸️"
-        :"متوقف مؤقتًا ⏸️";
-
-}
-
-function stopFocus(){
-
-    if(!timerRunning && timerSeconds===timerSelectedMinutes*60){
-
-        return;
-
-    }
-
-    finishFocus(false);
-
-}
-
-function finishFocus(completed){
-
-    clearInterval(timerInterval);
-
-    timerInterval=null;
-
-    timerRunning=false;
-
-    let studiedMinutes;
-
-    if(completed){
-
-        studiedMinutes=timerSelectedMinutes;
-
-    }else{
-
-        studiedMinutes=
-            Math.max(
-                0,
-                Math.floor(
-                    (timerSelectedMinutes*60-timerSeconds)/60
-                )
-            );
-
-    }
-
-    if(studiedMinutes>0){
-
-        const subject=
-            Number(
-                document.getElementById("focusSubject").value
-            );
-
-        currentAccount.sessions.push({
-
-            id:Date.now(),
-
-            date:todayString(),
-
-            minutes:studiedMinutes,
-
-            subject:subject
-
-        });
-
-        currentAccount.totalMinutes+=studiedMinutes;
-
-        currentAccount.xp+=studiedMinutes;
-
-        updateStreak();
-
-        saveCurrent();
-
-    }
-
-    if(completed){
-
-        document.getElementById("focusStatus").textContent=
-            currentLanguage()==="en"
-            ?"Session complete! 🎉"
-            :"الجلسة خلصت! 🎉";
-
-        notify(
-            currentLanguage()==="en"
-            ?"Focus session completed 🎉"
-            :"خلصت جلسة المذاكرة 🎉"
-        );
-
-        playSound();
-
-    }else{
-
-        document.getElementById("focusStatus").textContent=
-            currentLanguage()==="en"
-            ?"Session ended."
-            :"تم إنهاء الجلسة.";
-
-    }
-
-    timerSeconds=
-        timerSelectedMinutes*60;
-
-    updateTimerDisplay();
-
-    updateAll();
-
-}
-
-function updateStreak(){
-
-    const today=todayString();
-
-    if(currentAccount.lastStudyDate===today){
-
-        return;
-
-    }
-
-    const last=currentAccount.lastStudyDate;
-
-    if(!last){
-
-        currentAccount.streak=1;
-
-    }else{
-
-        const a=new Date(last);
-
-        const b=new Date(today);
-
-        const difference=
-            Math.round(
-                (b-a)/(1000*60*60*24)
-            );
-
-        if(difference===1){
-
-            currentAccount.streak++;
-
-        }else{
-
-            currentAccount.streak=1;
-
-        }
-
-    }
-
-    currentAccount.lastStudyDate=today;
-
-}
-
-
-/* =====================================================
-   SUBJECTS
-===================================================== */
-
-function renderSubjects(){
-
-    const grid=document.getElementById("subjectGrid");
-
-    if(!grid || !currentAccount) return;
-
-    grid.innerHTML="";
-
-   
+                <div class="card
+                    
