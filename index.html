@@ -4,11 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Study Quest</title>
 
   <style>
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -21,16 +19,15 @@
       background: linear-gradient(135deg, #e8f5e9, #e3f2fd);
       color: #183b2a;
       padding: 25px;
-      transition: 0.3s;
     }
 
-    /* Language button */
+    /* Language */
 
     .language-box {
       position: fixed;
       top: 20px;
       left: 20px;
-      z-index: 10;
+      z-index: 100;
     }
 
     .language-btn {
@@ -75,11 +72,10 @@
     .screen {
       width: min(92%, 700px);
       margin: 40px auto;
-      background: rgba(255,255,255,0.94);
+      background: rgba(255,255,255,0.95);
       padding: 45px 35px;
       border-radius: 30px;
       box-shadow: 0 20px 50px rgba(0,0,0,0.10);
-      animation: appear 0.5s ease;
     }
 
     .center {
@@ -139,7 +135,6 @@
 
     label {
       display: block;
-      text-align: right;
       margin: 18px 0 8px;
       font-weight: bold;
     }
@@ -180,6 +175,11 @@
       background: #e8f5e9;
     }
 
+    .next-btn {
+      width: 100%;
+      margin-top: 30px;
+    }
+
     /* Subjects */
 
     .subjects-counter {
@@ -204,7 +204,6 @@
       border-radius: 15px;
       padding: 17px 12px;
       cursor: pointer;
-      text-align: right;
       transition: 0.2s;
       font-size: 15px;
       display: flex;
@@ -240,7 +239,6 @@
     }
 
     @media (max-width: 500px) {
-
       .screen {
         padding: 30px 20px;
       }
@@ -252,46 +250,26 @@
       h1 {
         font-size: 30px;
       }
-
     }
-
-    @keyframes appear {
-
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-    }
-
   </style>
-
 </head>
 
 <body>
 
-
-  <!-- Language -->
+  <!-- LANGUAGE BUTTON -->
 
   <div class="language-box">
 
     <button
       class="language-btn"
-      onclick="toggleLanguageMenu()"
       id="languageButton"
-    >
+      onclick="toggleLanguageMenu()">
       🌐 العربية
     </button>
 
     <div
       class="language-menu"
-      id="languageMenu"
-    >
+      id="languageMenu">
 
       <button onclick="setLanguage('ar')">
         🇪🇬 العربية
@@ -306,45 +284,51 @@
   </div>
 
 
-  <!-- Welcome -->
+  <!-- ==================== -->
+  <!-- WELCOME SCREEN -->
+  <!-- ==================== -->
 
   <div
     class="screen center"
-    id="welcomeScreen"
-  >
+    id="welcomeScreen">
 
     <div class="logo">
       📚
     </div>
 
-    <h1 id="welcomeTitle">
+    <h1>
       Study Quest
     </h1>
 
     <p
       class="subtitle"
-      id="welcomeSubtitle"
-    >
+      id="welcomeSubtitle">
+
       رحلتك في المذاكرة تبدأ من هنا ✨
+
     </p>
+
+    <!-- START BUTTON -->
 
     <button
       class="start-btn"
-      onclick="startJourney()"
       id="startButton"
-    >
+      onclick="startJourney()">
+
       ابدأ رحلتك 🚀
+
     </button>
 
   </div>
 
 
-  <!-- Profile -->
+  <!-- ==================== -->
+  <!-- PROFILE SCREEN -->
+  <!-- ==================== -->
 
   <div
     class="screen"
-    id="profileScreen"
-  >
+    id="profileScreen">
 
     <div class="center">
 
@@ -358,9 +342,10 @@
 
       <p
         class="subtitle"
-        id="profileSubtitle"
-      >
+        id="profileSubtitle">
+
         خلينا نجهز حسابك 📚
+
       </p>
 
     </div>
@@ -373,8 +358,7 @@
     <input
       type="text"
       id="name"
-      placeholder="اكتب اسمك"
-    >
+      placeholder="اكتب اسمك">
 
 
     <label id="ageLabel">
@@ -386,8 +370,7 @@
       id="age"
       placeholder="اكتب سنك"
       min="5"
-      max="100"
-    >
+      max="100">
 
 
     <label id="genderLabel">
@@ -398,16 +381,18 @@
 
       <button
         id="boyBtn"
-        onclick="chooseGender('boy')"
-      >
+        onclick="chooseGender('boy')">
+
         👦 ولد
+
       </button>
 
       <button
         id="girlBtn"
-        onclick="chooseGender('girl')"
-      >
+        onclick="chooseGender('girl')">
+
         👧 بنت
+
       </button>
 
     </div>
@@ -419,4 +404,613 @@
 
     <select id="grade">
 
-      <option value="" id="gradePlaceholder
+      <option
+        value=""
+        id="gradePlaceholder">
+
+        اختار الصف
+
+      </option>
+
+      <option value="prep1">
+        أولى إعدادي
+      </option>
+
+      <option value="prep2">
+        تانية إعدادي
+      </option>
+
+      <option value="prep3">
+        تالتة إعدادي
+      </option>
+
+    </select>
+
+
+    <button
+      class="next-btn"
+      id="profileNext"
+      onclick="goToSubjects()">
+
+      التالي ➜
+
+    </button>
+
+  </div>
+
+
+  <!-- ==================== -->
+  <!-- SUBJECTS SCREEN -->
+  <!-- ==================== -->
+
+  <div
+    class="screen"
+    id="subjectsScreen">
+
+    <div class="center">
+
+      <div class="logo">
+        📚
+      </div>
+
+      <h1 id="subjectsTitle">
+        موادك الدراسية
+      </h1>
+
+      <p
+        class="subtitle"
+        id="subjectsSubtitle">
+
+        اختار المواد اللي بتدرسها
+
+      </p>
+
+    </div>
+
+
+    <div class="subjects-counter">
+
+      <span id="counterText">
+        تم اختيار
+      </span>
+
+      <span id="selectedCount">
+        0
+      </span>
+
+      <span id="subjectWord">
+        مادة
+      </span>
+
+    </div>
+
+
+    <div class="subjects-grid">
+
+      <div
+        class="subject-card"
+        onclick="toggleSubject(this)">
+
+        <span class="check">✓</span>
+        <span>القرآن الكريم وتجويده</span>
+
+      </div>
+
+
+      <div
+        class="subject-card"
+        onclick="toggleSubject(this)">
+
+        <span class="check">✓</span>
+        <span>أصول الدين</span>
+
+      </div>
+
+
+      <div
+        class="subject-card"
+        onclick="toggleSubject(this)">
+
+        <span class="check">✓</span>
+        <span>الفقه</span>
+
+      </div>
+
+
+      <div
+        class="subject-card"
+        onclick="toggleSubject(this)">
+
+        <span class="check">✓</span>
+        <span>النحو</span>
+
+      </div>
+
+
+      <div
+        class="subject-card"
+        onclick="toggleSubject(this)">
+
+        <span class="check">✓</span>
+        <span>الصرف</span>
+
+      </div>
+
+
+      <div
+        class="subject-card"
+        onclick="toggleSubject(this)">
+
+        <span class="check">✓</span>
+        <span>المطالعة والنصوص والقصة</span>
+
+      </div>
+
+
+      <div
+        class="subject-card"
+        onclick="toggleSubject(this)">
+
+        <span class="check">✓</span>
+        <span>الإنشاء</span>
+
+      </div>
+
+
+      <div
+        class="subject-card"
+        onclick="toggleSubject(this)">
+
+        <span class="check">✓</span>
+        <span>الإملاء</span>
+
+      </div>
+
+
+      <div
+        class="subject-card"
+        onclick="toggleSubject(this)">
+
+        <span class="check">✓</span>
+        <span>الخط</span>
+
+      </div>
+
+
+      <div
+        class="subject-card"
+        onclick="toggleSubject(this)">
+
+        <span class="check">✓</span>
+        <span>الدراسات الاجتماعية</span>
+
+      </div>
+
+
+      <div
+        class="subject-card"
+        onclick="toggleSubject(this)">
+
+        <span class="check">✓</span>
+        <span>العلوم</span>
+
+      </div>
+
+
+      <div
+        class="subject-card"
+        onclick="toggleSubject(this)">
+
+        <span class="check">✓</span>
+        <span>الرياضيات</span>
+
+      </div>
+
+
+      <div
+        class="subject-card"
+        onclick="toggleSubject(this)">
+
+        <span class="check">✓</span>
+        <span>اللغة الإنجليزية</span>
+
+      </div>
+
+
+      <div
+        class="subject-card"
+        onclick="toggleSubject(this)">
+
+        <span class="check">✓</span>
+        <span>الحاسب الآلي</span>
+
+      </div>
+
+
+      <div
+        class="subject-card"
+        onclick="toggleSubject(this)">
+
+        <span class="check">✓</span>
+        <span>التربية الفنية</span>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="next-btn"
+      id="subjectsNext"
+      onclick="finishSubjects()">
+
+      التالي ➜
+
+    </button>
+
+  </div>
+
+
+  <!-- ==================== -->
+  <!-- JAVASCRIPT -->
+  <!-- ==================== -->
+
+  <script>
+
+    let selectedGender = "";
+    let selectedSubjects = 0;
+    let currentLanguage = "ar";
+
+
+    /* LANGUAGE MENU */
+
+    function toggleLanguageMenu() {
+
+      const menu =
+        document.getElementById("languageMenu");
+
+      if (menu.style.display === "block") {
+
+        menu.style.display = "none";
+
+      } else {
+
+        menu.style.display = "block";
+
+      }
+
+    }
+
+
+    /* CHANGE LANGUAGE */
+
+    function setLanguage(language) {
+
+      currentLanguage = language;
+
+      const english = language === "en";
+
+
+      document.documentElement.lang =
+        language;
+
+      document.documentElement.dir =
+        english ? "ltr" : "rtl";
+
+
+      document.getElementById("languageButton").textContent =
+        english
+          ? "🌐 English"
+          : "🌐 العربية";
+
+
+      if (english) {
+
+        document.getElementById("welcomeSubtitle").textContent =
+          "Your study journey starts here ✨";
+
+        document.getElementById("startButton").textContent =
+          "Start Your Journey 🚀";
+
+
+        document.getElementById("profileTitle").textContent =
+          "Welcome!";
+
+        document.getElementById("profileSubtitle").textContent =
+          "Let's set up your profile 📚";
+
+        document.getElementById("nameLabel").textContent =
+          "👤 Your name";
+
+        document.getElementById("ageLabel").textContent =
+          "🎂 Your age";
+
+        document.getElementById("genderLabel").textContent =
+          "🧑 You are";
+
+        document.getElementById("boyBtn").textContent =
+          "👦 Boy";
+
+        document.getElementById("girlBtn").textContent =
+          "👧 Girl";
+
+        document.getElementById("gradeLabel").textContent =
+          "🎓 Your grade";
+
+        document.getElementById("gradePlaceholder").textContent =
+          "Choose your grade";
+
+        document.getElementById("profileNext").textContent =
+          "Next ➜";
+
+        document.getElementById("name").placeholder =
+          "Enter your name";
+
+        document.getElementById("age").placeholder =
+          "Enter your age";
+
+
+        document.getElementById("subjectsTitle").textContent =
+          "Your Subjects";
+
+        document.getElementById("subjectsSubtitle").textContent =
+          "Choose the subjects you study";
+
+        document.getElementById("counterText").textContent =
+          "Selected";
+
+        document.getElementById("subjectWord").textContent =
+          "subjects";
+
+        document.getElementById("subjectsNext").textContent =
+          "Next ➜";
+
+
+      } else {
+
+        document.getElementById("welcomeSubtitle").textContent =
+          "رحلتك في المذاكرة تبدأ من هنا ✨";
+
+        document.getElementById("startButton").textContent =
+          "ابدأ رحلتك 🚀";
+
+
+        document.getElementById("profileTitle").textContent =
+          "أهلاً بيك!";
+
+        document.getElementById("profileSubtitle").textContent =
+          "خلينا نجهز حسابك 📚";
+
+        document.getElementById("nameLabel").textContent =
+          "👤 اسمك";
+
+        document.getElementById("ageLabel").textContent =
+          "🎂 سنك";
+
+        document.getElementById("genderLabel").textContent =
+          "🧑 أنت";
+
+        document.getElementById("boyBtn").textContent =
+          "👦 ولد";
+
+        document.getElementById("girlBtn").textContent =
+          "👧 بنت";
+
+        document.getElementById("gradeLabel").textContent =
+          "🎓 صفك الدراسي";
+
+        document.getElementById("gradePlaceholder").textContent =
+          "اختار الصف";
+
+        document.getElementById("profileNext").textContent =
+          "التالي ➜";
+
+        document.getElementById("name").placeholder =
+          "اكتب اسمك";
+
+        document.getElementById("age").placeholder =
+          "اكتب سنك";
+
+
+        document.getElementById("subjectsTitle").textContent =
+          "موادك الدراسية";
+
+        document.getElementById("subjectsSubtitle").textContent =
+          "اختار المواد اللي بتدرسها";
+
+        document.getElementById("counterText").textContent =
+          "تم اختيار";
+
+        document.getElementById("subjectWord").textContent =
+          "مادة";
+
+        document.getElementById("subjectsNext").textContent =
+          "التالي ➜";
+
+      }
+
+
+      document.getElementById("languageMenu").style.display =
+        "none";
+
+    }
+
+
+    /* ==================== */
+    /* START JOURNEY */
+    /* ==================== */
+
+    function startJourney() {
+
+      document.getElementById("welcomeScreen").style.display =
+        "none";
+
+      document.getElementById("profileScreen").style.display =
+        "block";
+
+    }
+
+
+    /* ==================== */
+    /* GENDER */
+    /* ==================== */
+
+    function chooseGender(gender) {
+
+      selectedGender = gender;
+
+
+      document
+        .getElementById("boyBtn")
+        .classList
+        .remove("selected");
+
+      document
+        .getElementById("girlBtn")
+        .classList
+        .remove("selected");
+
+
+      if (gender === "boy") {
+
+        document
+          .getElementById("boyBtn")
+          .classList
+          .add("selected");
+
+      } else {
+
+        document
+          .getElementById("girlBtn")
+          .classList
+          .add("selected");
+
+      }
+
+    }
+
+
+    /* ==================== */
+    /* PROFILE → SUBJECTS */
+    /* ==================== */
+
+    function goToSubjects() {
+
+      const name =
+        document.getElementById("name").value.trim();
+
+      const age =
+        document.getElementById("age").value;
+
+      const grade =
+        document.getElementById("grade").value;
+
+
+      if (!name || !age || !selectedGender || !grade) {
+
+        if (currentLanguage === "en") {
+
+          alert(
+            "Please complete all the information first ❤️"
+          );
+
+        } else {
+
+          alert(
+            "من فضلك كمّل كل البيانات الأول ❤️"
+          );
+
+        }
+
+        return;
+
+      }
+
+
+      document.getElementById("profileScreen").style.display =
+        "none";
+
+      document.getElementById("subjectsScreen").style.display =
+        "block";
+
+    }
+
+
+    /* ==================== */
+    /* SUBJECT SELECTION */
+    /* ==================== */
+
+    function toggleSubject(card) {
+
+      card.classList.toggle("selected");
+
+
+      if (card.classList.contains("selected")) {
+
+        selectedSubjects++;
+
+      } else {
+
+        selectedSubjects--;
+
+      }
+
+
+      document.getElementById("selectedCount").textContent =
+        selectedSubjects;
+
+    }
+
+
+    /* ==================== */
+    /* FINISH SUBJECTS */
+    /* ==================== */
+
+    function finishSubjects() {
+
+      if (selectedSubjects === 0) {
+
+        if (currentLanguage === "en") {
+
+          alert(
+            "Choose at least one subject 📚"
+          );
+
+        } else {
+
+          alert(
+            "اختار مادة واحدة على الأقل 📚"
+          );
+
+        }
+
+        return;
+
+      }
+
+
+      if (currentLanguage === "en") {
+
+        alert(
+          "Great! You selected " +
+          selectedSubjects +
+          " subjects 🎉"
+        );
+
+      } else {
+
+        alert(
+          "ممتاز! اخترت " +
+          selectedSubjects +
+          " مادة 🎉"
+        );
+
+      }
+
+    }
+
+  </script>
+
+</body>
+
+</html>
