@@ -1,975 +1,751 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Study Quest</title>
 
 <style>
-
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #f4f8f5, #eaf3ee);
-  color: #183b2a;
-  padding: 25px;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #dff4ff, #e9e2ff);
+    color: #24324a;
+    padding: 25px;
 }
 
-/* ================= LANGUAGE ================= */
-
 .language-box {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 1000;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
 }
 
 .language-btn {
-  border: none;
-  background: white;
-  padding: 11px 16px;
-  border-radius: 12px;
-  box-shadow: 0 5px 18px rgba(0,0,0,.12);
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: bold;
+    border: none;
+    background: white;
+    padding: 12px 18px;
+    border-radius: 14px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.12);
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .language-menu {
-  display: none;
-  position: absolute;
-  top: 48px;
-  left: 0;
-  width: 150px;
-  background: white;
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 150px;
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,.15);
 }
 
 .language-menu button {
-  width: 100%;
-  border: none;
-  background: white;
-  padding: 14px;
-  cursor: pointer;
-  font-size: 15px;
-  text-align: right;
+    width: 100%;
+    border: none;
+    background: white;
+    padding: 14px;
+    cursor: pointer;
+    font-size: 15px;
 }
 
 .language-menu button:hover {
-  background: #f0f7f2;
+    background: #f1f5ff;
 }
 
-/* ================= SCREENS ================= */
-
 .screen {
-  width: min(92%, 700px);
-  margin: 40px auto;
-  background: rgba(255,255,255,.97);
-  padding: 45px 35px;
-  border-radius: 30px;
-  box-shadow: 0 20px 50px rgba(0,0,0,.10);
+    width: min(92%, 700px);
+    margin: 60px auto;
+    background: rgba(255,255,255,.97);
+    padding: 45px 35px;
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.12);
 }
 
 .center {
-  text-align: center;
+    text-align: center;
 }
 
 .logo {
-  font-size: 55px;
-  margin-bottom: 12px;
+    font-size: 60px;
+    margin-bottom: 15px;
 }
 
 h1 {
-  font-size: 36px;
-  margin-bottom: 12px;
+    font-size: 36px;
+    margin-bottom: 12px;
 }
 
 .subtitle {
-  color: #527064;
-  font-size: 18px;
-  margin-bottom: 30px;
-  line-height: 1.6;
+    color: #667085;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
 }
-
-/* ================= BUTTONS ================= */
 
 .start-btn,
 .next-btn {
-  border: none;
-  padding: 16px 35px;
-  border-radius: 15px;
-  font-size: 18px;
-  font-weight: bold;
-  background: #2e7d5b;
-  color: white;
-  cursor: pointer;
-  transition: .2s;
+    border: none;
+    padding: 16px 35px;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    background: #5b6ee1;
+    color: white;
+    cursor: pointer;
+    transition: .2s;
 }
 
 .start-btn:hover,
 .next-btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0,0,0,.15);
+    transform: translateY(-3px);
 }
 
 .next-btn {
-  width: 100%;
-  margin-top: 30px;
+    width: 100%;
+    margin-top: 30px;
 }
 
-/* ================= HIDDEN ================= */
-
-#profileScreen,
-#characterScreen,
-#subjectsScreen,
-#dashboardScreen {
-  display: none;
+.hidden {
+    display: none !important;
 }
-
-/* ================= PROFILE ================= */
 
 label {
-  display: block;
-  margin: 18px 0 8px;
-  font-weight: bold;
+    display: block;
+    margin: 18px 0 8px;
+    font-weight: bold;
 }
 
 input,
 select {
-  width: 100%;
-  padding: 14px;
-  border: 2px solid #dce8e1;
-  border-radius: 12px;
-  font-size: 16px;
-  outline: none;
-  background: white;
+    width: 100%;
+    padding: 14px;
+    border: 2px solid #e2e7f0;
+    border-radius: 12px;
+    font-size: 16px;
+    outline: none;
+    background: white;
 }
 
 input:focus,
 select:focus {
-  border-color: #2e7d5b;
+    border-color: #5b6ee1;
 }
 
 .gender-buttons {
-  display: flex;
-  gap: 12px;
+    display: flex;
+    gap: 12px;
 }
 
 .gender-buttons button {
-  flex: 1;
-  padding: 14px;
-  border: 2px solid #dce8e1;
-  border-radius: 12px;
-  background: white;
-  cursor: pointer;
-  font-size: 17px;
+    flex: 1;
+    padding: 14px;
+    border: 2px solid #e2e7f0;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    font-size: 17px;
 }
 
 .gender-buttons button.selected {
-  border-color: #2e7d5b;
-  background: #e8f5e9;
+    border-color: #5b6ee1;
+    background: #eef0ff;
 }
 
-/* ================= CHARACTER ================= */
+/* CHARACTER */
 
 .character-area {
-  text-align: center;
-  margin: 20px 0 30px;
+    text-align: center;
+    margin: 20px 0 30px;
 }
 
 .character {
-  width: 180px;
-  height: 270px;
-  margin: auto;
-  position: relative;
+    width: 180px;
+    height: 280px;
+    margin: auto;
+    position: relative;
 }
 
 .head {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background: #d99b78;
-  position: absolute;
-  top: 10px;
-  left: 45px;
-  z-index: 3;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #d99b78;
+    position: absolute;
+    top: 10px;
+    left: 45px;
+    z-index: 3;
 }
 
 .hair {
-  width: 92px;
-  height: 48px;
-  background: #3a2921;
-  border-radius: 50px 50px 20px 20px;
-  position: absolute;
-  top: 3px;
-  left: 44px;
-  z-index: 4;
+    width: 95px;
+    height: 48px;
+    background: #3b2920;
+    border-radius: 50px 50px 20px 20px;
+    position: absolute;
+    top: 3px;
+    left: 42px;
+    z-index: 4;
 }
 
 .eye {
-  width: 9px;
-  height: 9px;
-  background: #222;
-  border-radius: 50%;
-  position: absolute;
-  top: 48px;
-  z-index: 5;
+    width: 9px;
+    height: 9px;
+    background: #222;
+    border-radius: 50%;
+    position: absolute;
+    top: 50px;
+    z-index: 5;
 }
 
 .eye.left {
-  left: 68px;
+    left: 68px;
 }
 
 .eye.right {
-  left: 103px;
+    left: 103px;
 }
 
 .body-character {
-  width: 115px;
-  height: 105px;
-  background: #6fa8dc;
-  border-radius: 35px 35px 20px 20px;
-  position: absolute;
-  top: 92px;
-  left: 32px;
+    width: 115px;
+    height: 105px;
+    background: #6fa8dc;
+    border-radius: 35px 35px 20px 20px;
+    position: absolute;
+    top: 92px;
+    left: 32px;
 }
 
 .arm {
-  width: 28px;
-  height: 85px;
-  background: #d99b78;
-  border-radius: 20px;
-  position: absolute;
-  top: 105px;
+    width: 28px;
+    height: 85px;
+    background: #d99b78;
+    border-radius: 20px;
+    position: absolute;
+    top: 105px;
 }
 
 .arm.left {
-  left: 12px;
-  transform: rotate(12deg);
+    left: 12px;
+    transform: rotate(12deg);
 }
 
 .arm.right {
-  right: 12px;
-  transform: rotate(-12deg);
+    right: 12px;
+    transform: rotate(-12deg);
 }
 
 .leg {
-  width: 42px;
-  height: 80px;
-  background: #333;
-  position: absolute;
-  top: 185px;
-  border-radius: 10px;
+    width: 42px;
+    height: 80px;
+    background: #333;
+    position: absolute;
+    top: 185px;
+    border-radius: 10px;
 }
 
 .leg.left {
-  left: 47px;
+    left: 47px;
 }
 
 .leg.right {
-  right: 47px;
+    right: 47px;
 }
 
 .character-options {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 12px;
 }
 
 .character-options button {
-  border: 2px solid #e1e9e4;
-  background: white;
-  border-radius: 18px;
-  padding: 15px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
+    border: 2px solid #e2e7f0;
+    background: white;
+    border-radius: 15px;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .character-options button.selected {
-  border-color: #2e7d5b;
-  background: #e8f5e9;
+    border-color: #5b6ee1;
+    background: #eef0ff;
 }
 
-/* ================= SUBJECTS ================= */
+/* SUBJECTS */
 
 .subjects-counter {
-  background: #e8f5e9;
-  padding: 14px;
-  border-radius: 14px;
-  margin-bottom: 22px;
-  font-weight: bold;
-  color: #2e7d5b;
-  text-align: center;
+    background: #eef0ff;
+    padding: 14px;
+    border-radius: 14px;
+    margin-bottom: 22px;
+    font-weight: bold;
+    color: #5b6ee1;
+    text-align: center;
 }
 
 .subjects-grid {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 12px;
 }
 
 .subject-card {
-  background: white;
-  border: 2px solid #e1e9e4;
-  border-radius: 15px;
-  padding: 17px 12px;
-  cursor: pointer;
-  transition: .2s;
-  font-size: 15px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+    background: white;
+    border: 2px solid #e2e7f0;
+    border-radius: 15px;
+    padding: 17px 12px;
+    cursor: pointer;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .subject-card.selected {
-  border-color: #2e7d5b;
-  background: #f0faf3;
+    border-color: #5b6ee1;
+    background: #f3f4ff;
 }
 
 .check {
-  width: 23px;
-  height: 23px;
-  border: 2px solid #cbd8d0;
-  border-radius: 7px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 23px;
+    height: 23px;
+    border: 2px solid #ccd3df;
+    border-radius: 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .subject-card.selected .check {
-  background: #2e7d5b;
-  color: white;
-  border-color: #2e7d5b;
+    background: #5b6ee1;
+    color: white;
+    border-color: #5b6ee1;
 }
 
-/* ================= DASHBOARD ================= */
+/* HOME */
 
-.dashboard {
-  width: min(95%, 1000px);
-  margin: 30px auto;
+.home-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 30px;
 }
 
-.dashboard-header {
-  background: white;
-  border-radius: 25px;
-  padding: 25px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.08);
-  margin-bottom: 20px;
+.avatar {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #eef0ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
 }
 
-.dashboard-header h1 {
-  font-size: 30px;
-  margin-bottom: 8px;
-}
-
-.dashboard-header p {
-  color: #61756a;
+.welcome-box {
+    background: linear-gradient(135deg, #eef0ff, #e7f8ff);
+    padding: 25px;
+    border-radius: 20px;
+    margin-bottom: 20px;
 }
 
 .dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 15px;
 }
 
 .dashboard-card {
-  background: white;
-  padding: 25px;
-  border-radius: 22px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.07);
+    background: white;
+    border: 2px solid #edf0f5;
+    border-radius: 18px;
+    padding: 22px;
+    text-align: center;
 }
 
-.dashboard-card h2 {
-  font-size: 21px;
-  margin-bottom: 15px;
+.dashboard-card .icon {
+    font-size: 32px;
+    margin-bottom: 10px;
 }
 
-.today-box {
-  background: #f0f7f2;
-  padding: 18px;
-  border-radius: 16px;
-  margin-top: 10px;
+.dashboard-card h3 {
+    margin-bottom: 7px;
 }
 
-.progress {
-  height: 12px;
-  background: #e5ece8;
-  border-radius: 20px;
-  overflow: hidden;
-  margin-top: 12px;
+.dashboard-card p {
+    color: #667085;
 }
 
-.progress-bar {
-  width: 35%;
-  height: 100%;
-  background: #2e7d5b;
+@media(max-width:500px) {
+    .screen {
+        padding: 30px 20px;
+    }
+
+    .subjects-grid,
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
 }
-
-.calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
-  margin-top: 15px;
-}
-
-.calendar div {
-  padding: 10px 4px;
-  text-align: center;
-  border-radius: 10px;
-  background: #f5f8f6;
-  font-size: 13px;
-}
-
-.calendar .today {
-  background: #2e7d5b;
-  color: white;
-  font-weight: bold;
-}
-
-.todo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 12px 0;
-}
-
-.todo input {
-  width: auto;
-}
-
-@media(max-width:600px) {
-
-  .screen {
-    padding: 30px 20px;
-  }
-
-  .subjects-grid,
-  .dashboard-grid,
-  .character-options {
-    grid-template-columns: 1fr;
-  }
-
-  h1 {
-    font-size: 30px;
-  }
-
-  .dashboard {
-    width: 95%;
-  }
-
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- ================= LANGUAGE ================= -->
-
+<!-- LANGUAGE -->
 <div class="language-box">
 
-  <button
-    class="language-btn"
-    onclick="toggleLanguageMenu()"
-    id="languageButton">
-    🌐 العربية
-  </button>
-
-  <div
-    class="language-menu"
-    id="languageMenu">
-
-    <button onclick="setLanguage('ar')">
-      🇪🇬 العربية
+    <button class="language-btn" onclick="toggleLanguageMenu()" id="languageButton">
+        🌐 العربية
     </button>
 
-    <button onclick="setLanguage('en')">
-      🇬🇧 English
-    </button>
-
-  </div>
-
-</div>
-
-
-<!-- ================= WELCOME ================= -->
-
-<div
-  class="screen center"
-  id="welcomeScreen">
-
-  <div class="logo">
-    📚
-  </div>
-
-  <h1>
-    Study Quest
-  </h1>
-
-  <p
-    class="subtitle"
-    id="welcomeSubtitle">
-    رحلتك في المذاكرة تبدأ من هنا ✨
-  </p>
-
-  <button
-    class="start-btn"
-    id="startButton"
-    onclick="startJourney()">
-    ابدأ رحلتك 🚀
-  </button>
-
-</div>
-
-
-<!-- ================= PROFILE ================= -->
-
-<div
-  class="screen"
-  id="profileScreen">
-
-  <div class="center">
-
-    <div class="logo">
-      👋
+    <div class="language-menu" id="languageMenu">
+        <button onclick="setLanguage('ar')">🇪🇬 العربية</button>
+        <button onclick="setLanguage('en')">🇬🇧 English</button>
     </div>
 
-    <h1 id="profileTitle">
-      أهلاً بيك!
-    </h1>
+</div>
 
-    <p
-      class="subtitle"
-      id="profileSubtitle">
-      خلينا نجهز حسابك 📚
+
+<!-- WELCOME -->
+<div class="screen center" id="welcomeScreen">
+
+    <div class="logo">📚</div>
+
+    <h1>Study Quest</h1>
+
+    <p class="subtitle" id="welcomeSubtitle">
+        رحلتك في المذاكرة تبدأ من هنا ✨
     </p>
 
-  </div>
-
-  <label id="nameLabel">
-    👤 اسمك
-  </label>
-
-  <input
-    id="name"
-    type="text"
-    placeholder="اكتب اسمك">
-
-  <label id="ageLabel">
-    🎂 سنك
-  </label>
-
-  <input
-    id="age"
-    type="number"
-    placeholder="اكتب سنك">
-
-  <label id="genderLabel">
-    🧑 أنت
-  </label>
-
-  <div class="gender-buttons">
-
-    <button
-      id="boyBtn"
-      onclick="chooseGender('boy')">
-      👦 ولد
+    <button class="start-btn" id="startButton" onclick="startJourney()">
+        ابدأ رحلتك 🚀
     </button>
-
-    <button
-      id="girlBtn"
-      onclick="chooseGender('girl')">
-      👧 بنت
-    </button>
-
-  </div>
-
-  <label id="gradeLabel">
-    🎓 صفك الدراسي
-  </label>
-
-  <select id="grade">
-
-    <option
-      value=""
-      id="gradePlaceholder">
-      اختار الصف
-    </option>
-
-    <option value="prep1">
-      أولى إعدادي
-    </option>
-
-    <option value="prep2">
-      تانية إعدادي
-    </option>
-
-    <option value="prep3">
-      تالتة إعدادي
-    </option>
-
-  </select>
-
-  <button
-    class="next-btn"
-    id="profileNext"
-    onclick="goToCharacter()">
-    التالي ➜
-  </button>
 
 </div>
 
 
-<!-- ================= CHARACTER ================= -->
+<!-- PROFILE -->
+<div class="screen hidden" id="profileScreen">
 
-<div
-  class="screen"
-  id="characterScreen">
+    <div class="center">
 
-  <div class="center">
+        <div class="logo">👋</div>
 
-    <div class="logo">
-      🧍
-    </div>
+        <h1 id="profileTitle">أهلاً بيك!</h1>
 
-    <h1 id="characterTitle">
-      اختار شخصيتك
-    </h1>
-
-    <p
-      class="subtitle"
-      id="characterSubtitle">
-      اختار الشخصية اللي هتمثلك في Study Quest ✨
-    </p>
-
-  </div>
-
-  <div class="character-area">
-
-    <div class="character">
-
-      <div class="head"></div>
-      <div class="hair"></div>
-
-      <div class="eye left"></div>
-      <div class="eye right"></div>
-
-      <div class="body-character"></div>
-
-      <div class="arm left"></div>
-      <div class="arm right"></div>
-
-      <div class="leg left"></div>
-      <div class="leg right"></div>
-
-    </div>
-
-  </div>
-
-  <div class="character-options">
-
-    <button onclick="chooseCharacter('boy1')">
-      👦 ولد 1
-    </button>
-
-    <button onclick="chooseCharacter('boy2')">
-      👦 ولد 2
-    </button>
-
-    <button onclick="chooseCharacter('girl1')">
-      👧 بنت 1
-    </button>
-
-    <button onclick="chooseCharacter('girl2')">
-      👧 بنت 2
-    </button>
-
-  </div>
-
-  <button
-    class="next-btn"
-    onclick="goToSubjects()"
-    id="characterNext">
-    التالي ➜
-  </button>
-
-</div>
-
-
-<!-- ================= SUBJECTS ================= -->
-
-<div
-  class="screen"
-  id="subjectsScreen">
-
-  <div class="center">
-
-    <div class="logo">
-      📚
-    </div>
-
-    <h1 id="subjectsTitle">
-      موادك الدراسية
-    </h1>
-
-    <p
-      class="subtitle"
-      id="subjectsSubtitle">
-      اختار المواد اللي بتدرسها
-    </p>
-
-  </div>
-
-  <div class="subjects-counter">
-
-    <span id="counterText">
-      تم اختيار
-    </span>
-
-    <span id="selectedCount">
-      0
-    </span>
-
-    <span id="subjectWord">
-      مادة
-    </span>
-
-  </div>
-
-  <div class="subjects-grid">
-
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <span class="check">✓</span>
-      <span>القرآن الكريم وتجويده</span>
-    </div>
-
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <span class="check">✓</span>
-      <span>أصول الدين</span>
-    </div>
-
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <span class="check">✓</span>
-      <span>الفقه</span>
-    </div>
-
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <span class="check">✓</span>
-      <span>النحو</span>
-    </div>
-
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <span class="check">✓</span>
-      <span>الصرف</span>
-    </div>
-
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <span class="check">✓</span>
-      <span>المطالعة والنصوص والقصة</span>
-    </div>
-
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <span class="check">✓</span>
-      <span>الإنشاء</span>
-    </div>
-
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <span class="check">✓</span>
-      <span>الإملاء</span>
-    </div>
-
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <span class="check">✓</span>
-      <span>الخط</span>
-    </div>
-
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <span class="check">✓</span>
-      <span>الدراسات الاجتماعية</span>
-    </div>
-
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <span class="check">✓</span>
-      <span>العلوم</span>
-    </div>
-
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <span class="check">✓</span>
-      <span>الرياضيات</span>
-    </div>
-
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <span class="check">✓</span>
-      <span>اللغة الإنجليزية</span>
-    </div>
-
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <span class="check">✓</span>
-      <span>الحاسب الآلي</span>
-    </div>
-
-    <div class="subject-card" onclick="toggleSubject(this)">
-      <span class="check">✓</span>
-      <span>التربية الفنية</span>
-    </div>
-
-  </div>
-
-  <button
-    class="next-btn"
-    onclick="finishSubjects()"
-    id="subjectsNext">
-    إنهاء ➜
-  </button>
-
-</div>
-
-
-<!-- ================= DASHBOARD ================= -->
-
-<div
-  class="dashboard"
-  id="dashboardScreen">
-
-  <div class="dashboard-header">
-
-    <h1 id="dashboardWelcome">
-      أهلاً بيك 👋
-    </h1>
-
-    <p id="dashboardDate">
-      📅 اليوم
-    </p>
-
-  </div>
-
-
-  <div class="dashboard-grid">
-
-    <!-- TODAY -->
-
-    <div class="dashboard-card">
-
-      <h2>📚 خطة اليوم</h2>
-
-      <div class="today-box">
-
-        <strong>🎯 هدف اليوم</strong>
-
-        <p style="margin-top:8px;">
-          أنجز أول جلسة مذاكرة
+        <p class="subtitle" id="profileSubtitle">
+            خلينا نجهز حسابك 📚
         </p>
 
-        <div class="progress">
-          <div class="progress-bar"></div>
+    </div>
+
+    <label id="nameLabel">👤 اسمك</label>
+
+    <input id="name" type="text" placeholder="اكتب اسمك">
+
+
+    <label id="ageLabel">🎂 سنك</label>
+
+    <input id="age" type="number" placeholder="اكتب سنك">
+
+
+    <label id="genderLabel">🧑 أنت</label>
+
+    <div class="gender-buttons">
+
+        <button id="boyBtn" onclick="chooseGender('boy')">
+            👦 ولد
+        </button>
+
+        <button id="girlBtn" onclick="chooseGender('girl')">
+            👧 بنت
+        </button>
+
+    </div>
+
+
+    <label id="gradeLabel">🎓 صفك الدراسي</label>
+
+    <select id="grade">
+
+        <option value="" id="gradePlaceholder">
+            اختار الصف
+        </option>
+
+        <option value="prep1">أولى إعدادي</option>
+        <option value="prep2">تانية إعدادي</option>
+        <option value="prep3">تالتة إعدادي</option>
+
+    </select>
+
+
+    <button class="next-btn" id="profileNext" onclick="goToCharacter()">
+        التالي ➜
+    </button>
+
+</div>
+
+
+<!-- CHARACTER -->
+<div class="screen hidden" id="characterScreen">
+
+    <div class="center">
+
+        <div class="logo">🧍</div>
+
+        <h1 id="characterTitle">
+            اختار شخصيتك
+        </h1>
+
+        <p class="subtitle" id="characterSubtitle">
+            اختار الشخصية اللي هتمثلك في Study Quest ✨
+        </p>
+
+    </div>
+
+
+    <div class="character-area">
+
+        <div class="character">
+
+            <div class="head"></div>
+            <div class="hair"></div>
+
+            <div class="eye left"></div>
+            <div class="eye right"></div>
+
+            <div class="body-character"></div>
+
+            <div class="arm left"></div>
+            <div class="arm right"></div>
+
+            <div class="leg left"></div>
+            <div class="leg right"></div>
+
         </div>
 
-      </div>
+    </div>
+
+
+    <div class="character-options">
+
+        <button onclick="chooseCharacter('boy1',this)">
+            👦 ولد 1
+        </button>
+
+        <button onclick="chooseCharacter('boy2',this)">
+            👦 ولد 2
+        </button>
+
+        <button onclick="chooseCharacter('girl1',this)">
+            👧 بنت 1
+        </button>
+
+        <button onclick="chooseCharacter('girl2',this)">
+            👧 بنت 2
+        </button>
 
     </div>
 
 
-    <!-- TODO -->
+    <button class="next-btn" id="characterNext" onclick="goToSubjects()">
+        التالي ➜
+    </button>
 
-    <div class="dashboard-card">
-
-      <h2>✅ To-Do List</h2>
-
-      <div class="todo">
-        <input type="checkbox">
-        <span>مراجعة درس اليوم</span>
-      </div>
-
-      <div class="todo">
-        <input type="checkbox">
-        <span>حل الواجب</span>
-      </div>
-
-      <div class="todo">
-        <input type="checkbox">
-        <span>مراجعة الكلمات</span>
-      </div>
-
-    </div>
+</div>
 
 
-    <!-- CALENDAR -->
+<!-- SUBJECTS -->
+<div class="screen hidden" id="subjectsScreen">
 
-    <div class="dashboard-card">
+    <div class="center">
 
-      <h2>📅 Calendar</h2>
+        <div class="logo">📚</div>
 
-      <div class="calendar">
+        <h1 id="subjectsTitle">موادك الدراسية</h1>
 
-        <div>س</div>
-        <div>ح</div>
-        <div>ن</div>
-        <div>ث</div>
-        <div>ر</div>
-        <div>خ</div>
-        <div>ج</div>
-
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>6</div>
-        <div>7</div>
-
-        <div>8</div>
-        <div>9</div>
-        <div>10</div>
-        <div>11</div>
-        <div>12</div>
-        <div>13</div>
-        <div class="today">14</div>
-
-      </div>
+        <p class="subtitle" id="subjectsSubtitle">
+            اختار المواد اللي بتدرسها
+        </p>
 
     </div>
 
 
-    <!-- FOCUS -->
+    <div class="subjects-counter">
 
-    <div class="dashboard-card">
+        <span id="counterText">تم اختيار</span>
 
-      <h2>⏱️ Focus</h2>
+        <span id="selectedCount">0</span>
 
-      <p>
-        جاهز تبدأ جلسة مذاكرة؟
-      </p>
-
-      <button
-        class="next-btn"
-        style="margin-top:15px;"
-        onclick="startFocus()">
-
-        ابدأ المذاكرة 🔥
-
-      </button>
+        <span id="subjectWord">مادة</span>
 
     </div>
 
-  </div>
+
+    <div class="subjects-grid">
+
+        <div class="subject-card" onclick="toggleSubject(this)">
+            <span class="check">✓</span>
+            <span>القرآن الكريم وتجويده</span>
+        </div>
+
+        <div class="subject-card" onclick="toggleSubject(this)">
+            <span class="check">✓</span>
+            <span>أصول الدين</span>
+        </div>
+
+        <div class="subject-card" onclick="toggleSubject(this)">
+            <span class="check">✓</span>
+            <span>الفقه</span>
+        </div>
+
+        <div class="subject-card" onclick="toggleSubject(this)">
+            <span class="check">✓</span>
+            <span>النحو</span>
+        </div>
+
+        <div class="subject-card" onclick="toggleSubject(this)">
+            <span class="check">✓</span>
+            <span>الصرف</span>
+        </div>
+
+        <div class="subject-card" onclick="toggleSubject(this)">
+            <span class="check">✓</span>
+            <span>المطالعة والنصوص والقصة</span>
+        </div>
+
+        <div class="subject-card" onclick="toggleSubject(this)">
+            <span class="check">✓</span>
+            <span>الإنشاء</span>
+        </div>
+
+        <div class="subject-card" onclick="toggleSubject(this)">
+            <span class="check">✓</span>
+            <span>الإملاء</span>
+        </div>
+
+        <div class="subject-card" onclick="toggleSubject(this)">
+            <span class="check">✓</span>
+            <span>الخط</span>
+        </div>
+
+        <div class="subject-card" onclick="toggleSubject(this)">
+            <span class="check">✓</span>
+            <span>الدراسات الاجتماعية</span>
+        </div>
+
+        <div class="subject-card" onclick="toggleSubject(this)">
+            <span class="check">✓</span>
+            <span>العلوم</span>
+        </div>
+
+        <div class="subject-card" onclick="toggleSubject(this)">
+            <span class="check">✓</span>
+            <span>الرياضيات</span>
+        </div>
+
+        <div class="subject-card" onclick="toggleSubject(this)">
+            <span class="check">✓</span>
+            <span>اللغة الإنجليزية</span>
+        </div>
+
+        <div class="subject-card" onclick="toggleSubject(this)">
+            <span class="check">✓</span>
+            <span>الحاسب الآلي</span>
+        </div>
+
+        <div class="subject-card" onclick="toggleSubject(this)">
+            <span class="check">✓</span>
+            <span>التربية الفنية</span>
+        </div>
+
+    </div>
+
+
+    <button class="next-btn" id="subjectsNext" onclick="finishSubjects()">
+        التالي ➜
+    </button>
+
+</div>
+
+
+<!-- HOME -->
+<div class="screen hidden" id="homeScreen">
+
+    <div class="home-header">
+
+        <div>
+            <h1 id="homeTitle">أهلاً بيك 👋</h1>
+            <p id="homeSubtitle">جاهز تبدأ مذاكرتك؟</p>
+        </div>
+
+        <div class="avatar" id="homeAvatar">
+            🧑
+        </div>
+
+    </div>
+
+
+    <div class="welcome-box">
+
+        <h2 id="todayTitle">📅 خطة اليوم</h2>
+
+        <p id="todayText" style="margin-top:10px;">
+            لسه مفيش مهام لليوم. خلينا نبدأ ونضيف أول مهمة! ✨
+        </p>
+
+    </div>
+
+
+    <div class="dashboard-grid">
+
+        <div class="dashboard-card">
+            <div class="icon">📝</div>
+            <h3>To-Do List</h3>
+            <p>مهامك اليومية</p>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="icon">📅</div>
+            <h3>Calendar</h3>
+            <p>جدول الأسبوع</p>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="icon">⏱️</div>
+            <h3>Focus</h3>
+            <p>ابدأ جلسة مذاكرة</p>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="icon">📊</div>
+            <h3>Progress</h3>
+            <p>شوف تقدمك</p>
+        </div>
+
+    </div>
 
 </div>
 
 
 <script>
-
-/* ================= VARIABLES ================= */
 
 let selectedGender = "";
 let selectedCharacter = "";
@@ -977,445 +753,149 @@ let selectedSubjects = 0;
 let currentLanguage = "ar";
 
 
-/* ================= START ================= */
-
 function startJourney() {
 
-  document.getElementById("welcomeScreen").style.display = "none";
-
-  document.getElementById("profileScreen").style.display = "block";
+    document.getElementById("welcomeScreen").classList.add("hidden");
+    document.getElementById("profileScreen").classList.remove("hidden");
 
 }
 
-
-/* ================= LANGUAGE MENU ================= */
 
 function toggleLanguageMenu() {
 
-  const menu = document.getElementById("languageMenu");
+    const menu = document.getElementById("languageMenu");
 
-  if (menu.style.display === "block") {
-    menu.style.display = "none";
-  } else {
-    menu.style.display = "block";
-  }
+    if (menu.style.display === "block") {
+        menu.style.display = "none";
+    } else {
+        menu.style.display = "block";
+    }
 
 }
 
-
-/* ================= LANGUAGE ================= */
 
 function setLanguage(language) {
 
-  currentLanguage = language;
+    currentLanguage = language;
 
-  const english = language === "en";
+    const english = language === "en";
 
-  document.documentElement.lang = language;
+    document.documentElement.lang = language;
+    document.documentElement.dir = english ? "ltr" : "rtl";
 
-  document.documentElement.dir = english ? "ltr" : "rtl";
+    document.getElementById("languageButton").textContent =
+        english ? "🌐 English" : "🌐 العربية";
 
-  document.getElementById("languageButton").textContent =
-    english ? "🌐 English" : "🌐 العربية";
+    if (english) {
 
+        document.getElementById("welcomeSubtitle").textContent =
+            "Your study journey starts here ✨";
 
-  if (english) {
+        document.getElementById("startButton").textContent =
+            "Start Your Journey 🚀";
 
-    document.getElementById("welcomeSubtitle").textContent =
-      "Your study journey starts here ✨";
+        document.getElementById("profileTitle").textContent =
+            "Welcome!";
 
-    document.getElementById("startButton").textContent =
-      "Start Your Journey 🚀";
+        document.getElementById("profileSubtitle").textContent =
+            "Let's set up your profile 📚";
 
-    document.getElementById("profileTitle").textContent =
-      "Welcome!";
+        document.getElementById("nameLabel").textContent =
+            "👤 Your name";
 
-    document.getElementById("profileSubtitle").textContent =
-      "Let's set up your profile 📚";
+        document.getElementById("ageLabel").textContent =
+            "🎂 Your age";
 
-    document.getElementById("nameLabel").textContent =
-      "👤 Your name";
+        document.getElementById("genderLabel").textContent =
+            "🧑 You are";
 
-    document.getElementById("ageLabel").textContent =
-      "🎂 Your age";
+        document.getElementById("boyBtn").textContent =
+            "👦 Boy";
 
-    document.getElementById("genderLabel").textContent =
-      "🧑 You are";
+        document.getElementById("girlBtn").textContent =
+            "👧 Girl";
 
-    document.getElementById("boyBtn").textContent =
-      "👦 Boy";
+        document.getElementById("gradeLabel").textContent =
+            "🎓 Your grade";
 
-    document.getElementById("girlBtn").textContent =
-      "👧 Girl";
+        document.getElementById("gradePlaceholder").textContent =
+            "Choose your grade";
 
-    document.getElementById("gradeLabel").textContent =
-      "🎓 Your grade";
+        document.getElementById("profileNext").textContent =
+            "Next ➜";
 
-    document.getElementById("gradePlaceholder").textContent =
-      "Choose your grade";
+        document.getElementById("name").placeholder =
+            "Enter your name";
 
-    document.getElementById("profileNext").textContent =
-      "Next ➜";
+        document.getElementById("age").placeholder =
+            "Enter your age";
 
-    document.getElementById("name").placeholder =
-      "Enter your name";
+        document.getElementById("characterTitle").textContent =
+            "Choose Your Character";
 
-    document.getElementById("age").placeholder =
-      "Enter your age";
+        document.getElementById("characterSubtitle").textContent =
+            "Choose the character that represents you ✨";
 
-    document.getElementById("characterTitle").textContent =
-      "Choose Your Character";
+        document.getElementById("characterNext").textContent =
+            "Next ➜";
 
-    document.getElementById("characterSubtitle").textContent =
-      "Choose the character that represents you ✨";
+        document.getElementById("subjectsTitle").textContent =
+            "Your Subjects";
 
-    document.getElementById("characterNext").textContent =
-      "Next ➜";
+        document.getElementById("subjectsSubtitle").textContent =
+            "Choose the subjects you study";
 
-    document.getElementById("subjectsTitle").textContent =
-      "Your Subjects";
+        document.getElementById("counterText").textContent =
+            "Selected";
 
-    document.getElementById("subjectsSubtitle").textContent =
-      "Choose the subjects you study";
+        document.getElementById("subjectWord").textContent =
+            "subjects";
 
-    document.getElementById("counterText").textContent =
-      "Selected";
-
-    document.getElementById("subjectWord").textContent =
-      "subjects";
-
-    document.getElementById("subjectsNext").textContent =
-      "Finish ➜";
-
-  } else {
-
-    document.getElementById("welcomeSubtitle").textContent =
-      "رحلتك في المذاكرة تبدأ من هنا ✨";
-
-    document.getElementById("startButton").textContent =
-      "ابدأ رحلتك 🚀";
-
-    document.getElementById("profileTitle").textContent =
-      "أهلاً بيك!";
-
-    document.getElementById("profileSubtitle").textContent =
-      "خلينا نجهز حسابك 📚";
-
-    document.getElementById("nameLabel").textContent =
-      "👤 اسمك";
-
-    document.getElementById("ageLabel").textContent =
-      "🎂 سنك";
-
-    document.getElementById("genderLabel").textContent =
-      "🧑 أنت";
-
-    document.getElementById("boyBtn").textContent =
-      "👦 ولد";
-
-    document.getElementById("girlBtn").textContent =
-      "👧 بنت";
-
-    document.getElementById("gradeLabel").textContent =
-      "🎓 صفك الدراسي";
-
-    document.getElementById("gradePlaceholder").textContent =
-      "اختار الصف";
-
-    document.getElementById("profileNext").textContent =
-      "التالي ➜";
-
-    document.getElementById("name").placeholder =
-      "اكتب اسمك";
-
-    document.getElementById("age").placeholder =
-      "اكتب سنك";
-
-    document.getElementById("characterTitle").textContent =
-      "اختار شخصيتك";
-
-    document.getElementById("characterSubtitle").textContent =
-      "اختار الشخصية اللي هتمثلك في Study Quest ✨";
-
-    document.getElementById("characterNext").textContent =
-      "التالي ➜";
-
-    document.getElementById("subjectsTitle").textContent =
-      "موادك الدراسية";
-
-    document.getElementById("subjectsSubtitle").textContent =
-      "اختار المواد اللي بتدرسها";
-
-    document.getElementById("counterText").textContent =
-      "تم اختيار";
-
-    document.getElementById("subjectWord").textContent =
-      "مادة";
-
-    document.getElementById("subjectsNext").textContent =
-      "إنهاء ➜";
-
-  }
-
-  document.getElementById("languageMenu").style.display = "none";
-
-}
-
-
-/* ================= GENDER ================= */
-
-function chooseGender(gender) {
-
-  selectedGender = gender;
-
-  document.getElementById("boyBtn").classList.remove("selected");
-
-  document.getElementById("girlBtn").classList.remove("selected");
-
-  if (gender === "boy") {
-
-    document.getElementById("boyBtn").classList.add("selected");
-
-  } else {
-
-    document.getElementById("girlBtn").classList.add("selected");
-
-  }
-
-}
-
-
-/* ================= PROFILE → CHARACTER ================= */
-
-function goToCharacter() {
-
-  const name =
-    document.getElementById("name").value.trim();
-
-  const age =
-    document.getElementById("age").value;
-
-  const grade =
-    document.getElementById("grade").value;
-
-
-  if (!name || !age || !selectedGender || !grade) {
-
-    if (currentLanguage === "en") {
-
-      alert("Please complete all the information first ❤️");
+        document.getElementById("subjectsNext").textContent =
+            "Finish 🎉";
 
     } else {
 
-      alert("من فضلك كمّل كل البيانات الأول ❤️");
+        document.getElementById("welcomeSubtitle").textContent =
+            "رحلتك في المذاكرة تبدأ من هنا ✨";
 
-    }
+        document.getElementById("startButton").textContent =
+            "ابدأ رحلتك 🚀";
 
-    return;
+        document.getElementById("profileTitle").textContent =
+            "أهلاً بيك!";
 
-  }
+        document.getElementById("profileSubtitle").textContent =
+            "خلينا نجهز حسابك 📚";
 
+        document.getElementById("nameLabel").textContent =
+            "👤 اسمك";
 
-  document.getElementById("profileScreen").style.display = "none";
+        document.getElementById("ageLabel").textContent =
+            "🎂 سنك";
 
-  document.getElementById("characterScreen").style.display = "block";
+        document.getElementById("genderLabel").textContent =
+            "🧑 أنت";
 
-}
+        document.getElementById("boyBtn").textContent =
+            "👦 ولد";
 
+        document.getElementById("girlBtn").textContent =
+            "👧 بنت";
 
-/* ================= CHARACTER ================= */
+        document.getElementById("gradeLabel").textContent =
+            "🎓 صفك الدراسي";
 
-function chooseCharacter(character) {
+        document.getElementById("gradePlaceholder").textContent =
+            "اختار الصف";
 
-  selectedCharacter = character;
+        document.getElementById("profileNext").textContent =
+            "التالي ➜";
 
-  const buttons =
-    document.querySelectorAll(".character-options button");
+        document.getElementById("name").placeholder =
+            "اكتب اسمك";
 
-  buttons.forEach(button => {
-    button.classList.remove("selected");
-  });
+        document.getElementById("age").placeholder =
+            "اكتب سنك";
 
-  event.currentTarget.classList.add("selected");
-
-
-  const body =
-    document.querySelector(".body-character");
-
-  const hair =
-    document.querySelector(".hair");
-
-
-  if (character === "boy1") {
-
-    body.style.background = "#6fa8dc";
-    hair.style.background = "#3a2921";
-
-  }
-
-  if (character === "boy2") {
-
-    body.style.background = "#93c47d";
-    hair.style.background = "#222";
-
-  }
-
-  if (character === "girl1") {
-
-    body.style.background = "#d5a6bd";
-    hair.style.background = "#3a2921";
-
-  }
-
-  if (character === "girl2") {
-
-    body.style.background = "#f6b26b";
-    hair.style.background = "#5b351f";
-
-  }
-
-}
-
-
-/* ================= CHARACTER → SUBJECTS ================= */
-
-function goToSubjects() {
-
-  if (!selectedCharacter) {
-
-    if (currentLanguage === "en") {
-
-      alert("Please choose your character first 🧍");
-
-    } else {
-
-      alert("اختار شخصيتك الأول 🧍");
-
-    }
-
-    return;
-
-  }
-
-
-  document.getElementById("characterScreen").style.display = "none";
-
-  document.getElementById("subjectsScreen").style.display = "block";
-
-}
-
-
-/* ================= SUBJECTS ================= */
-
-function toggleSubject(card) {
-
-  card.classList.toggle("selected");
-
-  if (card.classList.contains("selected")) {
-
-    selectedSubjects++;
-
-  } else {
-
-    selectedSubjects--;
-
-  }
-
-  document.getElementById("selectedCount").textContent =
-    selectedSubjects;
-
-}
-
-
-/* ================= FINISH ================= */
-
-function finishSubjects() {
-
-  if (selectedSubjects === 0) {
-
-    if (currentLanguage === "en") {
-
-      alert("Choose at least one subject 📚");
-
-    } else {
-
-      alert("اختار مادة واحدة على الأقل 📚");
-
-    }
-
-    return;
-
-  }
-
-
-  document.getElementById("subjectsScreen").style.display =
-    "none";
-
-  document.getElementById("dashboardScreen").style.display =
-    "block";
-
-
-  const name =
-    document.getElementById("name").value.trim();
-
-
-  if (currentLanguage === "en") {
-
-    document.getElementById("dashboardWelcome").textContent =
-      "Welcome, " + name + " 👋";
-
-  } else {
-
-    document.getElementById("dashboardWelcome").textContent =
-      "أهلاً يا " + name + " 👋";
-
-  }
-
-
-  updateDate();
-
-}
-
-
-/* ================= DATE ================= */
-
-function updateDate() {
-
-  const today = new Date();
-
-  const options = {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric"
-  };
-
-  document.getElementById("dashboardDate").textContent =
-    "📅 " + today.toLocaleDateString(
-      currentLanguage === "ar" ? "ar-EG" : "en-US",
-      options
-    );
-
-}
-
-
-/* ================= FOCUS ================= */
-
-function startFocus() {
-
-  if (currentLanguage === "en") {
-
-    alert("Focus Mode is coming soon 🔥");
-
-  } else {
-
-    alert("وضع التركيز هيكون موجود قريب 🔥");
-
-  }
-
-}
-
-</script>
-
-</body>
-</html>
+        document.getElementById("character
