@@ -251,6 +251,84 @@
         font-size: 30px;
       }
     }
+ /* CHARACTER */
+
+#characterScreen {
+  display: none;
+  text-align: center;
+}
+
+.character-preview {
+  width: 170px;
+  height: 240px;
+  margin: 25px auto;
+  position: relative;
+  filter: drop-shadow(0 15px 15px rgba(0,0,0,0.15));
+}
+
+.character-head {
+  width: 75px;
+  height: 75px;
+  background: #d9a07c;
+  border-radius: 50%;
+  position: absolute;
+  top: 10px;
+  left: 48px;
+  box-shadow: inset -8px -5px 0 rgba(0,0,0,0.08);
+}
+
+.character-body {
+  width: 105px;
+  height: 110px;
+  background: #6fa8dc;
+  border-radius: 35px 35px 18px 18px;
+  position: absolute;
+  top: 80px;
+  left: 32px;
+}
+
+.character-legs {
+  width: 85px;
+  height: 65px;
+  background: #333;
+  border-radius: 10px;
+  position: absolute;
+  top: 180px;
+  left: 42px;
+}
+
+.character-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.character-options button {
+  border: 2px solid #e1e9e4;
+  background: white;
+  border-radius: 18px;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 30px;
+  transition: 0.2s;
+}
+
+.character-options button span {
+  display: block;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.character-options button:hover {
+  transform: translateY(-3px);
+  border-color: #2e7d5b;
+}
+
+.character-options button.selected {
+  border-color: #2e7d5b;
+  background: #e8f5e9;
+} 
   </style>
 </head>
 
