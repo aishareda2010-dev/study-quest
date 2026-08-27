@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Study Quest</title>
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -20,19 +23,47 @@
       align-items: center;
       justify-content: center;
       color: #183b2a;
+      padding: 20px;
     }
+
+    /* الخلفية */
+
+    body::before {
+      content: "📚   ✏️   📖   📝   📐";
+      position: fixed;
+      top: 10%;
+      left: 5%;
+      font-size: 35px;
+      opacity: 0.12;
+      word-spacing: 30px;
+      pointer-events: none;
+    }
+
+    body::after {
+      content: "📚   ⭐   ✏️   🧠";
+      position: fixed;
+      bottom: 10%;
+      right: 5%;
+      font-size: 35px;
+      opacity: 0.12;
+      word-spacing: 30px;
+      pointer-events: none;
+    }
+
+    /* الشاشة الأولى */
 
     .welcome {
       width: min(90%, 700px);
       text-align: center;
-      background: rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.88);
       padding: 60px 30px;
       border-radius: 30px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.10);
+      animation: appear 0.6s ease;
     }
 
     .logo {
-      font-size: 48px;
+      font-size: 60px;
       margin-bottom: 15px;
     }
 
@@ -41,13 +72,15 @@
       margin-bottom: 15px;
     }
 
-    p {
+    .welcome p,
+    .profile p {
       font-size: 20px;
       margin-bottom: 35px;
       color: #527064;
     }
 
-    .start-btn {
+    .start-btn,
+    .next-btn {
       border: none;
       padding: 16px 35px;
       border-radius: 15px;
@@ -59,32 +92,341 @@
       transition: 0.2s;
     }
 
-    .start-btn:hover {
+    .start-btn:hover,
+    .next-btn:hover {
       transform: translateY(-3px);
       box-shadow: 0 10px 20px rgba(0,0,0,0.15);
     }
+
+    /* شاشة إنشاء الحساب */
+
+    .profile {
+      display: none;
+      width: min(90%, 550px);
+      background: rgba(255,255,255,0.93);
+      padding: 45px 35px;
+      border-radius: 30px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.10);
+      animation: appear 0.5s ease;
+      text-align: center;
+    }
+
+    .profile h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .profile p {
+      margin-bottom: 25px;
+    }
+
+    .profile label {
+      display: block;
+      text-align: right;
+      margin: 18px 0 8px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .profile input,
+    .profile select {
+      width: 100%;
+      padding: 14px;
+      border: 2px solid #dce8e1;
+      border-radius: 12px;
+      font-size: 16px;
+      outline: none;
+      background: white;
+    }
+
+    .profile input:focus,
+    .profile select:focus {
+      border-color: #2e7d5b;
+    }
+
+    /* اختيار ولد أو بنت */
+
+    .gender-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .gender-buttons button {
+      flex: 1;
+      padding: 14px;
+      border: 2px solid #dce8e1;
+      border-radius: 12px;
+      background: white;
+      cursor: pointer;
+      font-size: 17px;
+      transition: 0.2s;
+    }
+
+    .gender-buttons button:hover {
+      transform: translateY(-2px);
+    }
+
+    .gender-buttons button.selected {
+      border-color: #2e7d5b;
+      background: #e8f5e9;
+      box-shadow: 0 5px 15px rgba(46,125,91,0.15);
+    }
+
+    .next-btn {
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    /* حركة ظهور */
+
+    @keyframes appear {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
   </style>
 </head>
 
 <body>
 
-  <div class="welcome">
-    <div class="logo">📚</div>
+  <!-- الشاشة الأولى -->
 
-    <h1>Study Quest</h1>
+  <div class="welcome" id="welcomeScreen">
 
-    <p>رحلتك في المذاكرة تبدأ من هنا ✨</p>
+    <div class="logo">
+      📚
+    </div>
+
+    <h1>
+      Study Quest
+    </h1>
+
+    <p>
+      رحلتك في المذاكرة تبدأ من هنا ✨
+    </p>
 
     <button class="start-btn" onclick="startJourney()">
       ابدأ رحلتك 🚀
     </button>
+
   </div>
 
+
+  <!-- شاشة إنشاء الحساب -->
+
+  <div class="profile" id="profileScreen">
+
+    <div class="logo">
+      👋
+    </div>
+
+    <h1>
+      أهلاً بيك!
+    </h1>
+
+    <p>
+      خلينا نجهز حسابك 📚
+    </p>
+
+
+    <label>
+      👤 اسمك
+    </label>
+
+    <input
+      type="text"
+      id="name"
+      placeholder="اكتب اسمك"
+    >
+
+
+    <label>
+      🎂 سنك
+    </label>
+
+    <input
+      type="number"
+      id="age"
+      placeholder="اكتب سنك"
+      min="5"
+      max="100"
+    >
+
+
+    <label>
+      🧑 أنت
+    </label>
+
+    <div class="gender-buttons">
+
+      <button
+        id="boyBtn"
+        onclick="chooseGender('boy')"
+      >
+        👦 ولد
+      </button>
+
+      <button
+        id="girlBtn"
+        onclick="chooseGender('girl')"
+      >
+        👧 بنت
+      </button>
+
+    </div>
+
+
+    <label>
+      🎓 صفك الدراسي
+    </label>
+
+    <select id="grade">
+
+      <option value="">
+        اختار الصف
+      </option>
+
+      <option value="primary">
+        ابتدائي
+      </option>
+
+      <option value="prep1">
+        أولى إعدادي
+      </option>
+
+      <option value="prep2">
+        تانية إعدادي
+      </option>
+
+      <option value="prep3">
+        تالتة إعدادي
+      </option>
+
+      <option value="secondary1">
+        أولى ثانوي
+      </option>
+
+      <option value="secondary2">
+        تانية ثانوي
+      </option>
+
+      <option value="secondary3">
+        تالتة ثانوي
+      </option>
+
+    </select>
+
+
+    <button
+      class="next-btn"
+      onclick="nextStep()"
+    >
+      التالي ➜
+    </button>
+
+  </div>
+
+
   <script>
+
+    let selectedGender = "";
+
+
+    /* زر ابدأ الرحلة */
+
     function startJourney() {
-      alert("هنبدأ نجهز حسابك! 🚀");
+
+      document.getElementById("welcomeScreen").style.display = "none";
+
+      document.getElementById("profileScreen").style.display = "block";
+
     }
+
+
+    /* اختيار ولد أو بنت */
+
+    function chooseGender(gender) {
+
+      selectedGender = gender;
+
+      document
+        .getElementById("boyBtn")
+        .classList
+        .remove("selected");
+
+      document
+        .getElementById("girlBtn")
+        .classList
+        .remove("selected");
+
+
+      if (gender === "boy") {
+
+        document
+          .getElementById("boyBtn")
+          .classList
+          .add("selected");
+
+      }
+
+      else {
+
+        document
+          .getElementById("girlBtn")
+          .classList
+          .add("selected");
+
+      }
+
+    }
+
+
+    /* زر التالي */
+
+    function nextStep() {
+
+      const name =
+        document.getElementById("name").value.trim();
+
+      const age =
+        document.getElementById("age").value;
+
+      const grade =
+        document.getElementById("grade").value;
+
+
+      if (
+        !name ||
+        !age ||
+        !selectedGender ||
+        !grade
+      ) {
+
+        alert("من فضلك كمّل كل البيانات الأول ❤️");
+
+        return;
+
+      }
+
+
+      alert(
+        "تمام يا " +
+        name +
+        "! 🎉\n\n" +
+        "دلوقتي هنروح لاختيار المواد."
+      );
+
+    }
+
   </script>
 
 </body>
+
 </html>
