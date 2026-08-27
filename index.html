@@ -2,306 +2,301 @@
 <html lang="ar" dir="rtl">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Study Quest</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<title>Study Quest</title>
 
-    body {
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #e8f5e9, #e3f2fd);
-      color: #183b2a;
-      padding: 25px;
-    }
+<style>
 
-    /* Language */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-    .language-box {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 100;
-    }
+body {
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #e8f5e9, #e3f2fd);
+  color: #183b2a;
+  padding: 25px;
+}
 
-    .language-btn {
-      border: none;
-      background: white;
-      padding: 11px 16px;
-      border-radius: 12px;
-      box-shadow: 0 5px 18px rgba(0,0,0,0.1);
-      cursor: pointer;
-      font-size: 15px;
-      font-weight: bold;
-    }
+/* LANGUAGE */
 
-    .language-menu {
-      display: none;
-      position: absolute;
-      top: 48px;
-      left: 0;
-      width: 150px;
-      background: white;
-      border-radius: 14px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      overflow: hidden;
-    }
+.language-box {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+}
 
-    .language-menu button {
-      width: 100%;
-      border: none;
-      background: white;
-      padding: 14px;
-      text-align: right;
-      cursor: pointer;
-      font-size: 15px;
-    }
+.language-btn {
+  border: none;
+  background: white;
+  padding: 11px 16px;
+  border-radius: 12px;
+  box-shadow: 0 5px 18px rgba(0,0,0,.12);
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+}
 
-    .language-menu button:hover {
-      background: #f0f7f2;
-    }
-
-    /* Screens */
-
-    .screen {
-      width: min(92%, 700px);
-      margin: 40px auto;
-      background: rgba(255,255,255,0.95);
-      padding: 45px 35px;
-      border-radius: 30px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.10);
-    }
-
-    .center {
-      text-align: center;
-    }
-
-    .logo {
-      font-size: 55px;
-      margin-bottom: 12px;
-    }
-
-    h1 {
-      font-size: 36px;
-      margin-bottom: 12px;
-    }
-
-    .subtitle {
-      color: #527064;
-      font-size: 18px;
-      margin-bottom: 30px;
-      line-height: 1.6;
-    }
-
-    /* Buttons */
-
-    .start-btn,
-    .next-btn {
-      border: none;
-      padding: 16px 35px;
-      border-radius: 15px;
-      font-size: 18px;
-      font-weight: bold;
-      background: #2e7d5b;
-      color: white;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .start-btn:hover,
-    .next-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-    }
-
-    /* Welcome */
-
-    #welcomeScreen {
-      margin-top: 15vh;
-    }
-
-    /* Profile */
-
-    #profileScreen,
-    #subjectsScreen {
-      display: none;
-    }
-
-    label {
-      display: block;
-      margin: 18px 0 8px;
-      font-weight: bold;
-    }
-
-    input,
-    select {
-      width: 100%;
-      padding: 14px;
-      border: 2px solid #dce8e1;
-      border-radius: 12px;
-      font-size: 16px;
-      outline: none;
-      background: white;
-    }
-
-    input:focus,
-    select:focus {
-      border-color: #2e7d5b;
-    }
-
-    .gender-buttons {
-      display: flex;
-      gap: 12px;
-    }
-
-    .gender-buttons button {
-      flex: 1;
-      padding: 14px;
-      border: 2px solid #dce8e1;
-      border-radius: 12px;
-      background: white;
-      cursor: pointer;
-      font-size: 17px;
-    }
-
-    .gender-buttons button.selected {
-      border-color: #2e7d5b;
-      background: #e8f5e9;
-    }
-
-    .next-btn {
-      width: 100%;
-      margin-top: 30px;
-    }
-
-    /* Subjects */
-
-    .subjects-counter {
-      background: #e8f5e9;
-      padding: 14px;
-      border-radius: 14px;
-      margin-bottom: 22px;
-      font-weight: bold;
-      color: #2e7d5b;
-      text-align: center;
-    }
-
-    .subjects-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .subject-card {
-      background: white;
-      border: 2px solid #e1e9e4;
-      border-radius: 15px;
-      padding: 17px 12px;
-      cursor: pointer;
-      transition: 0.2s;
-      font-size: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .subject-card:hover {
-      transform: translateY(-2px);
-    }
-
-    .subject-card.selected {
-      border-color: #2e7d5b;
-      background: #f0faf3;
-    }
-
-    .check {
-      width: 23px;
-      height: 23px;
-      border: 2px solid #cbd8d0;
-      border-radius: 7px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-    }
-
-    .subject-card.selected .check {
-      background: #2e7d5b;
-      color: white;
-      border-color: #2e7d5b;
-    }
-
-    @media (max-width: 500px) {
-      .screen {
-        padding: 30px 20px;
-      }
-
-      .subjects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        font-size: 30px;
-      }
-    }
- /* CHARACTER */
-
-#characterScreen {
+.language-menu {
   display: none;
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 150px;
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15);
+}
+
+.language-menu button {
+  width: 100%;
+  border: none;
+  background: white;
+  padding: 14px;
+  cursor: pointer;
+  font-size: 15px;
+  text-align: right;
+}
+
+.language-menu button:hover {
+  background: #f0f7f2;
+}
+
+/* SCREENS */
+
+.screen {
+  width: min(92%, 700px);
+  margin: 40px auto;
+  background: rgba(255,255,255,.96);
+  padding: 45px 35px;
+  border-radius: 30px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.10);
+}
+
+.center {
   text-align: center;
 }
 
-.character-preview {
-  width: 170px;
-  height: 240px;
-  margin: 25px auto;
-  position: relative;
-  filter: drop-shadow(0 15px 15px rgba(0,0,0,0.15));
+.logo {
+  font-size: 55px;
+  margin-bottom: 12px;
 }
 
-.character-head {
-  width: 75px;
-  height: 75px;
-  background: #d9a07c;
+h1 {
+  font-size: 36px;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  color: #527064;
+  font-size: 18px;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* BUTTONS */
+
+.start-btn,
+.next-btn {
+  border: none;
+  padding: 16px 35px;
+  border-radius: 15px;
+  font-size: 18px;
+  font-weight: bold;
+  background: #2e7d5b;
+  color: white;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.start-btn:hover,
+.next-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,.15);
+}
+
+.next-btn {
+  width: 100%;
+  margin-top: 30px;
+}
+
+/* HIDDEN SCREENS */
+
+#profileScreen,
+#characterScreen,
+#subjectsScreen {
+  display: none;
+}
+
+/* PROFILE */
+
+label {
+  display: block;
+  margin: 18px 0 8px;
+  font-weight: bold;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #dce8e1;
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+  background: white;
+}
+
+input:focus,
+select:focus {
+  border-color: #2e7d5b;
+}
+
+.gender-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.gender-buttons button {
+  flex: 1;
+  padding: 14px;
+  border: 2px solid #dce8e1;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  font-size: 17px;
+}
+
+.gender-buttons button.selected {
+  border-color: #2e7d5b;
+  background: #e8f5e9;
+}
+
+/* CHARACTER */
+
+.character-area {
+  text-align: center;
+  margin: 20px 0 30px;
+}
+
+.character {
+  width: 180px;
+  height: 270px;
+  margin: auto;
+  position: relative;
+}
+
+/* HEAD */
+
+.head {
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
+  background: #d99b78;
   position: absolute;
   top: 10px;
-  left: 48px;
-  box-shadow: inset -8px -5px 0 rgba(0,0,0,0.08);
+  left: 45px;
+  z-index: 3;
 }
 
-.character-body {
-  width: 105px;
-  height: 110px;
-  background: #6fa8dc;
-  border-radius: 35px 35px 18px 18px;
+/* HAIR */
+
+.hair {
+  width: 92px;
+  height: 48px;
+  background: #3a2921;
+  border-radius: 50px 50px 20px 20px;
   position: absolute;
-  top: 80px;
+  top: 3px;
+  left: 44px;
+  z-index: 4;
+}
+
+/* EYES */
+
+.eye {
+  width: 9px;
+  height: 9px;
+  background: #222;
+  border-radius: 50%;
+  position: absolute;
+  top: 48px;
+  z-index: 5;
+}
+
+.eye.left {
+  left: 68px;
+}
+
+.eye.right {
+  left: 103px;
+}
+
+/* BODY */
+
+.body-character {
+  width: 115px;
+  height: 105px;
+  background: #6fa8dc;
+  border-radius: 35px 35px 20px 20px;
+  position: absolute;
+  top: 92px;
   left: 32px;
 }
 
-.character-legs {
-  width: 85px;
-  height: 65px;
-  background: #333;
-  border-radius: 10px;
+/* ARMS */
+
+.arm {
+  width: 28px;
+  height: 85px;
+  background: #d99b78;
+  border-radius: 20px;
   position: absolute;
-  top: 180px;
-  left: 42px;
+  top: 105px;
 }
+
+.arm.left {
+  left: 12px;
+  transform: rotate(12deg);
+}
+
+.arm.right {
+  right: 12px;
+  transform: rotate(-12deg);
+}
+
+/* LEGS */
+
+.leg {
+  width: 42px;
+  height: 80px;
+  background: #333;
+  position: absolute;
+  top: 185px;
+  border-radius: 10px;
+}
+
+.leg.left {
+  left: 47px;
+}
+
+.leg.right {
+  right: 47px;
+}
+
+/* CHARACTER OPTIONS */
 
 .character-options {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2,1fr);
   gap: 12px;
-  margin: 20px 0;
 }
 
 .character-options button {
@@ -310,265 +305,353 @@
   border-radius: 18px;
   padding: 15px;
   cursor: pointer;
-  font-size: 30px;
-  transition: 0.2s;
-}
-
-.character-options button span {
-  display: block;
-  font-size: 14px;
-  margin-top: 5px;
-}
-
-.character-options button:hover {
-  transform: translateY(-3px);
-  border-color: #2e7d5b;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .character-options button.selected {
   border-color: #2e7d5b;
   background: #e8f5e9;
-} 
-  </style>
+}
+
+/* SUBJECTS */
+
+.subjects-counter {
+  background: #e8f5e9;
+  padding: 14px;
+  border-radius: 14px;
+  margin-bottom: 22px;
+  font-weight: bold;
+  color: #2e7d5b;
+  text-align: center;
+}
+
+.subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 12px;
+}
+
+.subject-card {
+  background: white;
+  border: 2px solid #e1e9e4;
+  border-radius: 15px;
+  padding: 17px 12px;
+  cursor: pointer;
+  transition: .2s;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.subject-card.selected {
+  border-color: #2e7d5b;
+  background: #f0faf3;
+}
+
+.check {
+  width: 23px;
+  height: 23px;
+  border: 2px solid #cbd8d0;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subject-card.selected .check {
+  background: #2e7d5b;
+  color: white;
+  border-color: #2e7d5b;
+}
+
+@media(max-width:500px) {
+
+  .screen {
+    padding: 30px 20px;
+  }
+
+  .subjects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .character-options {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
-  <!-- LANGUAGE BUTTON -->
+<!-- LANGUAGE -->
 
-  <div class="language-box">
+<div class="language-box">
 
-    <button
-      class="language-btn"
-      id="languageButton"
-      onclick="toggleLanguageMenu()">
-      🌐 العربية
+  <button
+    class="language-btn"
+    onclick="toggleLanguageMenu()"
+    id="languageButton">
+
+    🌐 العربية
+
+  </button>
+
+  <div
+    class="language-menu"
+    id="languageMenu">
+
+    <button onclick="setLanguage('ar')">
+      🇪🇬 العربية
     </button>
 
-    <div
-      class="language-menu"
-      id="languageMenu">
-
-      <button onclick="setLanguage('ar')">
-        🇪🇬 العربية
-      </button>
-
-      <button onclick="setLanguage('en')">
-        🇬🇧 English
-      </button>
-
-    </div>
+    <button onclick="setLanguage('en')">
+      🇬🇧 English
+    </button>
 
   </div>
 
+</div>
 
-  <!-- ==================== -->
-  <!-- WELCOME SCREEN -->
-  <!-- ==================== -->
 
-  <div
-    class="screen center"
-    id="welcomeScreen">
+<!-- WELCOME -->
+
+<div
+  class="screen center"
+  id="welcomeScreen">
+
+  <div class="logo">
+    📚
+  </div>
+
+  <h1>
+    Study Quest
+  </h1>
+
+  <p
+    class="subtitle"
+    id="welcomeSubtitle">
+
+    رحلتك في المذاكرة تبدأ من هنا ✨
+
+  </p>
+
+  <button
+    class="start-btn"
+    id="startButton"
+    onclick="startJourney()">
+
+    ابدأ رحلتك 🚀
+
+  </button>
+
+</div>
+
+
+<!-- PROFILE -->
+
+<div
+  class="screen"
+  id="profileScreen">
+
+  <div class="center">
 
     <div class="logo">
-      📚
+      👋
     </div>
 
-    <h1>
-      Study Quest
+    <h1 id="profileTitle">
+      أهلاً بيك!
     </h1>
 
     <p
       class="subtitle"
-      id="welcomeSubtitle">
+      id="profileSubtitle">
 
-      رحلتك في المذاكرة تبدأ من هنا ✨
+      خلينا نجهز حسابك 📚
 
     </p>
 
-    <!-- START BUTTON -->
+  </div>
+
+
+  <label id="nameLabel">
+    👤 اسمك
+  </label>
+
+  <input
+    id="name"
+    type="text"
+    placeholder="اكتب اسمك">
+
+
+  <label id="ageLabel">
+    🎂 سنك
+  </label>
+
+  <input
+    id="age"
+    type="number"
+    placeholder="اكتب سنك">
+
+
+  <label id="genderLabel">
+    🧑 أنت
+  </label>
+
+  <div class="gender-buttons">
 
     <button
-      class="start-btn"
-      id="startButton"
-      onclick="startJourney()">
+      id="boyBtn"
+      onclick="chooseGender('boy')">
 
-      ابدأ رحلتك 🚀
+      👦 ولد
+
+    </button>
+
+    <button
+      id="girlBtn"
+      onclick="chooseGender('girl')">
+
+      👧 بنت
 
     </button>
 
   </div>
 
 
-  <!-- ==================== -->
-  <!-- PROFILE SCREEN -->
-  <!-- ==================== -->
+  <label id="gradeLabel">
+    🎓 صفك الدراسي
+  </label>
 
-  <div
-    class="screen"
-    id="profileScreen">
+  <select id="grade">
 
-    <div class="center">
+    <option
+      value=""
+      id="gradePlaceholder">
 
-      <div class="logo">
-        👋
-      </div>
+      اختار الصف
 
-      <h1 id="profileTitle">
-        أهلاً بيك!
-      </h1>
+    </option>
 
-      <p
-        class="subtitle"
-        id="profileSubtitle">
+    <option value="prep1">
+      أولى إعدادي
+    </option>
 
-        خلينا نجهز حسابك 📚
+    <option value="prep2">
+      تانية إعدادي
+    </option>
 
-      </p>
+    <option value="prep3">
+      تالتة إعدادي
+    </option>
 
-    </div>
-
-
-    <label id="nameLabel">
-      👤 اسمك
-    </label>
-
-    <input
-      type="text"
-      id="name"
-      placeholder="اكتب اسمك">
+  </select>
 
 
-    <label id="ageLabel">
-      🎂 سنك
-    </label>
+  <button
+    class="next-btn"
+    id="profileNext"
+    onclick="goToCharacter()">
 
-    <input
-      type="number"
-      id="age"
-      placeholder="اكتب سنك"
-      min="5"
-      max="100">
+    التالي ➜
 
+  </button>
 
-    <label id="genderLabel">
-      🧑 أنت
-    </label>
-
-    <div class="gender-buttons">
-
-      <button
-        id="boyBtn"
-        onclick="chooseGender('boy')">
-
-        👦 ولد
-
-      </button>
-
-      <button
-        id="girlBtn"
-        onclick="chooseGender('girl')">
-
-        👧 بنت
-
-      </button>
-
-    </div>
+</div>
 
 
-    <label id="gradeLabel">
-      🎓 صفك الدراسي
-    </label>
+<!-- CHARACTER -->
 
-    <select id="grade">
-
-      <option
-        value=""
-        id="gradePlaceholder">
-
-        اختار الصف
-
-      </option>
-
-      <option value="prep1">
-        أولى إعدادي
-      </option>
-
-      <option value="prep2">
-        تانية إعدادي
-      </option>
-
-      <option value="prep3">
-        تالتة إعدادي
-      </option>
-
-    </select>
-
-
-    <button
-      class="next-btn"
-      id="profileNext"
-      onclick="goToSubjects()">
-
-      التالي ➜
-
-    </button>
-
-  </div>
-
-
-  <!-- ==================== -->
- <!-- CHARACTER SCREEN -->
-
-<div class="screen" id="characterScreen">
+<div
+  class="screen"
+  id="characterScreen">
 
   <div class="center">
 
-    <div class="logo">🧍</div>
+    <div class="logo">
+      🧍
+    </div>
 
-    <h1 id="characterTitle">اختار شخصيتك</h1>
+    <h1 id="characterTitle">
+      اختار شخصيتك
+    </h1>
 
-    <p class="subtitle" id="characterSubtitle">
-      اختار الشكل اللي هيمثلك في Study Quest ✨
+    <p
+      class="subtitle"
+      id="characterSubtitle">
+
+      اختار الشخصية اللي هتمثلك في Study Quest ✨
+
     </p>
 
   </div>
 
-  <div class="character-preview">
 
-    <div class="character-head"></div>
+  <div class="character-area">
 
-    <div class="character-body"></div>
+    <div class="character">
 
-    <div class="character-legs"></div>
+      <div class="head"></div>
+
+      <div class="hair"></div>
+
+      <div class="eye left"></div>
+      <div class="eye right"></div>
+
+      <div class="body-character"></div>
+
+      <div class="arm left"></div>
+      <div class="arm right"></div>
+
+      <div class="leg left"></div>
+      <div class="leg right"></div>
+
+    </div>
 
   </div>
 
-  <h2 id="characterName">الشخصية الأساسية</h2>
 
   <div class="character-options">
 
-    <button onclick="chooseCharacter('boy1')">
-      🧍‍♂️
-      <span>ولد 1</span>
+    <button
+      onclick="chooseCharacter('boy1')">
+
+      👦 ولد 1
+
     </button>
 
-    <button onclick="chooseCharacter('boy2')">
-      🧑
-      <span>ولد 2</span>
+    <button
+      onclick="chooseCharacter('boy2')">
+
+      👦 ولد 2
+
     </button>
 
-    <button onclick="chooseCharacter('girl1')">
-      🧕
-      <span>بنت 1</span>
+    <button
+      onclick="chooseCharacter('girl1')">
+
+      👧 بنت 1
+
     </button>
 
-    <button onclick="chooseCharacter('girl2')">
-      👩
-      <span>بنت 2</span>
+    <button
+      onclick="chooseCharacter('girl2')">
+
+      👧 بنت 2
+
     </button>
 
   </div>
+
 
   <button
     class="next-btn"
@@ -580,581 +663,563 @@
   </button>
 
 </div>
-  <!-- SUBJECTS SCREEN -->
-  <!-- ==================== -->
 
-  <div
-    class="screen"
-    id="subjectsScreen">
 
-    <div class="center">
+<!-- SUBJECTS -->
 
-      <div class="logo">
-        📚
-      </div>
+<div
+  class="screen"
+  id="subjectsScreen">
 
-      <h1 id="subjectsTitle">
-        موادك الدراسية
-      </h1>
+  <div class="center">
 
-      <p
-        class="subtitle"
-        id="subjectsSubtitle">
-
-        اختار المواد اللي بتدرسها
-
-      </p>
-
+    <div class="logo">
+      📚
     </div>
 
+    <h1 id="subjectsTitle">
+      موادك الدراسية
+    </h1>
 
-    <div class="subjects-counter">
+    <p
+      class="subtitle"
+      id="subjectsSubtitle">
 
-      <span id="counterText">
-        تم اختيار
-      </span>
+      اختار المواد اللي بتدرسها
 
-      <span id="selectedCount">
-        0
-      </span>
-
-      <span id="subjectWord">
-        مادة
-      </span>
-
-    </div>
-
-
-    <div class="subjects-grid">
-
-      <div
-        class="subject-card"
-        onclick="toggleSubject(this)">
-
-        <span class="check">✓</span>
-        <span>القرآن الكريم وتجويده</span>
-
-      </div>
-
-
-      <div
-        class="subject-card"
-        onclick="toggleSubject(this)">
-
-        <span class="check">✓</span>
-        <span>أصول الدين</span>
-
-      </div>
-
-
-      <div
-        class="subject-card"
-        onclick="toggleSubject(this)">
-
-        <span class="check">✓</span>
-        <span>الفقه</span>
-
-      </div>
-
-
-      <div
-        class="subject-card"
-        onclick="toggleSubject(this)">
-
-        <span class="check">✓</span>
-        <span>النحو</span>
-
-      </div>
-
-
-      <div
-        class="subject-card"
-        onclick="toggleSubject(this)">
-
-        <span class="check">✓</span>
-        <span>الصرف</span>
-
-      </div>
-
-
-      <div
-        class="subject-card"
-        onclick="toggleSubject(this)">
-
-        <span class="check">✓</span>
-        <span>المطالعة والنصوص والقصة</span>
-
-      </div>
-
-
-      <div
-        class="subject-card"
-        onclick="toggleSubject(this)">
-
-        <span class="check">✓</span>
-        <span>الإنشاء</span>
-
-      </div>
-
-
-      <div
-        class="subject-card"
-        onclick="toggleSubject(this)">
-
-        <span class="check">✓</span>
-        <span>الإملاء</span>
-
-      </div>
-
-
-      <div
-        class="subject-card"
-        onclick="toggleSubject(this)">
-
-        <span class="check">✓</span>
-        <span>الخط</span>
-
-      </div>
-
-
-      <div
-        class="subject-card"
-        onclick="toggleSubject(this)">
-
-        <span class="check">✓</span>
-        <span>الدراسات الاجتماعية</span>
-
-      </div>
-
-
-      <div
-        class="subject-card"
-        onclick="toggleSubject(this)">
-
-        <span class="check">✓</span>
-        <span>العلوم</span>
-
-      </div>
-
-
-      <div
-        class="subject-card"
-        onclick="toggleSubject(this)">
-
-        <span class="check">✓</span>
-        <span>الرياضيات</span>
-
-      </div>
-
-
-      <div
-        class="subject-card"
-        onclick="toggleSubject(this)">
-
-        <span class="check">✓</span>
-        <span>اللغة الإنجليزية</span>
-
-      </div>
-
-
-      <div
-        class="subject-card"
-        onclick="toggleSubject(this)">
-
-        <span class="check">✓</span>
-        <span>الحاسب الآلي</span>
-
-      </div>
-
-
-      <div
-        class="subject-card"
-        onclick="toggleSubject(this)">
-
-        <span class="check">✓</span>
-        <span>التربية الفنية</span>
-
-      </div>
-
-    </div>
-
-
-    <button
-      class="next-btn"
-      id="subjectsNext"
-      onclick="finishSubjects()">
-
-      التالي ➜
-
-    </button>
+    </p>
 
   </div>
 
 
-  <!-- ==================== -->
-  <!-- JAVASCRIPT -->
-  <!-- ==================== -->
+  <div class="subjects-counter">
 
-  <script>
+    <span id="counterText">
+      تم اختيار
+    </span>
 
-    let selectedGender = "";
-    let selectedSubjects = 0;
-    let currentLanguage = "ar";
+    <span id="selectedCount">
+      0
+    </span>
+
+    <span id="subjectWord">
+      مادة
+    </span>
+
+  </div>
 
 
-    /* LANGUAGE MENU */
+  <div class="subjects-grid">
 
-    function toggleLanguageMenu() {
+    <div class="subject-card" onclick="toggleSubject(this)">
+      <span class="check">✓</span>
+      <span>القرآن الكريم وتجويده</span>
+    </div>
 
-      const menu =
-        document.getElementById("languageMenu");
+    <div class="subject-card" onclick="toggleSubject(this)">
+      <span class="check">✓</span>
+      <span>أصول الدين</span>
+    </div>
 
-      if (menu.style.display === "block") {
+    <div class="subject-card" onclick="toggleSubject(this)">
+      <span class="check">✓</span>
+      <span>الفقه</span>
+    </div>
 
-        menu.style.display = "none";
+    <div class="subject-card" onclick="toggleSubject(this)">
+      <span class="check">✓</span>
+      <span>النحو</span>
+    </div>
 
-      } else {
+    <div class="subject-card" onclick="toggleSubject(this)">
+      <span class="check">✓</span>
+      <span>الصرف</span>
+    </div>
 
-        menu.style.display = "block";
+    <div class="subject-card" onclick="toggleSubject(this)">
+      <span class="check">✓</span>
+      <span>المطالعة والنصوص والقصة</span>
+    </div>
 
-      }
+    <div class="subject-card" onclick="toggleSubject(this)">
+      <span class="check">✓</span>
+      <span>الإنشاء</span>
+    </div>
+
+    <div class="subject-card" onclick="toggleSubject(this)">
+      <span class="check">✓</span>
+      <span>الإملاء</span>
+    </div>
+
+    <div class="subject-card" onclick="toggleSubject(this)">
+      <span class="check">✓</span>
+      <span>الخط</span>
+    </div>
+
+    <div class="subject-card" onclick="toggleSubject(this)">
+      <span class="check">✓</span>
+      <span>الدراسات الاجتماعية</span>
+    </div>
+
+    <div class="subject-card" onclick="toggleSubject(this)">
+      <span class="check">✓</span>
+      <span>العلوم</span>
+    </div>
+
+    <div class="subject-card" onclick="toggleSubject(this)">
+      <span class="check">✓</span>
+      <span>الرياضيات</span>
+    </div>
+
+    <div class="subject-card" onclick="toggleSubject(this)">
+      <span class="check">✓</span>
+      <span>اللغة الإنجليزية</span>
+    </div>
+
+    <div class="subject-card" onclick="toggleSubject(this)">
+      <span class="check">✓</span>
+      <span>الحاسب الآلي</span>
+    </div>
+
+    <div class="subject-card" onclick="toggleSubject(this)">
+      <span class="check">✓</span>
+      <span>التربية الفنية</span>
+    </div>
+
+  </div>
+
+
+  <button
+    class="next-btn"
+    onclick="finishSubjects()"
+    id="subjectsNext">
+
+    التالي ➜
+
+  </button>
+
+</div>
+
+
+<script>
+
+/* VARIABLES */
+
+let selectedGender = "";
+let selectedCharacter = "";
+let selectedSubjects = 0;
+let currentLanguage = "ar";
+
+
+/* START JOURNEY */
+
+function startJourney() {
+
+  document.getElementById("welcomeScreen").style.display = "none";
+
+  document.getElementById("profileScreen").style.display = "block";
+
+}
+
+
+/* LANGUAGE MENU */
+
+function toggleLanguageMenu() {
+
+  const menu =
+    document.getElementById("languageMenu");
+
+  menu.style.display =
+    menu.style.display === "block"
+    ? "none"
+    : "block";
+
+}
+
+
+/* LANGUAGE */
+
+function setLanguage(language) {
+
+  currentLanguage = language;
+
+  const english = language === "en";
+
+  document.documentElement.lang = language;
+
+  document.documentElement.dir =
+    english ? "ltr" : "rtl";
+
+
+  document.getElementById("languageButton").textContent =
+    english ? "🌐 English" : "🌐 العربية";
+
+
+  if (english) {
+
+    document.getElementById("welcomeSubtitle").textContent =
+      "Your study journey starts here ✨";
+
+    document.getElementById("startButton").textContent =
+      "Start Your Journey 🚀";
+
+    document.getElementById("profileTitle").textContent =
+      "Welcome!";
+
+    document.getElementById("profileSubtitle").textContent =
+      "Let's set up your profile 📚";
+
+    document.getElementById("nameLabel").textContent =
+      "👤 Your name";
+
+    document.getElementById("ageLabel").textContent =
+      "🎂 Your age";
+
+    document.getElementById("genderLabel").textContent =
+      "🧑 You are";
+
+    document.getElementById("boyBtn").textContent =
+      "👦 Boy";
+
+    document.getElementById("girlBtn").textContent =
+      "👧 Girl";
+
+    document.getElementById("gradeLabel").textContent =
+      "🎓 Your grade";
+
+    document.getElementById("gradePlaceholder").textContent =
+      "Choose your grade";
+
+    document.getElementById("profileNext").textContent =
+      "Next ➜";
+
+    document.getElementById("name").placeholder =
+      "Enter your name";
+
+    document.getElementById("age").placeholder =
+      "Enter your age";
+
+    document.getElementById("characterTitle").textContent =
+      "Choose Your Character";
+
+    document.getElementById("characterSubtitle").textContent =
+      "Choose the character that represents you ✨";
+
+    document.getElementById("characterNext").textContent =
+      "Next ➜";
+
+    document.getElementById("subjectsTitle").textContent =
+      "Your Subjects";
+
+    document.getElementById("subjectsSubtitle").textContent =
+      "Choose the subjects you study";
+
+    document.getElementById("counterText").textContent =
+      "Selected";
+
+    document.getElementById("subjectWord").textContent =
+      "subjects";
+
+    document.getElementById("subjectsNext").textContent =
+      "Next ➜";
+
+  } else {
+
+    document.getElementById("welcomeSubtitle").textContent =
+      "رحلتك في المذاكرة تبدأ من هنا ✨";
+
+    document.getElementById("startButton").textContent =
+      "ابدأ رحلتك 🚀";
+
+    document.getElementById("profileTitle").textContent =
+      "أهلاً بيك!";
+
+    document.getElementById("profileSubtitle").textContent =
+      "خلينا نجهز حسابك 📚";
+
+    document.getElementById("nameLabel").textContent =
+      "👤 اسمك";
+
+    document.getElementById("ageLabel").textContent =
+      "🎂 سنك";
+
+    document.getElementById("genderLabel").textContent =
+      "🧑 أنت";
+
+    document.getElementById("boyBtn").textContent =
+      "👦 ولد";
+
+    document.getElementById("girlBtn").textContent =
+      "👧 بنت";
+
+    document.getElementById("gradeLabel").textContent =
+      "🎓 صفك الدراسي";
+
+    document.getElementById("gradePlaceholder").textContent =
+      "اختار الصف";
+
+    document.getElementById("profileNext").textContent =
+      "التالي ➜";
+
+    document.getElementById("name").placeholder =
+      "اكتب اسمك";
+
+    document.getElementById("age").placeholder =
+      "اكتب سنك";
+
+    document.getElementById("characterTitle").textContent =
+      "اختار شخصيتك";
+
+    document.getElementById("characterSubtitle").textContent =
+      "اختار الشخصية اللي هتمثلك في Study Quest ✨";
+
+    document.getElementById("characterNext").textContent =
+      "التالي ➜";
+
+    document.getElementById("subjectsTitle").textContent =
+      "موادك الدراسية";
+
+    document.getElementById("subjectsSubtitle").textContent =
+      "اختار المواد اللي بتدرسها";
+
+    document.getElementById("counterText").textContent =
+      "تم اختيار";
+
+    document.getElementById("subjectWord").textContent =
+      "مادة";
+
+    document.getElementById("subjectsNext").textContent =
+      "التالي ➜";
+
+  }
+
+  document.getElementById("languageMenu").style.display = "none";
+
+}
+
+
+/* GENDER */
+
+function chooseGender(gender) {
+
+  selectedGender = gender;
+
+  document
+    .getElementById("boyBtn")
+    .classList
+    .remove("selected");
+
+  document
+    .getElementById("girlBtn")
+    .classList
+    .remove("selected");
+
+
+  if (gender === "boy") {
+
+    document
+      .getElementById("boyBtn")
+      .classList
+      .add("selected");
+
+  } else {
+
+    document
+      .getElementById("girlBtn")
+      .classList
+      .add("selected");
+
+  }
+
+}
+
+
+/* PROFILE → CHARACTER */
+
+function goToCharacter() {
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const age =
+    document.getElementById("age").value;
+
+  const grade =
+    document.getElementById("grade").value;
+
+
+  if (!name || !age || !selectedGender || !grade) {
+
+    if (currentLanguage === "en") {
+
+      alert("Please complete all the information first ❤️");
+
+    } else {
+
+      alert("من فضلك كمّل كل البيانات الأول ❤️");
 
     }
 
+    return;
 
-    /* CHANGE LANGUAGE */
-
-    function setLanguage(language) {
-
-      currentLanguage = language;
-
-      const english = language === "en";
+  }
 
 
-      document.documentElement.lang =
-        language;
+  document.getElementById("profileScreen").style.display =
+    "none";
 
-      document.documentElement.dir =
-        english ? "ltr" : "rtl";
+  document.getElementById("characterScreen").style.display =
+    "block";
 
-
-      document.getElementById("languageButton").textContent =
-        english
-          ? "🌐 English"
-          : "🌐 العربية";
+}
 
 
-      if (english) {
+/* CHARACTER */
 
-        document.getElementById("welcomeSubtitle").textContent =
-          "Your study journey starts here ✨";
+function chooseCharacter(character) {
 
-        document.getElementById("startButton").textContent =
-          "Start Your Journey 🚀";
+  selectedCharacter = character;
 
+  const buttons =
+    document.querySelectorAll(".character-options button");
 
-        document.getElementById("profileTitle").textContent =
-          "Welcome!";
+  buttons.forEach(button => {
+    button.classList.remove("selected");
+  });
 
-        document.getElementById("profileSubtitle").textContent =
-          "Let's set up your profile 📚";
-
-        document.getElementById("nameLabel").textContent =
-          "👤 Your name";
-
-        document.getElementById("ageLabel").textContent =
-          "🎂 Your age";
-
-        document.getElementById("genderLabel").textContent =
-          "🧑 You are";
-
-        document.getElementById("boyBtn").textContent =
-          "👦 Boy";
-
-        document.getElementById("girlBtn").textContent =
-          "👧 Girl";
-
-        document.getElementById("gradeLabel").textContent =
-          "🎓 Your grade";
-
-        document.getElementById("gradePlaceholder").textContent =
-          "Choose your grade";
-
-        document.getElementById("profileNext").textContent =
-          "Next ➜";
-
-        document.getElementById("name").placeholder =
-          "Enter your name";
-
-        document.getElementById("age").placeholder =
-          "Enter your age";
+  event.currentTarget.classList.add("selected");
 
 
-        document.getElementById("subjectsTitle").textContent =
-          "Your Subjects";
+  const body =
+    document.querySelector(".body-character");
 
-        document.getElementById("subjectsSubtitle").textContent =
-          "Choose the subjects you study";
-
-        document.getElementById("counterText").textContent =
-          "Selected";
-
-        document.getElementById("subjectWord").textContent =
-          "subjects";
-
-        document.getElementById("subjectsNext").textContent =
-          "Next ➜";
+  const hair =
+    document.querySelector(".hair");
 
 
-      } else {
+  if (character === "boy1") {
 
-        document.getElementById("welcomeSubtitle").textContent =
-          "رحلتك في المذاكرة تبدأ من هنا ✨";
+    body.style.background = "#6fa8dc";
+    hair.style.background = "#3a2921";
 
-        document.getElementById("startButton").textContent =
-          "ابدأ رحلتك 🚀";
+  }
 
+  if (character === "boy2") {
 
-        document.getElementById("profileTitle").textContent =
-          "أهلاً بيك!";
+    body.style.background = "#93c47d";
+    hair.style.background = "#222";
 
-        document.getElementById("profileSubtitle").textContent =
-          "خلينا نجهز حسابك 📚";
+  }
 
-        document.getElementById("nameLabel").textContent =
-          "👤 اسمك";
+  if (character === "girl1") {
 
-        document.getElementById("ageLabel").textContent =
-          "🎂 سنك";
+    body.style.background = "#d5a6bd";
+    hair.style.background = "#3a2921";
 
-        document.getElementById("genderLabel").textContent =
-          "🧑 أنت";
+  }
 
-        document.getElementById("boyBtn").textContent =
-          "👦 ولد";
+  if (character === "girl2") {
 
-        document.getElementById("girlBtn").textContent =
-          "👧 بنت";
+    body.style.background = "#f6b26b";
+    hair.style.background = "#5b351f";
 
-        document.getElementById("gradeLabel").textContent =
-          "🎓 صفك الدراسي";
+  }
 
-        document.getElementById("gradePlaceholder").textContent =
-          "اختار الصف";
-
-        document.getElementById("profileNext").textContent =
-          "التالي ➜";
-
-        document.getElementById("name").placeholder =
-          "اكتب اسمك";
-
-        document.getElementById("age").placeholder =
-          "اكتب سنك";
+}
 
 
-        document.getElementById("subjectsTitle").textContent =
-          "موادك الدراسية";
+/* CHARACTER → SUBJECTS */
 
-        document.getElementById("subjectsSubtitle").textContent =
-          "اختار المواد اللي بتدرسها";
+function goToSubjects() {
 
-        document.getElementById("counterText").textContent =
-          "تم اختيار";
+  if (!selectedCharacter) {
 
-        document.getElementById("subjectWord").textContent =
-          "مادة";
+    if (currentLanguage === "en") {
 
-        document.getElementById("subjectsNext").textContent =
-          "التالي ➜";
+      alert("Please choose your character first 🧍");
 
-      }
+    } else {
 
-
-      document.getElementById("languageMenu").style.display =
-        "none";
+      alert("اختار شخصيتك الأول 🧍");
 
     }
 
+    return;
 
-    /* ==================== */
-    /* START JOURNEY */
-    /* ==================== */
-
-    function startJourney() {
-
-      document.getElementById("welcomeScreen").style.display =
-        "none";
-
-      document.getElementById("profileScreen").style.display =
-        "block";
-
-    }
+  }
 
 
-    /* ==================== */
-    /* GENDER */
-    /* ==================== */
+  document.getElementById("characterScreen").style.display =
+    "none";
 
-    function chooseGender(gender) {
+  document.getElementById("subjectsScreen").style.display =
+    "block";
 
-      selectedGender = gender;
-
-
-      document
-        .getElementById("boyBtn")
-        .classList
-        .remove("selected");
-
-      document
-        .getElementById("girlBtn")
-        .classList
-        .remove("selected");
+}
 
 
-      if (gender === "boy") {
+/* SUBJECTS */
 
-        document
-          .getElementById("boyBtn")
-          .classList
-          .add("selected");
+function toggleSubject(card) {
 
-      } else {
-
-        document
-          .getElementById("girlBtn")
-          .classList
-          .add("selected");
-
-      }
-
-    }
+  card.classList.toggle("selected");
 
 
-    /* ==================== */
-    /* PROFILE → SUBJECTS */
-    /* ==================== */
+  if (card.classList.contains("selected")) {
 
-    function goToSubjects() {
+    selectedSubjects++;
 
-      const name =
-        document.getElementById("name").value.trim();
+  } else {
 
-      const age =
-        document.getElementById("age").value;
+    selectedSubjects--;
 
-      const grade =
-        document.getElementById("grade").value;
+  }
 
 
-      if (!name || !age || !selectedGender || !grade) {
+  document.getElementById("selectedCount").textContent =
+    selectedSubjects;
 
-        if (currentLanguage === "en") {
-
-          alert(
-            "Please complete all the information first ❤️"
-          );
-
-        } else {
-
-          alert(
-            "من فضلك كمّل كل البيانات الأول ❤️"
-          );
-
-        }
-
-        return;
-
-      }
+}
 
 
-      document.getElementById("profileScreen").style.display =
-        "none";
+/* FINISH */
 
-      document.getElementById("subjectsScreen").style.display =
-        "block";
+function finishSubjects() {
+
+  if (selectedSubjects === 0) {
+
+    if (currentLanguage === "en") {
+
+      alert("Choose at least one subject 📚");
+
+    } else {
+
+      alert("اختار مادة واحدة على الأقل 📚");
 
     }
 
+    return;
 
-    /* ==================== */
-    /* SUBJECT SELECTION */
-    /* ==================== */
-
-    function toggleSubject(card) {
-
-      card.classList.toggle("selected");
+  }
 
 
-      if (card.classList.contains("selected")) {
+  if (currentLanguage === "en") {
 
-        selectedSubjects++;
+    alert(
+      "Great! Your Study Quest is ready 🎉"
+    );
 
-      } else {
+  } else {
 
-        selectedSubjects--;
+    alert(
+      "ممتاز! Study Quest بتاعك جاهز 🎉"
+    );
 
-      }
+  }
 
+}
 
-      document.getElementById("selectedCount").textContent =
-        selectedSubjects;
-
-    }
-
-
-    /* ==================== */
-    /* FINISH SUBJECTS */
-    /* ==================== */
-
-    function finishSubjects() {
-
-      if (selectedSubjects === 0) {
-
-        if (currentLanguage === "en") {
-
-          alert(
-            "Choose at least one subject 📚"
-          );
-
-        } else {
-
-          alert(
-            "اختار مادة واحدة على الأقل 📚"
-          );
-
-        }
-
-        return;
-
-      }
-
-
-      if (currentLanguage === "en") {
-
-        alert(
-          "Great! You selected " +
-          selectedSubjects +
-          " subjects 🎉"
-        );
-
-      } else {
-
-        alert(
-          "ممتاز! اخترت " +
-          selectedSubjects +
-          " مادة 🎉"
-        );
-
-      }
-
-    }
-
-  </script>
+</script>
 
 </body>
-<script>
-function startJourney() {
-  alert("اشتغل زر ابدأ الرحلة! 🎉");
-}
-</script>
 </html>
