@@ -440,6 +440,68 @@
 
 
   <!-- ==================== -->
+ <!-- CHARACTER SCREEN -->
+
+<div class="screen" id="characterScreen">
+
+  <div class="center">
+
+    <div class="logo">🧍</div>
+
+    <h1 id="characterTitle">اختار شخصيتك</h1>
+
+    <p class="subtitle" id="characterSubtitle">
+      اختار الشكل اللي هيمثلك في Study Quest ✨
+    </p>
+
+  </div>
+
+  <div class="character-preview">
+
+    <div class="character-head"></div>
+
+    <div class="character-body"></div>
+
+    <div class="character-legs"></div>
+
+  </div>
+
+  <h2 id="characterName">الشخصية الأساسية</h2>
+
+  <div class="character-options">
+
+    <button onclick="chooseCharacter('boy1')">
+      🧍‍♂️
+      <span>ولد 1</span>
+    </button>
+
+    <button onclick="chooseCharacter('boy2')">
+      🧑
+      <span>ولد 2</span>
+    </button>
+
+    <button onclick="chooseCharacter('girl1')">
+      🧕
+      <span>بنت 1</span>
+    </button>
+
+    <button onclick="chooseCharacter('girl2')">
+      👩
+      <span>بنت 2</span>
+    </button>
+
+  </div>
+
+  <button
+    class="next-btn"
+    onclick="goToSubjects()"
+    id="characterNext">
+
+    التالي ➜
+
+  </button>
+
+</div>
   <!-- SUBJECTS SCREEN -->
   <!-- ==================== -->
 
