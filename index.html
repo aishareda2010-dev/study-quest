@@ -26,40 +26,15 @@
       padding: 20px;
     }
 
-    /* الخلفية */
-
-    body::before {
-      content: "📚   ✏️   📖   📝   📐";
-      position: fixed;
-      top: 10%;
-      left: 5%;
-      font-size: 35px;
-      opacity: 0.12;
-      word-spacing: 30px;
-      pointer-events: none;
-    }
-
-    body::after {
-      content: "📚   ⭐   ✏️   🧠";
-      position: fixed;
-      bottom: 10%;
-      right: 5%;
-      font-size: 35px;
-      opacity: 0.12;
-      word-spacing: 30px;
-      pointer-events: none;
-    }
-
-    /* الشاشة الأولى */
-
-    .welcome {
+    .welcome,
+    .profile {
       width: min(90%, 700px);
       text-align: center;
-      background: rgba(255, 255, 255, 0.88);
-      padding: 60px 30px;
+      background: rgba(255, 255, 255, 0.92);
+      padding: 55px 35px;
       border-radius: 30px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.10);
-      animation: appear 0.6s ease;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      animation: appear 0.5s ease;
     }
 
     .logo {
@@ -72,11 +47,15 @@
       margin-bottom: 15px;
     }
 
-    .welcome p,
-    .profile p {
+    p {
       font-size: 20px;
-      margin-bottom: 35px;
       color: #527064;
+      margin-bottom: 30px;
+    }
+
+    button {
+      cursor: pointer;
+      font-family: inherit;
     }
 
     .start-btn,
@@ -86,7 +65,6 @@
       border-radius: 15px;
       font-size: 18px;
       font-weight: bold;
-      cursor: pointer;
       background: #2e7d5b;
       color: white;
       transition: 0.2s;
@@ -98,26 +76,15 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.15);
     }
 
-    /* شاشة إنشاء الحساب */
+    /* Profile */
 
     .profile {
       display: none;
       width: min(90%, 550px);
-      background: rgba(255,255,255,0.93);
-      padding: 45px 35px;
-      border-radius: 30px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.10);
-      animation: appear 0.5s ease;
-      text-align: center;
     }
 
     .profile h1 {
       font-size: 36px;
-      margin-bottom: 10px;
-    }
-
-    .profile p {
-      margin-bottom: 25px;
     }
 
     .profile label {
@@ -125,7 +92,6 @@
       text-align: right;
       margin: 18px 0 8px;
       font-weight: bold;
-      font-size: 16px;
     }
 
     .profile input,
@@ -135,16 +101,14 @@
       border: 2px solid #dce8e1;
       border-radius: 12px;
       font-size: 16px;
-      outline: none;
       background: white;
+      outline: none;
     }
 
     .profile input:focus,
     .profile select:focus {
       border-color: #2e7d5b;
     }
-
-    /* اختيار ولد أو بنت */
 
     .gender-buttons {
       display: flex;
@@ -157,27 +121,19 @@
       border: 2px solid #dce8e1;
       border-radius: 12px;
       background: white;
-      cursor: pointer;
       font-size: 17px;
       transition: 0.2s;
-    }
-
-    .gender-buttons button:hover {
-      transform: translateY(-2px);
     }
 
     .gender-buttons button.selected {
       border-color: #2e7d5b;
       background: #e8f5e9;
-      box-shadow: 0 5px 15px rgba(46,125,91,0.15);
     }
 
     .next-btn {
       width: 100%;
       margin-top: 30px;
     }
-
-    /* حركة ظهور */
 
     @keyframes appear {
       from {
@@ -192,21 +148,18 @@
     }
 
   </style>
+
 </head>
 
 <body>
 
-  <!-- الشاشة الأولى -->
+  <!-- Welcome Screen -->
 
   <div class="welcome" id="welcomeScreen">
 
-    <div class="logo">
-      📚
-    </div>
+    <div class="logo">📚</div>
 
-    <h1>
-      Study Quest
-    </h1>
+    <h1>Study Quest</h1>
 
     <p>
       رحلتك في المذاكرة تبدأ من هنا ✨
@@ -219,26 +172,20 @@
   </div>
 
 
-  <!-- شاشة إنشاء الحساب -->
+  <!-- Profile Screen -->
 
   <div class="profile" id="profileScreen">
 
-    <div class="logo">
-      👋
-    </div>
+    <div class="logo">👋</div>
 
-    <h1>
-      أهلاً بيك!
-    </h1>
+    <h1>أهلاً بيك!</h1>
 
     <p>
       خلينا نجهز حسابك 📚
     </p>
 
 
-    <label>
-      👤 اسمك
-    </label>
+    <label>👤 اسمك</label>
 
     <input
       type="text"
@@ -247,9 +194,7 @@
     >
 
 
-    <label>
-      🎂 سنك
-    </label>
+    <label>🎂 سنك</label>
 
     <input
       type="number"
@@ -260,9 +205,7 @@
     >
 
 
-    <label>
-      🧑 أنت
-    </label>
+    <label>🧑 أنت</label>
 
     <div class="gender-buttons">
 
@@ -283,9 +226,7 @@
     </div>
 
 
-    <label>
-      🎓 صفك الدراسي
-    </label>
+    <label>🎓 صفك الدراسي</label>
 
     <select id="grade">
 
@@ -339,8 +280,6 @@
     let selectedGender = "";
 
 
-    /* زر ابدأ الرحلة */
-
     function startJourney() {
 
       document.getElementById("welcomeScreen").style.display = "none";
@@ -349,8 +288,6 @@
 
     }
 
-
-    /* اختيار ولد أو بنت */
 
     function chooseGender(gender) {
 
@@ -374,9 +311,7 @@
           .classList
           .add("selected");
 
-      }
-
-      else {
+      } else {
 
         document
           .getElementById("girlBtn")
@@ -387,8 +322,6 @@
 
     }
 
-
-    /* زر التالي */
 
     function nextStep() {
 
@@ -402,12 +335,7 @@
         document.getElementById("grade").value;
 
 
-      if (
-        !name ||
-        !age ||
-        !selectedGender ||
-        !grade
-      ) {
+      if (!name || !age || !selectedGender || !grade) {
 
         alert("من فضلك كمّل كل البيانات الأول ❤️");
 
@@ -420,7 +348,7 @@
         "تمام يا " +
         name +
         "! 🎉\n\n" +
-        "دلوقتي هنروح لاختيار المواد."
+        "الخطوة الجاية: اختيار المواد 📚"
       );
 
     }
