@@ -19,43 +19,45 @@
       min-height: 100vh;
       font-family: Arial, sans-serif;
       background: linear-gradient(135deg, #e8f5e9, #e3f2fd);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       color: #183b2a;
-      padding: 20px;
+      padding: 25px;
     }
 
-    .welcome,
-    .profile {
-      width: min(90%, 700px);
-      text-align: center;
-      background: rgba(255, 255, 255, 0.92);
-      padding: 55px 35px;
+    .screen {
+      width: min(92%, 700px);
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.94);
+      padding: 45px 35px;
       border-radius: 30px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.10);
       animation: appear 0.5s ease;
     }
 
+    .center {
+      text-align: center;
+    }
+
     .logo {
-      font-size: 60px;
-      margin-bottom: 15px;
+      font-size: 55px;
+      margin-bottom: 12px;
     }
 
     h1 {
-      font-size: 42px;
-      margin-bottom: 15px;
+      font-size: 36px;
+      margin-bottom: 12px;
     }
 
-    p {
-      font-size: 20px;
+    .subtitle {
       color: #527064;
+      font-size: 18px;
       margin-bottom: 30px;
+      line-height: 1.6;
     }
 
-    button {
-      cursor: pointer;
-      font-family: inherit;
+    /* Welcome */
+
+    #welcomeScreen {
+      margin-top: 15vh;
     }
 
     .start-btn,
@@ -67,6 +69,7 @@
       font-weight: bold;
       background: #2e7d5b;
       color: white;
+      cursor: pointer;
       transition: 0.2s;
     }
 
@@ -78,35 +81,31 @@
 
     /* Profile */
 
-    .profile {
+    #profileScreen,
+    #subjectsScreen {
       display: none;
-      width: min(90%, 550px);
     }
 
-    .profile h1 {
-      font-size: 36px;
-    }
-
-    .profile label {
+    label {
       display: block;
       text-align: right;
       margin: 18px 0 8px;
       font-weight: bold;
     }
 
-    .profile input,
-    .profile select {
+    input,
+    select {
       width: 100%;
       padding: 14px;
       border: 2px solid #dce8e1;
       border-radius: 12px;
       font-size: 16px;
-      background: white;
       outline: none;
+      background: white;
     }
 
-    .profile input:focus,
-    .profile select:focus {
+    input:focus,
+    select:focus {
       border-color: #2e7d5b;
     }
 
@@ -121,8 +120,8 @@
       border: 2px solid #dce8e1;
       border-radius: 12px;
       background: white;
+      cursor: pointer;
       font-size: 17px;
-      transition: 0.2s;
     }
 
     .gender-buttons button.selected {
@@ -135,7 +134,82 @@
       margin-top: 30px;
     }
 
+    /* Subjects */
+
+    .subjects-counter {
+      background: #e8f5e9;
+      padding: 14px;
+      border-radius: 14px;
+      margin-bottom: 22px;
+      font-weight: bold;
+      color: #2e7d5b;
+    }
+
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .subject-card {
+      background: white;
+      border: 2px solid #e1e9e4;
+      border-radius: 15px;
+      padding: 17px 12px;
+      cursor: pointer;
+      text-align: right;
+      transition: 0.2s;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .subject-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .subject-card.selected {
+      border-color: #2e7d5b;
+      background: #f0faf3;
+    }
+
+    .check {
+      width: 23px;
+      height: 23px;
+      border: 2px solid #cbd8d0;
+      border-radius: 7px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .subject-card.selected .check {
+      background: #2e7d5b;
+      color: white;
+      border-color: #2e7d5b;
+    }
+
+    @media (max-width: 500px) {
+
+      .screen {
+        padding: 30px 20px;
+      }
+
+      .subjects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+    }
+
     @keyframes appear {
+
       from {
         opacity: 0;
         transform: translateY(20px);
@@ -145,6 +219,7 @@
         opacity: 1;
         transform: translateY(0);
       }
+
     }
 
   </style>
@@ -153,15 +228,18 @@
 
 <body>
 
-  <!-- Welcome Screen -->
 
-  <div class="welcome" id="welcomeScreen">
+  <!-- ========================= -->
+  <!-- Welcome Screen -->
+  <!-- ========================= -->
+
+  <div class="screen center" id="welcomeScreen">
 
     <div class="logo">📚</div>
 
     <h1>Study Quest</h1>
 
-    <p>
+    <p class="subtitle">
       رحلتك في المذاكرة تبدأ من هنا ✨
     </p>
 
@@ -172,20 +250,28 @@
   </div>
 
 
+  <!-- ========================= -->
   <!-- Profile Screen -->
+  <!-- ========================= -->
 
-  <div class="profile" id="profileScreen">
+  <div class="screen" id="profileScreen">
 
-    <div class="logo">👋</div>
+    <div class="center">
 
-    <h1>أهلاً بيك!</h1>
+      <div class="logo">👋</div>
 
-    <p>
-      خلينا نجهز حسابك 📚
-    </p>
+      <h1>أهلاً بيك!</h1>
+
+      <p class="subtitle">
+        خلينا نجهز حسابك 📚
+      </p>
+
+    </div>
 
 
-    <label>👤 اسمك</label>
+    <label>
+      👤 اسمك
+    </label>
 
     <input
       type="text"
@@ -194,7 +280,9 @@
     >
 
 
-    <label>🎂 سنك</label>
+    <label>
+      🎂 سنك
+    </label>
 
     <input
       type="number"
@@ -205,7 +293,9 @@
     >
 
 
-    <label>🧑 أنت</label>
+    <label>
+      🧑 أنت
+    </label>
 
     <div class="gender-buttons">
 
@@ -226,16 +316,14 @@
     </div>
 
 
-    <label>🎓 صفك الدراسي</label>
+    <label>
+      🎓 صفك الدراسي
+    </label>
 
     <select id="grade">
 
       <option value="">
         اختار الصف
-      </option>
-
-      <option value="primary">
-        ابتدائي
       </option>
 
       <option value="prep1">
@@ -250,24 +338,12 @@
         تالتة إعدادي
       </option>
 
-      <option value="secondary1">
-        أولى ثانوي
-      </option>
-
-      <option value="secondary2">
-        تانية ثانوي
-      </option>
-
-      <option value="secondary3">
-        تالتة ثانوي
-      </option>
-
     </select>
 
 
     <button
       class="next-btn"
-      onclick="nextStep()"
+      onclick="goToSubjects()"
     >
       التالي ➜
     </button>
@@ -275,86 +351,120 @@
   </div>
 
 
-  <script>
+  <!-- ========================= -->
+  <!-- Subjects Screen -->
+  <!-- ========================= -->
 
-    let selectedGender = "";
+  <div class="screen" id="subjectsScreen">
 
+    <div class="center">
 
-    function startJourney() {
+      <div class="logo">📚</div>
 
-      document.getElementById("welcomeScreen").style.display = "none";
+      <h1>موادك الدراسية</h1>
 
-      document.getElementById("profileScreen").style.display = "block";
+      <p class="subtitle">
+        اختار المواد اللي بتدرسها
+      </p>
 
-    }
-
-
-    function chooseGender(gender) {
-
-      selectedGender = gender;
-
-      document
-        .getElementById("boyBtn")
-        .classList
-        .remove("selected");
-
-      document
-        .getElementById("girlBtn")
-        .classList
-        .remove("selected");
+    </div>
 
 
-      if (gender === "boy") {
+    <div class="subjects-counter">
 
-        document
-          .getElementById("boyBtn")
-          .classList
-          .add("selected");
+      تم اختيار
+      <span id="selectedCount">0</span>
+      مادة
 
-      } else {
-
-        document
-          .getElementById("girlBtn")
-          .classList
-          .add("selected");
-
-      }
-
-    }
+    </div>
 
 
-    function nextStep() {
-
-      const name =
-        document.getElementById("name").value.trim();
-
-      const age =
-        document.getElementById("age").value;
-
-      const grade =
-        document.getElementById("grade").value;
+    <div class="subjects-grid">
 
 
-      if (!name || !age || !selectedGender || !grade) {
-
-        alert("من فضلك كمّل كل البيانات الأول ❤️");
-
-        return;
-
-      }
+      <div class="subject-card" onclick="toggleSubject(this)">
+        <span class="check">✓</span>
+        <span>القرآن الكريم وتجويده</span>
+      </div>
 
 
-      alert(
-        "تمام يا " +
-        name +
-        "! 🎉\n\n" +
-        "الخطوة الجاية: اختيار المواد 📚"
-      );
+      <div class="subject-card" onclick="toggleSubject(this)">
+        <span class="check">✓</span>
+        <span>أصول الدين</span>
+      </div>
 
-    }
 
-  </script>
+      <div class="subject-card" onclick="toggleSubject(this)">
+        <span class="check">✓</span>
+        <span>الفقه</span>
+      </div>
 
-</body>
 
-</html>
+      <div class="subject-card" onclick="toggleSubject(this)">
+        <span class="check">✓</span>
+        <span>النحو</span>
+      </div>
+
+
+      <div class="subject-card" onclick="toggleSubject(this)">
+        <span class="check">✓</span>
+        <span>الصرف</span>
+      </div>
+
+
+      <div class="subject-card" onclick="toggleSubject(this)">
+        <span class="check">✓</span>
+        <span>المطالعة والنصوص والقصة</span>
+      </div>
+
+
+      <div class="subject-card" onclick="toggleSubject(this)">
+        <span class="check">✓</span>
+        <span>الإنشاء</span>
+      </div>
+
+
+      <div class="subject-card" onclick="toggleSubject(this)">
+        <span class="check">✓</span>
+        <span>الإملاء</span>
+      </div>
+
+
+      <div class="subject-card" onclick="toggleSubject(this)">
+        <span class="check">✓</span>
+        <span>الخط</span>
+      </div>
+
+
+      <div class="subject-card" onclick="toggleSubject(this)">
+        <span class="check">✓</span>
+        <span>الدراسات الاجتماعية</span>
+      </div>
+
+
+      <div class="subject-card" onclick="toggleSubject(this)">
+        <span class="check">✓</span>
+        <span>العلوم</span>
+      </div>
+
+
+      <div class="subject-card" onclick="toggleSubject(this)">
+        <span class="check">✓</span>
+        <span>الرياضيات</span>
+      </div>
+
+
+      <div class="subject-card" onclick="toggleSubject(this)">
+        <span class="check">✓</span>
+        <span>اللغة الإنجليزية</span>
+      </div>
+
+
+      <div class="subject-card" onclick="toggleSubject(this)">
+        <span class="check">✓</span>
+        <span>الحاسب الآلي</span>
+      </div>
+
+
+      <div class="subject-card" onclick="toggleSubject(this)">
+        <span class="check
