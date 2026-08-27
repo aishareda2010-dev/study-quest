@@ -6,401 +6,1079 @@
 <title>Study Quest</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body {
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #dff4ff, #e9e2ff);
-    color: #24324a;
-    padding: 25px;
+:root{
+    --primary:#6c63d9;
+    --primary2:#8b83ec;
+    --bg:#eef2ff;
+    --card:#ffffff;
+    --text:#25304a;
+    --muted:#77809a;
+    --border:#e5e8f2;
+    --success:#45b887;
+    --danger:#e85d75;
+    --shadow:0 12px 35px rgba(45,55,100,.10);
 }
 
-.language-box {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 100;
+body{
+    font-family:Arial,"Tahoma",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
 }
 
-.language-btn {
-    border: none;
-    background: white;
-    padding: 12px 18px;
-    border-radius: 14px;
-    box-shadow: 0 5px 20px rgba(0,0,0,.12);
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: bold;
+/* ===================== WELCOME ===================== */
+
+#welcome{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:25px;
+    background:
+        radial-gradient(circle at 10% 20%,rgba(139,131,236,.22),transparent 30%),
+        radial-gradient(circle at 90% 80%,rgba(69,184,135,.18),transparent 30%),
+        linear-gradient(135deg,#eef2ff,#f7f4ff);
 }
 
-.language-menu {
-    display: none;
-    position: absolute;
-    top: 50px;
-    left: 0;
-    width: 150px;
-    background: white;
-    border-radius: 14px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,.15);
+.welcome-card{
+    width:min(560px,95%);
+    background:rgba(255,255,255,.94);
+    padding:55px 40px;
+    border-radius:35px;
+    box-shadow:0 25px 70px rgba(50,50,100,.15);
+    text-align:center;
 }
 
-.language-menu button {
-    width: 100%;
-    border: none;
-    background: white;
-    padding: 14px;
-    cursor: pointer;
-    font-size: 15px;
+.welcome-logo{
+    width:110px;
+    height:110px;
+    margin:auto auto 20px;
+    border-radius:32px;
+    background:linear-gradient(135deg,var(--primary),var(--primary2));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:58px;
+    box-shadow:0 15px 30px rgba(108,99,217,.25);
 }
 
-.language-menu button:hover {
-    background: #f1f5ff;
+.welcome-card h1{
+    font-size:42px;
+    margin-bottom:12px;
 }
 
-.screen {
-    width: min(92%, 700px);
-    margin: 60px auto;
-    background: rgba(255,255,255,.97);
-    padding: 45px 35px;
-    border-radius: 30px;
-    box-shadow: 0 20px 50px rgba(0,0,0,.12);
+.welcome-card p{
+    color:var(--muted);
+    font-size:18px;
+    line-height:1.7;
+    margin-bottom:30px;
 }
 
-.center {
-    text-align: center;
+/* ===================== BUTTONS ===================== */
+
+button{
+    font-family:inherit;
 }
 
-.logo {
-    font-size: 60px;
-    margin-bottom: 15px;
+.primary-btn{
+    border:0;
+    background:linear-gradient(135deg,var(--primary),var(--primary2));
+    color:white;
+    padding:15px 25px;
+    border-radius:15px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
 }
 
-h1 {
-    font-size: 36px;
-    margin-bottom: 12px;
+.primary-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 25px rgba(108,99,217,.25);
 }
 
-.subtitle {
-    color: #667085;
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 30px;
+.secondary-btn{
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    padding:13px 20px;
+    border-radius:13px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.start-btn,
-.next-btn {
-    border: none;
-    padding: 16px 35px;
-    border-radius: 15px;
-    font-size: 18px;
-    font-weight: bold;
-    background: #5b6ee1;
-    color: white;
-    cursor: pointer;
-    transition: .2s;
+.danger-btn{
+    border:0;
+    background:#fff0f2;
+    color:var(--danger);
+    padding:13px 20px;
+    border-radius:13px;
+    font-weight:bold;
+    cursor:pointer;
 }
 
-.start-btn:hover,
-.next-btn:hover {
-    transform: translateY(-3px);
+/* ===================== LOGIN ===================== */
+
+.login-card{
+    width:min(560px,95%);
+    background:var(--card);
+    padding:40px;
+    border-radius:30px;
+    box-shadow:var(--shadow);
 }
 
-.next-btn {
-    width: 100%;
-    margin-top: 30px;
+.login-card h2{
+    text-align:center;
+    margin-bottom:25px;
 }
 
-.hidden {
-    display: none !important;
+.field{
+    margin-bottom:18px;
 }
 
-label {
-    display: block;
-    margin: 18px 0 8px;
-    font-weight: bold;
+.field label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:bold;
 }
 
-input,
-select {
-    width: 100%;
-    padding: 14px;
-    border: 2px solid #e2e7f0;
-    border-radius: 12px;
-    font-size: 16px;
-    outline: none;
-    background: white;
+.field input,
+.field select{
+    width:100%;
+    padding:14px;
+    border:2px solid var(--border);
+    border-radius:13px;
+    outline:none;
+    background:var(--card);
+    color:var(--text);
+    font-size:15px;
 }
 
-input:focus,
-select:focus {
-    border-color: #5b6ee1;
+.field input:focus,
+.field select:focus{
+    border-color:var(--primary);
 }
 
-.gender-buttons {
-    display: flex;
-    gap: 12px;
+.gender-row{
+    display:flex;
+    gap:10px;
 }
 
-.gender-buttons button {
-    flex: 1;
-    padding: 14px;
-    border: 2px solid #e2e7f0;
-    border-radius: 12px;
-    background: white;
-    cursor: pointer;
-    font-size: 17px;
+.gender-btn{
+    flex:1;
+    padding:14px;
+    border:2px solid var(--border);
+    background:var(--card);
+    border-radius:13px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.gender-buttons button.selected {
-    border-color: #5b6ee1;
-    background: #eef0ff;
+.gender-btn.selected{
+    border-color:var(--primary);
+    background:#efeeff;
 }
 
-/* CHARACTER */
+/* ===================== CHARACTER ===================== */
 
-.character-area {
-    text-align: center;
-    margin: 20px 0 30px;
+.character-preview{
+    width:210px;
+    height:300px;
+    position:relative;
+    margin:15px auto 25px;
 }
 
-.character {
-    width: 180px;
-    height: 280px;
-    margin: auto;
-    position: relative;
+.char-head{
+    position:absolute;
+    width:88px;
+    height:88px;
+    border-radius:50%;
+    background:#d99a78;
+    left:61px;
+    top:15px;
+    z-index:3;
 }
 
-.head {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    background: #d99b78;
-    position: absolute;
-    top: 10px;
-    left: 45px;
-    z-index: 3;
+.char-hair{
+    position:absolute;
+    width:94px;
+    height:50px;
+    border-radius:55px 55px 25px 25px;
+    background:#382820;
+    left:58px;
+    top:8px;
+    z-index:4;
 }
 
-.hair {
-    width: 95px;
-    height: 48px;
-    background: #3b2920;
-    border-radius: 50px 50px 20px 20px;
-    position: absolute;
-    top: 3px;
-    left: 42px;
-    z-index: 4;
+.char-eye{
+    position:absolute;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#222;
+    top:57px;
+    z-index:5;
 }
 
-.eye {
-    width: 9px;
-    height: 9px;
-    background: #222;
-    border-radius: 50%;
-    position: absolute;
-    top: 50px;
-    z-index: 5;
+.char-eye.one{left:84px}
+.char-eye.two{left:119px}
+
+.char-body{
+    position:absolute;
+    width:120px;
+    height:115px;
+    border-radius:35px 35px 20px 20px;
+    background:#6c8ee8;
+    left:45px;
+    top:100px;
 }
 
-.eye.left {
-    left: 68px;
+.char-arm{
+    position:absolute;
+    width:27px;
+    height:90px;
+    background:#d99a78;
+    border-radius:20px;
+    top:110px;
 }
 
-.eye.right {
-    left: 103px;
+.char-arm.one{
+    left:25px;
+    transform:rotate(10deg);
 }
 
-.body-character {
-    width: 115px;
-    height: 105px;
-    background: #6fa8dc;
-    border-radius: 35px 35px 20px 20px;
-    position: absolute;
-    top: 92px;
-    left: 32px;
+.char-arm.two{
+    right:25px;
+    transform:rotate(-10deg);
 }
 
-.arm {
-    width: 28px;
-    height: 85px;
-    background: #d99b78;
-    border-radius: 20px;
-    position: absolute;
-    top: 105px;
+.char-leg{
+    position:absolute;
+    width:43px;
+    height:85px;
+    border-radius:10px;
+    background:#34394a;
+    top:205px;
 }
 
-.arm.left {
-    left: 12px;
-    transform: rotate(12deg);
+.char-leg.one{left:64px}
+.char-leg.two{right:64px}
+
+.hijab{
+    display:none;
+    position:absolute;
+    width:108px;
+    height:112px;
+    background:#8b83ec;
+    border-radius:55px 55px 30px 30px;
+    left:51px;
+    top:5px;
+    z-index:6;
 }
 
-.arm.right {
-    right: 12px;
-    transform: rotate(-12deg);
+.character-preview.girl .hijab{
+    display:block;
 }
 
-.leg {
-    width: 42px;
-    height: 80px;
-    background: #333;
-    position: absolute;
-    top: 185px;
-    border-radius: 10px;
+.character-preview.girl .char-hair{
+    display:none;
 }
 
-.leg.left {
-    left: 47px;
+.character-options{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
 }
 
-.leg.right {
-    right: 47px;
+.char-option{
+    border:2px solid var(--border);
+    background:var(--card);
+    padding:15px;
+    border-radius:15px;
+    cursor:pointer;
+    font-weight:bold;
 }
 
-.character-options {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 12px;
+.char-option.selected{
+    border-color:var(--primary);
+    background:#efeeff;
 }
 
-.character-options button {
-    border: 2px solid #e2e7f0;
-    background: white;
-    border-radius: 15px;
-    padding: 15px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
+/* ===================== APP ===================== */
+
+#app{
+    display:none;
+    min-height:100vh;
 }
 
-.character-options button.selected {
-    border-color: #5b6ee1;
-    background: #eef0ff;
+.sidebar{
+    position:fixed;
+    top:0;
+    right:0;
+    width:270px;
+    height:100vh;
+    background:var(--card);
+    border-left:1px solid var(--border);
+    padding:22px 15px;
+    z-index:1000;
+    transition:.25s;
+    overflow-y:auto;
 }
 
-/* SUBJECTS */
-
-.subjects-counter {
-    background: #eef0ff;
-    padding: 14px;
-    border-radius: 14px;
-    margin-bottom: 22px;
-    font-weight: bold;
-    color: #5b6ee1;
-    text-align: center;
+body[dir="ltr"] .sidebar{
+    right:auto;
+    left:0;
+    border-left:0;
+    border-right:1px solid var(--border);
 }
 
-.subjects-grid {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 12px;
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:10px;
+    margin-bottom:25px;
 }
 
-.subject-card {
-    background: white;
-    border: 2px solid #e2e7f0;
-    border-radius: 15px;
-    padding: 17px 12px;
-    cursor: pointer;
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.brand-icon{
+    width:45px;
+    height:45px;
+    border-radius:13px;
+    background:linear-gradient(135deg,var(--primary),var(--primary2));
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
 }
 
-.subject-card.selected {
-    border-color: #5b6ee1;
-    background: #f3f4ff;
+.brand strong{
+    font-size:19px;
 }
 
-.check {
-    width: 23px;
-    height: 23px;
-    border: 2px solid #ccd3df;
-    border-radius: 7px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.nav-title{
+    color:var(--muted);
+    font-size:12px;
+    margin:18px 12px 8px;
 }
 
-.subject-card.selected .check {
-    background: #5b6ee1;
-    color: white;
-    border-color: #5b6ee1;
+.nav-btn{
+    width:100%;
+    border:0;
+    background:transparent;
+    color:var(--text);
+    text-align:right;
+    padding:13px 14px;
+    border-radius:13px;
+    cursor:pointer;
+    margin-bottom:3px;
+    font-size:14px;
 }
 
-/* HOME */
-
-.home-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-    margin-bottom: 30px;
+body[dir="ltr"] .nav-btn{
+    text-align:left;
 }
 
-.avatar {
-    width: 65px;
-    height: 65px;
-    border-radius: 50%;
-    background: #eef0ff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 35px;
+.nav-btn:hover,
+.nav-btn.active{
+    background:#efeeff;
+    color:var(--primary);
+    font-weight:bold;
 }
 
-.welcome-box {
-    background: linear-gradient(135deg, #eef0ff, #e7f8ff);
-    padding: 25px;
-    border-radius: 20px;
-    margin-bottom: 20px;
+.account-mini{
+    margin-top:20px;
+    padding:15px;
+    border-radius:17px;
+    background:linear-gradient(135deg,#f1f0ff,#edf9f5);
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 15px;
+.mini-avatar{
+    width:43px;
+    height:43px;
+    border-radius:50%;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
 }
 
-.dashboard-card {
-    background: white;
-    border: 2px solid #edf0f5;
-    border-radius: 18px;
-    padding: 22px;
-    text-align: center;
+.main{
+    margin-right:270px;
+    padding:25px;
 }
 
-.dashboard-card .icon {
-    font-size: 32px;
-    margin-bottom: 10px;
+body[dir="ltr"] .main{
+    margin-right:0;
+    margin-left:270px;
 }
 
-.dashboard-card h3 {
-    margin-bottom: 7px;
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    gap:15px;
 }
 
-.dashboard-card p {
-    color: #667085;
+.top-actions{
+    display:flex;
+    gap:8px;
 }
 
-@media(max-width:500px) {
-    .screen {
-        padding: 30px 20px;
+.icon-btn{
+    width:45px;
+    height:45px;
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:13px;
+    cursor:pointer;
+    font-size:19px;
+}
+
+/* ===================== PAGES ===================== */
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.page-title{
+    margin-bottom:6px;
+    font-size:28px;
+}
+
+.page-subtitle{
+    color:var(--muted);
+    margin-bottom:25px;
+}
+
+/* ===================== DASHBOARD ===================== */
+
+.greeting{
+    background:linear-gradient(135deg,#7470df,#9188ed);
+    color:white;
+    border-radius:25px;
+    padding:28px;
+    margin-bottom:20px;
+    position:relative;
+    overflow:hidden;
+}
+
+.greeting h1{
+    margin-bottom:8px;
+}
+
+.greeting p{
+    opacity:.9;
+}
+
+.dashboard-stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.stat-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:20px;
+    box-shadow:var(--shadow);
+}
+
+.stat-icon{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.stat-card strong{
+    display:block;
+    font-size:24px;
+    margin-bottom:5px;
+}
+
+.stat-card span{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:1.3fr .7fr;
+    gap:20px;
+}
+
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:22px;
+    box-shadow:var(--shadow);
+    margin-bottom:20px;
+}
+
+.card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.card-header h3{
+    font-size:18px;
+}
+
+.empty{
+    text-align:center;
+    color:var(--muted);
+    padding:25px;
+}
+
+/* ===================== TODO ===================== */
+
+.add-task{
+    display:grid;
+    grid-template-columns:1fr 150px 120px auto;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.add-task input,
+.add-task select{
+    padding:13px;
+    border:2px solid var(--border);
+    border-radius:12px;
+    background:var(--card);
+    color:var(--text);
+}
+
+.task{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:15px;
+    border:1px solid var(--border);
+    border-radius:15px;
+    margin-bottom:10px;
+}
+
+.task-check{
+    width:25px;
+    height:25px;
+    border-radius:8px;
+    border:2px solid #ccd1df;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex:none;
+}
+
+.task.done .task-check{
+    background:var(--success);
+    color:white;
+    border-color:var(--success);
+}
+
+.task.done .task-name{
+    text-decoration:line-through;
+    opacity:.5;
+}
+
+.task-content{
+    flex:1;
+}
+
+.task-name{
+    font-weight:bold;
+}
+
+.task-meta{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:5px;
+}
+
+/* ===================== CALENDAR ===================== */
+
+.calendar-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.calendar-nav{
+    display:flex;
+    gap:8px;
+}
+
+.calendar-nav button{
+    width:40px;
+    height:40px;
+    border:1px solid var(--border);
+    background:var(--card);
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.calendar-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:7px;
+}
+
+.day-name{
+    text-align:center;
+    color:var(--muted);
+    font-size:12px;
+    padding:8px 2px;
+    font-weight:bold;
+}
+
+.day{
+    min-height:85px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:9px;
+    background:var(--card);
+    cursor:pointer;
+}
+
+.day:hover{
+    border-color:var(--primary);
+}
+
+.day.today{
+    border:2px solid var(--primary);
+    background:#f3f2ff;
+}
+
+.day-number{
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.day-event{
+    font-size:10px;
+    padding:4px;
+    border-radius:5px;
+    background:#ecebff;
+    color:var(--primary);
+    margin-top:3px;
+    overflow:hidden;
+}
+
+/* ===================== WEEK ===================== */
+
+.week-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
+}
+
+.week-day{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:17px;
+    min-height:220px;
+    padding:12px;
+}
+
+.week-day.today{
+    border:2px solid var(--primary);
+}
+
+.week-day-name{
+    font-weight:bold;
+    text-align:center;
+    margin-bottom:4px;
+}
+
+.week-date{
+    color:var(--muted);
+    font-size:12px;
+    text-align:center;
+    margin-bottom:12px;
+}
+
+.schedule-item{
+    background:#efeeff;
+    color:#5550a9;
+    padding:9px;
+    border-radius:10px;
+    margin-bottom:7px;
+    font-size:12px;
+}
+
+/* ===================== FOCUS ===================== */
+
+.focus-box{
+    max-width:600px;
+    margin:auto;
+    text-align:center;
+}
+
+.focus-selects{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-bottom:25px;
+}
+
+.focus-selects select{
+    padding:14px;
+    border:2px solid var(--border);
+    border-radius:12px;
+    background:var(--card);
+    color:var(--text);
+}
+
+.timer{
+    font-size:75px;
+    font-weight:bold;
+    letter-spacing:3px;
+    margin:25px 0;
+}
+
+.focus-status{
+    color:var(--muted);
+    margin-bottom:20px;
+}
+
+.focus-buttons{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+}
+
+/* ===================== SUBJECTS ===================== */
+
+.subject-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.subject{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:20px;
+    cursor:pointer;
+    box-shadow:var(--shadow);
+    transition:.2s;
+}
+
+.subject:hover{
+    transform:translateY(-3px);
+    border-color:var(--primary);
+}
+
+.subject-icon{
+    font-size:32px;
+    margin-bottom:12px;
+}
+
+.subject-name{
+    font-weight:bold;
+}
+
+.subject-progress{
+    height:7px;
+    background:#edf0f5;
+    border-radius:20px;
+    margin-top:12px;
+    overflow:hidden;
+}
+
+.subject-progress div{
+    height:100%;
+    background:linear-gradient(90deg,var(--primary),var(--primary2));
+    border-radius:20px;
+}
+
+/* ===================== PROGRESS ===================== */
+
+.progress-big{
+    display:flex;
+    align-items:center;
+    gap:25px;
+}
+
+.circle-progress{
+    width:145px;
+    height:145px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:conic-gradient(var(--primary) 0deg,#edf0f5 0deg);
+    position:relative;
+}
+
+.circle-progress::after{
+    content:"";
+    position:absolute;
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    background:var(--card);
+}
+
+.circle-progress span{
+    position:relative;
+    z-index:2;
+    font-size:25px;
+    font-weight:bold;
+}
+
+/* ===================== SETTINGS ===================== */
+
+.setting-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    padding:18px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.setting-row:last-child{
+    border-bottom:0;
+}
+
+.setting-info strong{
+    display:block;
+    margin-bottom:5px;
+}
+
+.setting-info span{
+    color:var(--muted);
+    font-size:13px;
+}
+
+.toggle{
+    width:52px;
+    height:29px;
+    border:0;
+    border-radius:30px;
+    background:#d5d9e4;
+    cursor:pointer;
+    position:relative;
+}
+
+.toggle::after{
+    content:"";
+    position:absolute;
+    width:23px;
+    height:23px;
+    border-radius:50%;
+    background:white;
+    top:3px;
+    right:3px;
+    transition:.2s;
+}
+
+body[dir="ltr"] .toggle::after{
+    right:auto;
+    left:3px;
+}
+
+.toggle.on{
+    background:var(--primary);
+}
+
+.toggle.on::after{
+    right:26px;
+}
+
+body[dir="ltr"] .toggle.on::after{
+    right:auto;
+    left:26px;
+}
+
+/* ===================== MODAL ===================== */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(20,25,45,.45);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:2000;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(500px,100%);
+    background:var(--card);
+    border-radius:25px;
+    padding:30px;
+    max-height:90vh;
+    overflow:auto;
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+/* ===================== DARK ===================== */
+
+body.dark{
+    --bg:#151827;
+    --card:#202437;
+    --text:#f0f2fa;
+    --muted:#a5abc0;
+    --border:#30364d;
+    --shadow:0 12px 35px rgba(0,0,0,.25);
+}
+
+body.dark .nav-btn.active,
+body.dark .nav-btn:hover{
+    background:#30304f;
+}
+
+body.dark .day.today{
+    background:#2a2945;
+}
+
+body.dark .schedule-item,
+body.dark .day-event{
+    background:#302f50;
+}
+
+/* ===================== MOBILE ===================== */
+
+.mobile-menu{
+    display:none;
+}
+
+@media(max-width:1000px){
+
+    .dashboard-stats{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .subjects-grid,
-    .dashboard-grid {
-        grid-template-columns: 1fr;
+    .dashboard-grid{
+        grid-template-columns:1fr;
     }
 
-    h1 {
-        font-size: 30px;
+    .subject-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .add-task{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:700px){
+
+    .sidebar{
+        transform:translateX(110%);
+    }
+
+    body[dir="ltr"] .sidebar{
+        transform:translateX(-110%);
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main,
+    body[dir="ltr"] .main{
+        margin:0;
+        padding:15px;
+    }
+
+    .mobile-menu{
+        display:block;
+    }
+
+    .dashboard-stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .subject-grid{
+        grid-template-columns:1fr;
+    }
+
+    .week-grid{
+        overflow-x:auto;
+        grid-template-columns:repeat(7,150px);
+    }
+
+    .calendar-grid{
+        gap:3px;
+    }
+
+    .day{
+        min-height:65px;
+        padding:5px;
+    }
+
+    .day-event{
+        display:none;
+    }
+
+    .timer{
+        font-size:55px;
+    }
+}
+
+@media(max-width:500px){
+
+    .welcome-card{
+        padding:40px 22px;
+    }
+
+    .welcome-card h1{
+        font-size:34px;
+    }
+
+    .login-card{
+        padding:25px 20px;
+    }
+
+    .dashboard-stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .add-task{
+        grid-template-columns:1fr;
+    }
+
+    .focus-selects{
+        grid-template-columns:1fr;
+    }
+
+    .character-options{
+        grid-template-columns:1fr 1fr;
     }
 }
 </style>
@@ -408,337 +1086,755 @@ select:focus {
 
 <body>
 
-<!-- LANGUAGE -->
-<div class="language-box">
+<!-- ================= WELCOME ================= -->
 
-    <button class="language-btn" onclick="toggleLanguageMenu()" id="languageButton">
-        🌐 العربية
-    </button>
+<section id="welcome">
 
-    <div class="language-menu" id="languageMenu">
-        <button onclick="setLanguage('ar')">🇪🇬 العربية</button>
-        <button onclick="setLanguage('en')">🇬🇧 English</button>
-    </div>
+    <div class="welcome-card">
 
-</div>
+        <div class="welcome-logo">📚</div>
 
+        <h1>Study Quest</h1>
 
-<!-- WELCOME -->
-<div class="screen center" id="welcomeScreen">
-
-    <div class="logo">📚</div>
-
-    <h1>Study Quest</h1>
-
-    <p class="subtitle" id="welcomeSubtitle">
-        رحلتك في المذاكرة تبدأ من هنا ✨
-    </p>
-
-    <button class="start-btn" id="startButton" onclick="startJourney()">
-        ابدأ رحلتك 🚀
-    </button>
-
-</div>
-
-
-<!-- PROFILE -->
-<div class="screen hidden" id="profileScreen">
-
-    <div class="center">
-
-        <div class="logo">👋</div>
-
-        <h1 id="profileTitle">أهلاً بيك!</h1>
-
-        <p class="subtitle" id="profileSubtitle">
-            خلينا نجهز حسابك 📚
+        <p id="welcomeText">
+            رحلتك في المذاكرة تبدأ من هنا ✨
+            <br>
+            نظم وقتك، ذاكر بتركيز، وشوف تقدمك.
         </p>
 
-    </div>
-
-    <label id="nameLabel">👤 اسمك</label>
-
-    <input id="name" type="text" placeholder="اكتب اسمك">
-
-
-    <label id="ageLabel">🎂 سنك</label>
-
-    <input id="age" type="number" placeholder="اكتب سنك">
-
-
-    <label id="genderLabel">🧑 أنت</label>
-
-    <div class="gender-buttons">
-
-        <button id="boyBtn" onclick="chooseGender('boy')">
-            👦 ولد
+        <button class="primary-btn" onclick="showLogin()">
+            <span id="welcomeButton">ابدأ رحلتك 🚀</span>
         </button>
 
-        <button id="girlBtn" onclick="chooseGender('girl')">
-            👧 بنت
-        </button>
+        <div style="margin-top:18px">
+            <button class="secondary-btn" onclick="changeWelcomeLanguage()">
+                🌐 <span id="welcomeLang">العربية</span>
+            </button>
+        </div>
 
     </div>
 
-
-    <label id="gradeLabel">🎓 صفك الدراسي</label>
-
-    <select id="grade">
-
-        <option value="" id="gradePlaceholder">
-            اختار الصف
-        </option>
-
-        <option value="prep1">أولى إعدادي</option>
-        <option value="prep2">تانية إعدادي</option>
-        <option value="prep3">تالتة إعدادي</option>
-
-    </select>
+</section>
 
 
-    <button class="next-btn" id="profileNext" onclick="goToCharacter()">
-        التالي ➜
-    </button>
+<!-- ================= LOGIN ================= -->
+
+<section id="loginScreen" style="display:none;min-height:100vh;align-items:center;justify-content:center;padding:25px;">
+
+    <div class="login-card">
+
+        <div style="text-align:center;font-size:45px;margin-bottom:10px">👋</div>
+
+        <h2 id="loginTitle">إنشاء حسابك</h2>
+
+        <div class="field">
+            <label id="nameLabel">👤 اسمك</label>
+            <input id="userName" placeholder="اكتب اسمك">
+        </div>
+
+        <div class="field">
+            <label id="ageLabel">🎂 سنك</label>
+            <input id="userAge" type="number" min="5" max="100" placeholder="اكتب سنك">
+        </div>
+
+        <div class="field">
+
+            <label id="genderLabel">🧑 النوع</label>
+
+            <div class="gender-row">
+
+                <button class="gender-btn" id="boyGender" onclick="chooseGender('boy')">
+                    👦 ولد
+                </button>
+
+                <button class="gender-btn" id="girlGender" onclick="chooseGender('girl')">
+                    👧 بنت
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="field">
+
+            <label id="gradeLabel">🎓 الصف الدراسي</label>
+
+            <select id="userGrade">
+                <option value="">اختار الصف</option>
+                <option value="prep1">أولى إعدادي</option>
+                <option value="prep2">تانية إعدادي</option>
+                <option value="prep3">تالتة إعدادي</option>
+            </select>
+
+        </div>
+
+        <button class="primary-btn" style="width:100%;margin-top:10px" onclick="createAccount()">
+            <span id="createAccountText">إنشاء الحساب والبدء</span>
+        </button>
+
+        <div id="existingAccounts" style="margin-top:25px"></div>
+
+        <button class="secondary-btn" style="width:100%;margin-top:12px" onclick="backWelcome()">
+            ← رجوع
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CHARACTER ================= -->
+
+<section id="characterScreen" style="display:none;min-height:100vh;align-items:center;justify-content:center;padding:25px;">
+
+    <div class="login-card">
+
+        <div style="text-align:center">
+
+            <div style="font-size:45px">🧑‍🎨</div>
+
+            <h2 id="characterTitle">اختار شخصيتك</h2>
+
+            <p style="color:var(--muted);margin:10px 0 20px" id="characterText">
+                اختار الشخصية واللبس اللي يمثلّك ✨
+            </p>
+
+        </div>
+
+        <div class="character-preview" id="characterPreview">
+
+            <div class="char-head"></div>
+            <div class="char-hair"></div>
+
+            <div class="char-eye one"></div>
+            <div class="char-eye two"></div>
+
+            <div class="hijab"></div>
+
+            <div class="char-body"></div>
+
+            <div class="char-arm one"></div>
+            <div class="char-arm two"></div>
+
+            <div class="char-leg one"></div>
+            <div class="char-leg two"></div>
+
+        </div>
+
+        <div class="character-options">
+
+            <button class="char-option" onclick="chooseCharacter('boy1',this)">
+                👦 ولد 1
+            </button>
+
+            <button class="char-option" onclick="chooseCharacter('boy2',this)">
+                👦 ولد 2
+            </button>
+
+            <button class="char-option" onclick="chooseCharacter('girl1',this)">
+                👧 بنت 1
+            </button>
+
+            <button class="char-option" onclick="chooseCharacter('girl2',this)">
+                👧 بنت 2
+            </button>
+
+        </div>
+
+        <button class="primary-btn" style="width:100%;margin-top:20px" onclick="finishCharacter()">
+            <span id="characterNext">التالي ➜</span>
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= APP ================= -->
+
+<div id="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+            <div class="brand-icon">📚</div>
+            <strong>Study Quest</strong>
+        </div>
+
+        <div class="nav-title" id="mainNavTitle">الرئيسية</div>
+
+        <button class="nav-btn active" onclick="showPage('dashboard',this)">
+            🏠 <span data-ar="الرئيسية" data-en="Home">الرئيسية</span>
+        </button>
+
+        <button class="nav-btn" onclick="showPage('calendar',this)">
+            📅 <span data-ar="Calendar" data-en="Calendar">Calendar</span>
+        </button>
+
+        <button class="nav-btn" onclick="showPage('todo',this)">
+            📝 <span data-ar="قائمة المهام" data-en="To-Do List">قائمة المهام</span>
+        </button>
+
+        <button class="nav-btn" onclick="showPage('subjects',this)">
+            📚 <span data-ar="المواد" data-en="Subjects">المواد</span>
+        </button>
+
+        <button class="nav-btn" onclick="showPage('focus',this)">
+            ⏱️ <span data-ar="جلسة مذاكرة" data-en="Focus Session">جلسة مذاكرة</span>
+        </button>
+
+        <button class="nav-btn" onclick="showPage('progress',this)">
+            📊 <span data-ar="التقدم والإحصائيات" data-en="Progress & Stats">التقدم والإحصائيات</span>
+        </button>
+
+        <div class="nav-title" id="toolsNavTitle">أدوات</div>
+
+        <button class="nav-btn" onclick="showPage('week',this)">
+            🗓️ <span data-ar="جدول الأسبوع" data-en="Weekly Schedule">جدول الأسبوع</span>
+        </button>
+
+        <button class="nav-btn" onclick="showPage('settings',this)">
+            ⚙️ <span data-ar="الإعدادات" data-en="Settings">الإعدادات</span>
+        </button>
+
+        <div class="account-mini">
+
+            <div class="mini-avatar" id="sideAvatar">👦</div>
+
+            <div style="overflow:hidden">
+                <strong id="sideName">الطالب</strong>
+                <div id="sideGrade" style="font-size:11px;color:var(--muted);margin-top:4px">
+                    طالب
+                </div>
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <div>
+                <button class="icon-btn mobile-menu" onclick="toggleSidebar()">☰</button>
+            </div>
+
+            <div class="top-actions">
+
+                <button class="icon-btn" onclick="showNotifications()" title="Notifications">
+                    🔔
+                </button>
+
+                <button class="icon-btn" onclick="showPage('settings')" title="Settings">
+                    ⚙️
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section class="page active" id="page-dashboard">
+
+            <div class="greeting">
+
+                <h1 id="dashboardGreeting">
+                    أهلاً 👋
+                </h1>
+
+                <p id="dashboardSub">
+                    جاهز تبدأ مذاكرتك النهارده؟
+                </p>
+
+            </div>
+
+            <div class="dashboard-stats">
+
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <strong id="todayMinutes">0</strong>
+                    <span id="minutesLabel">دقيقة مذاكرة اليوم</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <strong id="streakNumber">0</strong>
+                    <span id="streakLabel">يوم متتالي</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <strong id="doneTasks">0</strong>
+                    <span id="doneLabel">مهام مكتملة</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🎯</div>
+                    <strong id="dailyPercent">0%</strong>
+                    <span id="goalLabel">هدف اليوم</span>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-grid">
+
+                <div>
+
+                    <div class="card">
+
+                        <div class="card-header">
+
+                            <h3 id="todayPlanTitle">📅 خطة اليوم</h3>
+
+                            <button class="secondary-btn" onclick="showPage('todo')">
+                                + <span id="addTaskSmall">مهمة</span>
+                            </button>
+
+                        </div>
+
+                        <div id="dashboardTasks"></div>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <div class="card-header">
+                            <h3 id="quickActionsTitle">⚡ اختصارات سريعة</h3>
+                        </div>
+
+                        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+
+                            <button class="secondary-btn" onclick="showPage('focus')">
+                                ⏱️ Focus
+                            </button>
+
+                            <button class="secondary-btn" onclick="showPage('calendar')">
+                                📅 Calendar
+                            </button>
+
+                            <button class="secondary-btn" onclick="showPage('todo')">
+                                📝 To-Do
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div>
+
+                    <div class="card">
+
+                        <div class="card-header">
+                            <h3 id="goalTitle">🎯 هدف اليوم</h3>
+                        </div>
+
+                        <div style="text-align:center">
+
+                            <div class="circle-progress" id="dashboardCircle">
+                                <span id="dashboardCircleText">0%</span>
+                            </div>
+
+                            <p style="margin-top:15px;color:var(--muted)" id="goalText">
+                                0 من 120 دقيقة
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="card">
+
+                        <div class="card-header">
+                            <h3 id="nextStudyTitle">📌 التالي</h3>
+                        </div>
+
+                        <div id="nextStudy">
+                            <div class="empty">مفيش جلسات مجدولة حاليًا</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CALENDAR ================= -->
+
+        <section class="page" id="page-calendar">
+
+            <h1 class="page-title" id="calendarTitle">📅 Calendar</h1>
+
+            <p class="page-subtitle" id="calendarSubtitle">
+                شوف الشهر ورتب مواعيد مذاكرتك.
+            </p>
+
+            <div class="card">
+
+                <div class="calendar-head">
+
+                    <h2 id="calendarMonth"></h2>
+
+                    <div class="calendar-nav">
+                        <button onclick="changeMonth(-1)">‹</button>
+                        <button onclick="goToday()">●</button>
+                        <button onclick="changeMonth(1)">›</button>
+                    </div>
+
+                </div>
+
+                <div class="calendar-grid" id="calendarGrid"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= TODO ================= -->
+
+        <section class="page" id="page-todo">
+
+            <h1 class="page-title" id="todoTitle">📝 To-Do List</h1>
+
+            <p class="page-subtitle" id="todoSubtitle">
+                كل اللي عليك تعمله في مكان واحد.
+            </p>
+
+            <div class="card">
+
+                <div class="add-task">
+
+                    <input id="taskInput" placeholder="اكتب المهمة...">
+
+                    <select id="taskSubject"></select>
+
+                    <input id="taskDate" type="date">
+
+                    <button class="primary-btn" onclick="addTask()">
+                        + <span id="addTaskText">إضافة</span>
+                    </button>
+
+                </div>
+
+                <div id="taskList"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SUBJECTS ================= -->
+
+        <section class="page" id="page-subjects">
+
+            <h1 class="page-title" id="subjectsTitle">📚 المواد الدراسية</h1>
+
+            <p class="page-subtitle" id="subjectsSubtitle">
+                كل مادة وليها تقدمها الخاص.
+            </p>
+
+            <div class="subject-grid" id="subjectGrid"></div>
+
+        </section>
+
+
+        <!-- ================= FOCUS ================= -->
+
+        <section class="page" id="page-focus">
+
+            <h1 class="page-title" id="focusTitle">⏱️ جلسة مذاكرة</h1>
+
+            <p class="page-subtitle" id="focusSubtitle">
+                اختار المادة والمدة وابدأ التركيز.
+            </p>
+
+            <div class="card focus-box">
+
+                <div class="focus-selects">
+
+                    <select id="focusSubject"></select>
+
+                    <select id="focusDuration">
+
+                        <option value="15">15 دقيقة</option>
+                        <option value="25" selected>25 دقيقة</option>
+                        <option value="30">30 دقيقة</option>
+                        <option value="45">45 دقيقة</option>
+                        <option value="50">50 دقيقة</option>
+                        <option value="60">60 دقيقة</option>
+                        <option value="90">90 دقيقة</option>
+
+                    </select>
+
+                </div>
+
+                <div class="focus-status" id="focusStatus">
+                    جاهز؟
+                </div>
+
+                <div class="timer" id="timer">
+                    25:00
+                </div>
+
+                <div class="focus-buttons">
+
+                    <button class="primary-btn" id="startFocusBtn" onclick="startFocus()">
+                        ▶️ ابدأ
+                    </button>
+
+                    <button class="secondary-btn" onclick="pauseFocus()">
+                        ⏸️ Pause
+                    </button>
+
+                    <button class="danger-btn" onclick="stopFocus()">
+                        ⏹️ إنهاء
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= PROGRESS ================= -->
+
+        <section class="page" id="page-progress">
+
+            <h1 class="page-title" id="progressTitle">📊 التقدم والإحصائيات</h1>
+
+            <p class="page-subtitle" id="progressSubtitle">
+                شوف رحلتك الدراسية بتتقدم إزاي.
+            </p>
+
+            <div class="card">
+
+                <div class="progress-big">
+
+                    <div class="circle-progress" id="bigCircle">
+                        <span id="bigPercent">0%</span>
+                    </div>
+
+                    <div>
+                        <h2 id="progressHeading">تقدمك ممتاز 👏</h2>
+                        <p id="progressDescription" style="color:var(--muted);margin-top:8px">
+                            ابدأ أول جلسة مذاكرة علشان يظهر تقدمك.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="dashboard-stats">
+
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <strong id="allTimeMinutes">0</strong>
+                    <span>دقيقة مذاكرة إجمالي</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <strong id="sessionsNumber">0</strong>
+                    <span>جلسة مذاكرة</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">📝</div>
+                    <strong id="tasksNumber">0</strong>
+                    <span>كل المهام</span>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <strong id="xpNumber">0</strong>
+                    <span>XP</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= WEEK ================= -->
+
+        <section class="page" id="page-week">
+
+            <h1 class="page-title" id="weekTitle">🗓️ جدول الأسبوع</h1>
+
+            <p class="page-subtitle" id="weekSubtitle">
+                كل يوم والمواد اللي عليك فيه.
+            </p>
+
+            <div class="week-grid" id="weekGrid"></div>
+
+            <div class="card" style="margin-top:20px">
+
+                <h3 style="margin-bottom:15px" id="scheduleAddTitle">
+                    ➕ إضافة مادة لليوم
+                </h3>
+
+                <div class="add-task">
+
+                    <select id="scheduleDay"></select>
+
+                    <select id="scheduleSubject"></select>
+
+                    <input id="scheduleTime" type="time">
+
+                    <button class="primary-btn" onclick="addSchedule()">
+                        إضافة
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= SETTINGS ================= -->
+
+        <section class="page" id="page-settings">
+
+            <h1 class="page-title" id="settingsTitle">⚙️ الإعدادات</h1>
+
+            <p class="page-subtitle" id="settingsSubtitle">
+                ظبط Study Quest بالطريقة اللي تحبها.
+            </p>
+
+            <div class="card">
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+                        <strong>🌐 اللغة</strong>
+                        <span>اختار لغة البرنامج</span>
+                    </div>
+
+                    <select id="languageSelect" onchange="setLanguage(this.value)" style="padding:10px;border-radius:10px">
+                        <option value="ar">العربية</option>
+                        <option value="en">English</option>
+                    </select>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+                        <strong>🔊 الصوت</strong>
+                        <span>أصوات انتهاء جلسة المذاكرة</span>
+                    </div>
+
+                    <button class="toggle on" id="soundToggle" onclick="toggleSetting('sound')"></button>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+                        <strong>🌙 الوضع الداكن</strong>
+                        <span>تغيير إضاءة البرنامج</span>
+                    </div>
+
+                    <button class="toggle" id="darkToggle" onclick="toggleSetting('dark')"></button>
+
+                </div>
+
+
+                <div class="setting-row">
+
+                    <div class="setting-info">
+                        <strong>🔔 الإشعارات</strong>
+                        <span>تنبيهات المذاكرة والتذكيرات</span>
+                    </div>
+
+                    <button class="toggle on" id="notificationToggle" onclick="enableNotifications()"></button>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3 style="margin-bottom:15px">🎨 الخلفية</h3>
+
+                <div style="display:flex;gap:10px;flex-wrap:wrap">
+
+                    <button class="secondary-btn" onclick="setBackground('blue')">
+                        💙 Blue
+                    </button>
+
+                    <button class="secondary-btn" onclick="setBackground('purple')">
+                        💜 Purple
+                    </button>
+
+                    <button class="secondary-btn" onclick="setBackground('green')">
+                        💚 Green
+                    </button>
+
+                    <button class="secondary-btn" onclick="setBackground('pink')">
+                        🩷 Pink
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3 style="margin-bottom:15px">👤 الحساب</h3>
+
+                <button class="secondary-btn" onclick="showLogin()">
+                    ➕ إنشاء / تبديل حساب
+                </button>
+
+                <button class="danger-btn" style="margin-right:8px" onclick="deleteCurrentAccount()">
+                    🗑️ حذف الحساب الحالي
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
 
 </div>
 
 
-<!-- CHARACTER -->
-<div class="screen hidden" id="characterScreen">
+<!-- ================= NOTIFICATION MODAL ================= -->
 
-    <div class="center">
+<div class="modal" id="notificationModal">
 
-        <div class="logo">🧍</div>
+    <div class="modal-box">
 
-        <h1 id="characterTitle">
-            اختار شخصيتك
-        </h1>
-
-        <p class="subtitle" id="characterSubtitle">
-            اختار الشخصية اللي هتمثلك في Study Quest ✨
-        </p>
-
-    </div>
-
-
-    <div class="character-area">
-
-        <div class="character">
-
-            <div class="head"></div>
-            <div class="hair"></div>
-
-            <div class="eye left"></div>
-            <div class="eye right"></div>
-
-            <div class="body-character"></div>
-
-            <div class="arm left"></div>
-            <div class="arm right"></div>
-
-            <div class="leg left"></div>
-            <div class="leg right"></div>
-
+        <div class="modal-header">
+            <h2>🔔 Notifications</h2>
+            <button class="icon-btn" onclick="closeModal()">×</button>
         </div>
 
-    </div>
-
-
-    <div class="character-options">
-
-        <button onclick="chooseCharacter('boy1',this)">
-            👦 ولد 1
-        </button>
-
-        <button onclick="chooseCharacter('boy2',this)">
-            👦 ولد 2
-        </button>
-
-        <button onclick="chooseCharacter('girl1',this)">
-            👧 بنت 1
-        </button>
-
-        <button onclick="chooseCharacter('girl2',this)">
-            👧 بنت 2
-        </button>
-
-    </div>
-
-
-    <button class="next-btn" id="characterNext" onclick="goToSubjects()">
-        التالي ➜
-    </button>
-
-</div>
-
-
-<!-- SUBJECTS -->
-<div class="screen hidden" id="subjectsScreen">
-
-    <div class="center">
-
-        <div class="logo">📚</div>
-
-        <h1 id="subjectsTitle">موادك الدراسية</h1>
-
-        <p class="subtitle" id="subjectsSubtitle">
-            اختار المواد اللي بتدرسها
-        </p>
-
-    </div>
-
-
-    <div class="subjects-counter">
-
-        <span id="counterText">تم اختيار</span>
-
-        <span id="selectedCount">0</span>
-
-        <span id="subjectWord">مادة</span>
-
-    </div>
-
-
-    <div class="subjects-grid">
-
-        <div class="subject-card" onclick="toggleSubject(this)">
-            <span class="check">✓</span>
-            <span>القرآن الكريم وتجويده</span>
-        </div>
-
-        <div class="subject-card" onclick="toggleSubject(this)">
-            <span class="check">✓</span>
-            <span>أصول الدين</span>
-        </div>
-
-        <div class="subject-card" onclick="toggleSubject(this)">
-            <span class="check">✓</span>
-            <span>الفقه</span>
-        </div>
-
-        <div class="subject-card" onclick="toggleSubject(this)">
-            <span class="check">✓</span>
-            <span>النحو</span>
-        </div>
-
-        <div class="subject-card" onclick="toggleSubject(this)">
-            <span class="check">✓</span>
-            <span>الصرف</span>
-        </div>
-
-        <div class="subject-card" onclick="toggleSubject(this)">
-            <span class="check">✓</span>
-            <span>المطالعة والنصوص والقصة</span>
-        </div>
-
-        <div class="subject-card" onclick="toggleSubject(this)">
-            <span class="check">✓</span>
-            <span>الإنشاء</span>
-        </div>
-
-        <div class="subject-card" onclick="toggleSubject(this)">
-            <span class="check">✓</span>
-            <span>الإملاء</span>
-        </div>
-
-        <div class="subject-card" onclick="toggleSubject(this)">
-            <span class="check">✓</span>
-            <span>الخط</span>
-        </div>
-
-        <div class="subject-card" onclick="toggleSubject(this)">
-            <span class="check">✓</span>
-            <span>الدراسات الاجتماعية</span>
-        </div>
-
-        <div class="subject-card" onclick="toggleSubject(this)">
-            <span class="check">✓</span>
-            <span>العلوم</span>
-        </div>
-
-        <div class="subject-card" onclick="toggleSubject(this)">
-            <span class="check">✓</span>
-            <span>الرياضيات</span>
-        </div>
-
-        <div class="subject-card" onclick="toggleSubject(this)">
-            <span class="check">✓</span>
-            <span>اللغة الإنجليزية</span>
-        </div>
-
-        <div class="subject-card" onclick="toggleSubject(this)">
-            <span class="check">✓</span>
-            <span>الحاسب الآلي</span>
-        </div>
-
-        <div class="subject-card" onclick="toggleSubject(this)">
-            <span class="check">✓</span>
-            <span>التربية الفنية</span>
-        </div>
-
-    </div>
-
-
-    <button class="next-btn" id="subjectsNext" onclick="finishSubjects()">
-        التالي ➜
-    </button>
-
-</div>
-
-
-<!-- HOME -->
-<div class="screen hidden" id="homeScreen">
-
-    <div class="home-header">
-
-        <div>
-            <h1 id="homeTitle">أهلاً بيك 👋</h1>
-            <p id="homeSubtitle">جاهز تبدأ مذاكرتك؟</p>
-        </div>
-
-        <div class="avatar" id="homeAvatar">
-            🧑
-        </div>
-
-    </div>
-
-
-    <div class="welcome-box">
-
-        <h2 id="todayTitle">📅 خطة اليوم</h2>
-
-        <p id="todayText" style="margin-top:10px;">
-            لسه مفيش مهام لليوم. خلينا نبدأ ونضيف أول مهمة! ✨
-        </p>
-
-    </div>
-
-
-    <div class="dashboard-grid">
-
-        <div class="dashboard-card">
-            <div class="icon">📝</div>
-            <h3>To-Do List</h3>
-            <p>مهامك اليومية</p>
-        </div>
-
-        <div class="dashboard-card">
-            <div class="icon">📅</div>
-            <h3>Calendar</h3>
-            <p>جدول الأسبوع</p>
-        </div>
-
-        <div class="dashboard-card">
-            <div class="icon">⏱️</div>
-            <h3>Focus</h3>
-            <p>ابدأ جلسة مذاكرة</p>
-        </div>
-
-        <div class="dashboard-card">
-            <div class="icon">📊</div>
-            <h3>Progress</h3>
-            <p>شوف تقدمك</p>
-        </div>
+        <div id="notificationList"></div>
 
     </div>
 
@@ -747,155 +1843,1458 @@ select:focus {
 
 <script>
 
+/* =====================================================
+   DATA
+===================================================== */
+
+const subjects = [
+    "القرآن الكريم وتجويده",
+    "أصول الدين",
+    "الفقه",
+    "النحو",
+    "الصرف",
+    "المطالعة والنصوص والقصة",
+    "الإنشاء",
+    "الإملاء",
+    "الخط",
+    "الدراسات الاجتماعية",
+    "العلوم",
+    "الرياضيات",
+    "اللغة الإنجليزية",
+    "الحاسب الآلي",
+    "التربية الفنية"
+];
+
+const subjectIcons = [
+    "📖","☪️","⚖️","✍️","🔤",
+    "📚","📝","🔠","✒️","🌍",
+    "🧪","📐","🇬🇧","💻","🎨"
+];
+
+const subjectEnglish = [
+    "Quran & Tajweed",
+    "Islamic Studies",
+    "Fiqh",
+    "Arabic Grammar",
+    "Morphology",
+    "Reading & Texts",
+    "Composition",
+    "Spelling",
+    "Calligraphy",
+    "Social Studies",
+    "Science",
+    "Mathematics",
+    "English",
+    "Computer",
+    "Art"
+];
+
+const daysAr = [
+    "الأحد","الاثنين","الثلاثاء",
+    "الأربعاء","الخميس","الجمعة","السبت"
+];
+
+const daysEn = [
+    "Sunday","Monday","Tuesday",
+    "Wednesday","Thursday","Friday","Saturday"
+];
+
 let selectedGender = "";
 let selectedCharacter = "";
-let selectedSubjects = 0;
-let currentLanguage = "ar";
+
+let currentAccount = null;
+
+let calendarDate = new Date();
+
+let timerSeconds = 25 * 60;
+let timerInterval = null;
+let timerRunning = false;
+let timerStartedAt = null;
+let timerSelectedMinutes = 25;
 
 
-function startJourney() {
+/* =====================================================
+   STORAGE
+===================================================== */
 
-    document.getElementById("welcomeScreen").classList.add("hidden");
-    document.getElementById("profileScreen").classList.remove("hidden");
+function getAccounts(){
+
+    return JSON.parse(
+        localStorage.getItem("studyQuestAccounts") || "[]"
+    );
 
 }
 
+function saveAccounts(accounts){
 
-function toggleLanguageMenu() {
+    localStorage.setItem(
+        "studyQuestAccounts",
+        JSON.stringify(accounts)
+    );
 
-    const menu = document.getElementById("languageMenu");
+}
 
-    if (menu.style.display === "block") {
-        menu.style.display = "none";
-    } else {
-        menu.style.display = "block";
+function saveCurrent(){
+
+    if(!currentAccount) return;
+
+    let accounts = getAccounts();
+
+    const index = accounts.findIndex(
+        a => a.id === currentAccount.id
+    );
+
+    if(index !== -1){
+
+        accounts[index] = currentAccount;
+
+        saveAccounts(accounts);
+
     }
 
 }
 
 
-function setLanguage(language) {
+/* =====================================================
+   WELCOME
+===================================================== */
 
-    currentLanguage = language;
+function showLogin(){
 
-    const english = language === "en";
+    document.getElementById("welcome").style.display="none";
 
-    document.documentElement.lang = language;
-    document.documentElement.dir = english ? "ltr" : "rtl";
+    document.getElementById("app").style.display="none";
 
-    document.getElementById("languageButton").textContent =
-        english ? "🌐 English" : "🌐 العربية";
+    const login=document.getElementById("loginScreen");
 
-    if (english) {
+    login.style.display="flex";
 
-        document.getElementById("welcomeSubtitle").textContent =
-            "Your study journey starts here ✨";
+    renderAccounts();
 
-        document.getElementById("startButton").textContent =
-            "Start Your Journey 🚀";
+}
 
-        document.getElementById("profileTitle").textContent =
-            "Welcome!";
+function backWelcome(){
 
-        document.getElementById("profileSubtitle").textContent =
-            "Let's set up your profile 📚";
+    document.getElementById("loginScreen").style.display="none";
 
-        document.getElementById("nameLabel").textContent =
-            "👤 Your name";
+    document.getElementById("welcome").style.display="flex";
 
-        document.getElementById("ageLabel").textContent =
-            "🎂 Your age";
+}
 
-        document.getElementById("genderLabel").textContent =
-            "🧑 You are";
+function changeWelcomeLanguage(){
 
-        document.getElementById("boyBtn").textContent =
-            "👦 Boy";
+    const english =
+        document.documentElement.lang === "en";
 
-        document.getElementById("girlBtn").textContent =
-            "👧 Girl";
+    if(english){
 
-        document.getElementById("gradeLabel").textContent =
-            "🎓 Your grade";
+        document.documentElement.lang="ar";
+        document.documentElement.dir="rtl";
 
-        document.getElementById("gradePlaceholder").textContent =
-            "Choose your grade";
+        document.getElementById("welcomeText").innerHTML=
+            "رحلتك في المذاكرة تبدأ من هنا ✨<br>نظم وقتك، ذاكر بتركيز، وشوف تقدمك.";
 
-        document.getElementById("profileNext").textContent =
-            "Next ➜";
-
-        document.getElementById("name").placeholder =
-            "Enter your name";
-
-        document.getElementById("age").placeholder =
-            "Enter your age";
-
-        document.getElementById("characterTitle").textContent =
-            "Choose Your Character";
-
-        document.getElementById("characterSubtitle").textContent =
-            "Choose the character that represents you ✨";
-
-        document.getElementById("characterNext").textContent =
-            "Next ➜";
-
-        document.getElementById("subjectsTitle").textContent =
-            "Your Subjects";
-
-        document.getElementById("subjectsSubtitle").textContent =
-            "Choose the subjects you study";
-
-        document.getElementById("counterText").textContent =
-            "Selected";
-
-        document.getElementById("subjectWord").textContent =
-            "subjects";
-
-        document.getElementById("subjectsNext").textContent =
-            "Finish 🎉";
-
-    } else {
-
-        document.getElementById("welcomeSubtitle").textContent =
-            "رحلتك في المذاكرة تبدأ من هنا ✨";
-
-        document.getElementById("startButton").textContent =
+        document.getElementById("welcomeButton").textContent=
             "ابدأ رحلتك 🚀";
 
-        document.getElementById("profileTitle").textContent =
-            "أهلاً بيك!";
+        document.getElementById("welcomeLang").textContent=
+            "العربية";
 
-        document.getElementById("profileSubtitle").textContent =
-            "خلينا نجهز حسابك 📚";
+    }else{
 
-        document.getElementById("nameLabel").textContent =
-            "👤 اسمك";
+        document.documentElement.lang="en";
+        document.documentElement.dir="ltr";
 
-        document.getElementById("ageLabel").textContent =
-            "🎂 سنك";
+        document.getElementById("welcomeText").innerHTML=
+            "Your study journey starts here ✨<br>Organize, focus and track your progress.";
 
-        document.getElementById("genderLabel").textContent =
-            "🧑 أنت";
+        document.getElementById("welcomeButton").textContent=
+            "Start Your Journey 🚀";
 
-        document.getElementById("boyBtn").textContent =
-            "👦 ولد";
+        document.getElementById("welcomeLang").textContent=
+            "English";
 
-        document.getElementById("girlBtn").textContent =
-            "👧 بنت";
+    }
 
-        document.getElementById("gradeLabel").textContent =
-            "🎓 صفك الدراسي";
+}
 
-        document.getElementById("gradePlaceholder").textContent =
-            "اختار الصف";
 
-        document.getElementById("profileNext").textContent =
-            "التالي ➜";
+/* =====================================================
+   LOGIN / ACCOUNT
+===================================================== */
 
-        document.getElementById("name").placeholder =
-            "اكتب اسمك";
+function chooseGender(gender){
 
-        document.getElementById("age").placeholder =
-            "اكتب سنك";
+    selectedGender=gender;
 
-        document.getElementById("character
+    document.getElementById("boyGender")
+        .classList.remove("selected");
+
+    document.getElementById("girlGender")
+        .classList.remove("selected");
+
+    document.getElementById(
+        gender==="boy" ? "boyGender":"girlGender"
+    ).classList.add("selected");
+
+}
+
+function createAccount(){
+
+    const name=
+        document.getElementById("userName").value.trim();
+
+    const age=
+        document.getElementById("userAge").value;
+
+    const grade=
+        document.getElementById("userGrade").value;
+
+    if(!name || !age || !grade || !selectedGender){
+
+        alert(
+            currentLanguage()==="en"
+            ? "Please complete all information."
+            : "من فضلك كمّل كل البيانات."
+        );
+
+        return;
+
+    }
+
+    const account={
+
+        id:Date.now().toString(),
+
+        name:name,
+
+        age:Number(age),
+
+        gender:selectedGender,
+
+        grade:grade,
+
+        character:"",
+
+        tasks:[],
+
+        schedules:[],
+
+        sessions:[],
+
+        totalMinutes:0,
+
+        xp:0,
+
+        streak:0,
+
+        lastStudyDate:"",
+
+        settings:{
+            language:"ar",
+            sound:true,
+            dark:false,
+            background:"blue",
+            notifications:true
+        }
+
+    };
+
+    let accounts=getAccounts();
+
+    accounts.push(account);
+
+    saveAccounts(accounts);
+
+    currentAccount=account;
+
+    document.getElementById("loginScreen").style.display="none";
+
+    document.getElementById("characterScreen").style.display="flex";
+
+    selectedCharacter="";
+
+}
+
+
+/* existing accounts */
+
+function renderAccounts(){
+
+    const box=document.getElementById("existingAccounts");
+
+    const accounts=getAccounts();
+
+    if(!accounts.length){
+
+        box.innerHTML="";
+
+        return;
+
+    }
+
+    box.innerHTML=`
+
+        <div style="color:var(--muted);font-size:13px;margin-bottom:10px">
+            ${document.documentElement.lang==="en"
+                ?"Existing accounts"
+                :"الحسابات الموجودة على الجهاز"}
+        </div>
+
+    `;
+
+    accounts.forEach(account=>{
+
+        const button=document.createElement("button");
+
+        button.className="secondary-btn";
+
+        button.style.width="100%";
+
+        button.style.marginBottom="8px";
+
+        button.textContent=
+            `${account.gender==="boy"?"👦":"👧"} ${account.name}`;
+
+        button.onclick=()=>loginAccount(account.id);
+
+        box.appendChild(button);
+
+    });
+
+}
+
+function loginAccount(id){
+
+    const account=getAccounts()
+        .find(a=>a.id===id);
+
+    if(!account) return;
+
+    currentAccount=account;
+
+    document.getElementById("loginScreen").style.display="none";
+
+    if(!currentAccount.character){
+
+        document.getElementById("characterScreen").style.display="flex";
+
+    }else{
+
+        openApp();
+
+    }
+
+}
+
+
+/* =====================================================
+   CHARACTER
+===================================================== */
+
+function chooseCharacter(character,button){
+
+    selectedCharacter=character;
+
+    document.querySelectorAll(".char-option")
+        .forEach(b=>b.classList.remove("selected"));
+
+    button.classList.add("selected");
+
+    const preview=
+        document.getElementById("characterPreview");
+
+    if(character.startsWith("girl")){
+
+        preview.classList.add("girl");
+
+    }else{
+
+        preview.classList.remove("girl");
+
+    }
+
+    const body=
+        preview.querySelector(".char-body");
+
+    const hair=
+        preview.querySelector(".char-hair");
+
+    if(character==="boy1"){
+        body.style.background="#6c8ee8";
+        hair.style.background="#382820";
+    }
+
+    if(character==="boy2"){
+        body.style.background="#58ad83";
+        hair.style.background="#202020";
+    }
+
+    if(character==="girl1"){
+        body.style.background="#d88bb1";
+    }
+
+    if(character==="girl2"){
+        body.style.background="#e9a66a";
+    }
+
+}
+
+function finishCharacter(){
+
+    if(!selectedCharacter){
+
+        alert(
+            currentLanguage()==="en"
+            ?"Choose a character first."
+            :"اختار شخصيتك الأول."
+        );
+
+        return;
+
+    }
+
+    currentAccount.character=selectedCharacter;
+
+    saveCurrent();
+
+    document.getElementById("characterScreen").style.display="none";
+
+    openApp();
+
+}
+
+
+/* =====================================================
+   APP START
+===================================================== */
+
+function openApp(){
+
+    document.getElementById("welcome").style.display="none";
+
+    document.getElementById("loginScreen").style.display="none";
+
+    document.getElementById("characterScreen").style.display="none";
+
+    document.getElementById("app").style.display="block";
+
+    applySettings();
+
+    updateAll();
+
+}
+
+function currentLanguage(){
+
+    return currentAccount?.settings?.language || "ar";
+
+}
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function showPage(page,button){
+
+    document.querySelectorAll(".page")
+        .forEach(p=>p.classList.remove("active"));
+
+    const target=
+        document.getElementById("page-"+page);
+
+    if(target) target.classList.add("active");
+
+    document.querySelectorAll(".nav-btn")
+        .forEach(b=>b.classList.remove("active"));
+
+    if(button) button.classList.add("active");
+
+    if(page==="calendar") renderCalendar();
+
+    if(page==="todo") renderTasks();
+
+    if(page==="subjects") renderSubjects();
+
+    if(page==="week") renderWeek();
+
+    if(page==="progress") renderProgress();
+
+    if(page==="focus") updateFocusSubjects();
+
+    if(window.innerWidth<=700){
+
+        document.getElementById("sidebar")
+            .classList.remove("open");
+
+    }
+
+}
+
+function toggleSidebar(){
+
+    document.getElementById("sidebar")
+        .classList.toggle("open");
+
+}
+
+
+/* =====================================================
+   UPDATE ALL
+===================================================== */
+
+function updateAll(){
+
+    updateAccountUI();
+
+    renderTasks();
+
+    renderSubjects();
+
+    renderCalendar();
+
+    renderWeek();
+
+    renderProgress();
+
+    updateDashboard();
+
+    updateFocusSubjects();
+
+    updateScheduleSubjects();
+
+}
+
+
+/* =====================================================
+   ACCOUNT UI
+===================================================== */
+
+function updateAccountUI(){
+
+    if(!currentAccount) return;
+
+    document.getElementById("sideName").textContent=
+        currentAccount.name;
+
+    document.getElementById("dashboardGreeting").textContent=
+        currentLanguage()==="en"
+        ?`Welcome, ${currentAccount.name} 👋`
+        :`أهلاً يا ${currentAccount.name} 👋`;
+
+    document.getElementById("dashboardSub").textContent=
+        currentLanguage()==="en"
+        ?"Ready to start studying today?"
+        :"جاهز تبدأ مذاكرتك النهارده؟";
+
+    document.getElementById("sideAvatar").textContent=
+        currentAccount.character?.startsWith("girl")
+        ?"👧":"👦";
+
+    document.getElementById("sideGrade").textContent=
+        getGradeName(currentAccount.grade);
+
+}
+
+function getGradeName(grade){
+
+    if(currentLanguage()==="en"){
+
+        if(grade==="prep1") return "1st Preparatory";
+
+        if(grade==="prep2") return "2nd Preparatory";
+
+        if(grade==="prep3") return "3rd Preparatory";
+
+    }else{
+
+        if(grade==="prep1") return "أولى إعدادي";
+
+        if(grade==="prep2") return "تانية إعدادي";
+
+        if(grade==="prep3") return "تالتة إعدادي";
+
+    }
+
+    return "";
+
+}
+
+
+/* =====================================================
+   TODO
+===================================================== */
+
+function fillSubjectSelect(selectId){
+
+    const select=document.getElementById(selectId);
+
+    if(!select) return;
+
+    select.innerHTML="";
+
+    subjects.forEach((subject,i)=>{
+
+        const option=document.createElement("option");
+
+        option.value=i;
+
+        option.textContent=
+            currentLanguage()==="en"
+            ?subjectEnglish[i]
+            :subject;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+function addTask(){
+
+    const input=document.getElementById("taskInput");
+
+    const subject=document.getElementById("taskSubject");
+
+    const date=document.getElementById("taskDate");
+
+    const text=input.value.trim();
+
+    if(!text){
+
+        alert(
+            currentLanguage()==="en"
+            ?"Write the task first."
+            :"اكتب المهمة الأول."
+        );
+
+        return;
+
+    }
+
+    currentAccount.tasks.push({
+
+        id:Date.now(),
+
+        text:text,
+
+        subject:Number(subject.value),
+
+        date:date.value || todayString(),
+
+        done:false,
+
+        created:Date.now()
+
+    });
+
+    currentAccount.xp+=5;
+
+    saveCurrent();
+
+    input.value="";
+
+    renderTasks();
+
+    updateDashboard();
+
+    notify(
+        currentLanguage()==="en"
+        ?"New task added 📚"
+        :"تمت إضافة مهمة جديدة 📚"
+    );
+
+}
+
+function renderTasks(){
+
+    fillSubjectSelect("taskSubject");
+
+    const list=document.getElementById("taskList");
+
+    if(!list) return;
+
+    list.innerHTML="";
+
+    const tasks=currentAccount?.tasks || [];
+
+    if(!tasks.length){
+
+        list.innerHTML=`
+            <div class="empty">
+                ${currentLanguage()==="en"
+                ?"No tasks yet. Add your first task!"
+                :"لسه مفيش مهام. أضف أول مهمة!"}
+            </div>
+        `;
+
+        renderDashboardTasks();
+
+        return;
+
+    }
+
+    tasks
+    .slice()
+    .sort((a,b)=>{
+
+        if(a.done!==b.done) return a.done?1:-1;
+
+        return a.date.localeCompare(b.date);
+
+    })
+    .forEach(task=>{
+
+        const row=document.createElement("div");
+
+        row.className="task "+(task.done?"done":"");
+
+        const subjectName=
+            currentLanguage()==="en"
+            ?subjectEnglish[task.subject]
+            :subjects[task.subject];
+
+        row.innerHTML=`
+
+            <div class="task-check"
+                onclick="toggleTask(${task.id})">
+                ${task.done?"✓":""}
+            </div>
+
+            <div class="task-content">
+
+                <div class="task-name">
+                    ${escapeHTML(task.text)}
+                </div>
+
+                <div class="task-meta">
+                    ${subjectIcons[task.subject]}
+                    ${subjectName}
+                    •
+                    ${task.date || ""}
+                </div>
+
+            </div>
+
+            <button class="danger-btn"
+                onclick="deleteTask(${task.id})">
+                🗑️
+            </button>
+
+        `;
+
+        list.appendChild(row);
+
+    });
+
+    renderDashboardTasks();
+
+}
+
+function renderDashboardTasks(){
+
+    const box=document.getElementById("dashboardTasks");
+
+    if(!box) return;
+
+    const today=todayString();
+
+    const tasks=(currentAccount?.tasks||[])
+        .filter(t=>t.date===today);
+
+    if(!tasks.length){
+
+        box.innerHTML=`
+            <div class="empty">
+                ${currentLanguage()==="en"
+                ?"No tasks for today 🎉"
+                :"مفيش مهام لليوم 🎉"}
+            </div>
+        `;
+
+        return;
+
+    }
+
+    box.innerHTML="";
+
+    tasks.slice(0,5).forEach(task=>{
+
+        const div=document.createElement("div");
+
+        div.className="task "+(task.done?"done":"");
+
+        div.innerHTML=`
+
+            <div class="task-check"
+                onclick="toggleTask(${task.id})">
+                ${task.done?"✓":""}
+            </div>
+
+            <div class="task-content">
+                <div class="task-name">
+                    ${escapeHTML(task.text)}
+                </div>
+
+                <div class="task-meta">
+                    ${subjectIcons[task.subject]}
+                    ${
+                        currentLanguage()==="en"
+                        ?subjectEnglish[task.subject]
+                        :subjects[task.subject]
+                    }
+                </div>
+            </div>
+
+        `;
+
+        box.appendChild(div);
+
+    });
+
+}
+
+function toggleTask(id){
+
+    const task=currentAccount.tasks.find(t=>t.id===id);
+
+    if(!task) return;
+
+    task.done=!task.done;
+
+    if(task.done) currentAccount.xp+=10;
+
+    saveCurrent();
+
+    updateAll();
+
+}
+
+function deleteTask(id){
+
+    currentAccount.tasks=
+        currentAccount.tasks.filter(t=>t.id!==id);
+
+    saveCurrent();
+
+    updateAll();
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+function updateDashboard(){
+
+    if(!currentAccount) return;
+
+    const today=todayString();
+
+    const todayMinutes=
+        currentAccount.sessions
+        .filter(s=>s.date===today)
+        .reduce((sum,s)=>sum+s.minutes,0);
+
+    const done=
+        currentAccount.tasks
+        .filter(t=>t.done).length;
+
+    const goal=120;
+
+    const percent=
+        Math.min(100,Math.round(todayMinutes/goal*100));
+
+    document.getElementById("todayMinutes").textContent=
+        todayMinutes;
+
+    document.getElementById("doneTasks").textContent=
+        done;
+
+    document.getElementById("dailyPercent").textContent=
+        percent+"%";
+
+    document.getElementById("streakNumber").textContent=
+        currentAccount.streak;
+
+    document.getElementById("goalText").textContent=
+        currentLanguage()==="en"
+        ?`${todayMinutes} of ${goal} minutes`
+        :`${todayMinutes} من ${goal} دقيقة`;
+
+    document.getElementById("dashboardCircleText").textContent=
+        percent+"%";
+
+    document.getElementById("dashboardCircle").style.background=
+        `conic-gradient(var(--primary) ${percent*3.6}deg,#edf0f5 0deg)`;
+
+    renderDashboardTasks();
+
+}
+
+
+/* =====================================================
+   CALENDAR
+===================================================== */
+
+function todayString(){
+
+    const d=new Date();
+
+    return formatDate(d);
+
+}
+
+function formatDate(date){
+
+    const y=date.getFullYear();
+
+    const m=String(date.getMonth()+1).padStart(2,"0");
+
+    const d=String(date.getDate()).padStart(2,"0");
+
+    return `${y}-${m}-${d}`;
+
+}
+
+function changeMonth(amount){
+
+    calendarDate.setMonth(
+        calendarDate.getMonth()+amount
+    );
+
+    renderCalendar();
+
+}
+
+function goToday(){
+
+    calendarDate=new Date();
+
+    renderCalendar();
+
+}
+
+function renderCalendar(){
+
+    const grid=document.getElementById("calendarGrid");
+
+    if(!grid) return;
+
+    grid.innerHTML="";
+
+    const lang=currentLanguage();
+
+    const monthNamesAr=[
+        "يناير","فبراير","مارس","أبريل",
+        "مايو","يونيو","يوليو","أغسطس",
+        "سبتمبر","أكتوبر","نوفمبر","ديسمبر"
+    ];
+
+    const monthNamesEn=[
+        "January","February","March","April",
+        "May","June","July","August",
+        "September","October","November","December"
+    ];
+
+    const monthName=
+        lang==="en"
+        ?monthNamesEn[calendarDate.getMonth()]
+        :monthNamesAr[calendarDate.getMonth()];
+
+    document.getElementById("calendarMonth").textContent=
+        `${monthName} ${calendarDate.getFullYear()}`;
+
+    const names=
+        lang==="en"
+        ?["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+        :["الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة","السبت"];
+
+    names.forEach(name=>{
+
+        const div=document.createElement("div");
+
+        div.className="day-name";
+
+        div.textContent=name;
+
+        grid.appendChild(div);
+
+    });
+
+    const year=calendarDate.getFullYear();
+
+    const month=calendarDate.getMonth();
+
+    const firstDay=
+        new Date(year,month,1).getDay();
+
+    const daysInMonth=
+        new Date(year,month+1,0).getDate();
+
+    for(let i=0;i<firstDay;i++){
+
+        const blank=document.createElement("div");
+
+        grid.appendChild(blank);
+
+    }
+
+    for(let day=1;day<=daysInMonth;day++){
+
+        const date=new Date(year,month,day);
+
+        const dateString=formatDate(date);
+
+        const div=document.createElement("div");
+
+        div.className="day";
+
+        if(dateString===todayString()){
+
+            div.classList.add("today");
+
+        }
+
+        div.innerHTML=`
+            <div class="day-number">${day}</div>
+        `;
+
+        const tasks=
+            currentAccount.tasks
+            .filter(t=>t.date===dateString);
+
+        tasks.slice(0,3).forEach(task=>{
+
+            const event=document.createElement("div");
+
+            event.className="day-event";
+
+            event.textContent=task.text;
+
+            div.appendChild(event);
+
+        });
+
+        div.onclick=()=>{
+
+            document.getElementById("taskDate").value=
+                dateString;
+
+            showPage("todo");
+
+        };
+
+        grid.appendChild(div);
+
+    }
+
+}
+
+
+/* =====================================================
+   WEEK SCHEDULE
+===================================================== */
+
+function updateScheduleSubjects(){
+
+    fillSubjectSelect("scheduleSubject");
+
+}
+
+function addSchedule(){
+
+    const day=
+        Number(document.getElementById("scheduleDay").value);
+
+    const subject=
+        Number(document.getElementById("scheduleSubject").value);
+
+    const time=
+        document.getElementById("scheduleTime").value;
+
+    if(!time){
+
+        alert(
+            currentLanguage()==="en"
+            ?"Choose a time."
+            :"اختار الوقت."
+        );
+
+        return;
+
+    }
+
+    currentAccount.schedules.push({
+
+        id:Date.now(),
+
+        day:day,
+
+        subject:subject,
+
+        time:time
+
+    });
+
+    saveCurrent();
+
+    renderWeek();
+
+    notify(
+        currentLanguage()==="en"
+        ?"Schedule updated 📅"
+        :"تم تحديث الجدول 📅"
+    );
+
+}
+
+function renderWeek(){
+
+    const grid=document.getElementById("weekGrid");
+
+    const daySelect=document.getElementById("scheduleDay");
+
+    if(!grid || !currentAccount) return;
+
+    const lang=currentLanguage();
+
+    const names=
+        lang==="en"?daysEn:daysAr;
+
+    if(daySelect){
+
+        daySelect.innerHTML="";
+
+        names.forEach((name,i)=>{
+
+            const option=document.createElement("option");
+
+            option.value=i;
+
+            option.textContent=name;
+
+            daySelect.appendChild(option);
+
+        });
+
+    }
+
+    grid.innerHTML="";
+
+    const today=new Date();
+
+    const todayDay=today.getDay();
+
+    names.forEach((name,i)=>{
+
+        const div=document.createElement("div");
+
+        div.className="week-day";
+
+        if(i===todayDay){
+
+            div.classList.add("today");
+
+        }
+
+        div.innerHTML=`
+
+            <div class="week-day-name">
+                ${name}
+            </div>
+
+            <div class="week-date">
+                ${i===todayDay
+                    ?(lang==="en"?"Today":"اليوم")
+                    :""
+                }
+            </div>
+
+        `;
+
+        currentAccount.schedules
+            .filter(s=>s.day===i)
+            .sort((a,b)=>a.time.localeCompare(b.time))
+            .forEach(schedule=>{
+
+                const item=document.createElement("div");
+
+                item.className="schedule-item";
+
+                item.innerHTML=`
+                    <strong>${schedule.time}</strong>
+                    <br>
+                    ${subjectIcons[schedule.subject]}
+                    ${
+                        lang==="en"
+                        ?subjectEnglish[schedule.subject]
+                        :subjects[schedule.subject]
+                    }
+                `;
+
+                div.appendChild(item);
+
+            });
+
+        grid.appendChild(div);
+
+    });
+
+}
+
+
+/* =====================================================
+   FOCUS TIMER
+===================================================== */
+
+function updateFocusSubjects(){
+
+    fillSubjectSelect("focusSubject");
+
+}
+
+function updateTimerDisplay(){
+
+    const minutes=
+        Math.floor(timerSeconds/60);
+
+    const seconds=
+        timerSeconds%60;
+
+    document.getElementById("timer").textContent=
+        `${String(minutes).padStart(2,"0")}:${String(seconds).padStart(2,"0")}`;
+
+}
+
+document.getElementById("focusDuration")
+.addEventListener("change",function(){
+
+    if(timerRunning) return;
+
+    timerSelectedMinutes=
+        Number(this.value);
+
+    timerSeconds=
+        timerSelectedMinutes*60;
+
+    updateTimerDisplay();
+
+});
+
+function startFocus(){
+
+    if(timerRunning) return;
+
+    const select=
+        document.getElementById("focusDuration");
+
+    timerSelectedMinutes=
+        Number(select.value);
+
+    if(timerSeconds<=0){
+
+        timerSeconds=
+            timerSelectedMinutes*60;
+
+    }
+
+    timerRunning=true;
+
+    timerStartedAt=Date.now();
+
+    document.getElementById("focusStatus").textContent=
+        currentLanguage()==="en"
+        ?"Focus mode is ON 🎯"
+        :"وضع التركيز شغال 🎯";
+
+    timerInterval=setInterval(()=>{
+
+        timerSeconds--;
+
+        updateTimerDisplay();
+
+        if(timerSeconds<=0){
+
+            finishFocus(true);
+
+        }
+
+    },1000);
+
+}
+
+function pauseFocus(){
+
+    if(!timerRunning) return;
+
+    clearInterval(timerInterval);
+
+    timerRunning=false;
+
+    document.getElementById("focusStatus").textContent=
+        currentLanguage()==="en"
+        ?"Paused ⏸️"
+        :"متوقف مؤقتًا ⏸️";
+
+}
+
+function stopFocus(){
+
+    if(!timerRunning && timerSeconds===timerSelectedMinutes*60){
+
+        return;
+
+    }
+
+    finishFocus(false);
+
+}
+
+function finishFocus(completed){
+
+    clearInterval(timerInterval);
+
+    timerInterval=null;
+
+    timerRunning=false;
+
+    let studiedMinutes;
+
+    if(completed){
+
+        studiedMinutes=timerSelectedMinutes;
+
+    }else{
+
+        studiedMinutes=
+            Math.max(
+                0,
+                Math.floor(
+                    (timerSelectedMinutes*60-timerSeconds)/60
+                )
+            );
+
+    }
+
+    if(studiedMinutes>0){
+
+        const subject=
+            Number(
+                document.getElementById("focusSubject").value
+            );
+
+        currentAccount.sessions.push({
+
+            id:Date.now(),
+
+            date:todayString(),
+
+            minutes:studiedMinutes,
+
+            subject:subject
+
+        });
+
+        currentAccount.totalMinutes+=studiedMinutes;
+
+        currentAccount.xp+=studiedMinutes;
+
+        updateStreak();
+
+        saveCurrent();
+
+    }
+
+    if(completed){
+
+        document.getElementById("focusStatus").textContent=
+            currentLanguage()==="en"
+            ?"Session complete! 🎉"
+            :"الجلسة خلصت! 🎉";
+
+        notify(
+            currentLanguage()==="en"
+            ?"Focus session completed 🎉"
+            :"خلصت جلسة المذاكرة 🎉"
+        );
+
+        playSound();
+
+    }else{
+
+        document.getElementById("focusStatus").textContent=
+            currentLanguage()==="en"
+            ?"Session ended."
+            :"تم إنهاء الجلسة.";
+
+    }
+
+    timerSeconds=
+        timerSelectedMinutes*60;
+
+    updateTimerDisplay();
+
+    updateAll();
+
+}
+
+function updateStreak(){
+
+    const today=todayString();
+
+    if(currentAccount.lastStudyDate===today){
+
+        return;
+
+    }
+
+    const last=currentAccount.lastStudyDate;
+
+    if(!last){
+
+        currentAccount.streak=1;
+
+    }else{
+
+        const a=new Date(last);
+
+        const b=new Date(today);
+
+        const difference=
+            Math.round(
+                (b-a)/(1000*60*60*24)
+            );
+
+        if(difference===1){
+
+            currentAccount.streak++;
+
+        }else{
+
+            currentAccount.streak=1;
+
+        }
+
+    }
+
+    currentAccount.lastStudyDate=today;
+
+}
+
+
+/* =====================================================
+   SUBJECTS
+===================================================== */
+
+function renderSubjects(){
+
+    const grid=document.getElementById("subjectGrid");
+
+    if(!grid || !currentAccount) return;
+
+    grid.innerHTML="";
+
+   
