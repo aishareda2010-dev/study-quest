@@ -1,294 +1,483 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Study Quest</title>
-<style>
-:root{
-  --bg:#f4f7f3;--card:#fff;--text:#18352a;--muted:#708078;
-  --primary:#347a5b;--primary2:#255d45;--soft:#e7f2eb;--border:#e1e9e4;
-  --shadow:0 12px 35px rgba(31,61,48,.10);--danger:#c94b4b;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,"Segoe UI",sans-serif;background:linear-gradient(135deg,#edf7ef,#f1f6fb);
-color:var(--text);min-height:100vh}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
-#app{min-height:100vh}
-.screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:25px}
-.welcome-card{width:min(650px,94vw);background:rgba(255,255,255,.95);border:1px solid var(--border);
-border-radius:32px;padding:55px 40px;text-align:center;box-shadow:var(--shadow)}
-.logo{font-size:68px;margin-bottom:12px}.welcome-card h1{font-size:42px;margin-bottom:12px}
-.subtitle{color:var(--muted);font-size:18px;line-height:1.7;margin-bottom:28px}
-.primary{border:0;background:var(--primary);color:#fff;padding:15px 28px;border-radius:15px;font-weight:700;transition:.2s}
-.primary:hover{background:var(--primary2);transform:translateY(-2px)}
-.secondary{border:1px solid var(--border);background:#fff;color:var(--text);padding:12px 18px;border-radius:12px;font-weight:700}
-.lang-wrap{position:fixed;top:18px;left:18px;z-index:50}
-.lang-btn{background:#fff;border:1px solid var(--border);padding:10px 14px;border-radius:12px;box-shadow:var(--shadow)}
-.lang-menu{position:absolute;top:48px;left:0;background:#fff;border:1px solid var(--border);border-radius:13px;overflow:hidden;box-shadow:var(--shadow);min-width:140px}
-.lang-menu button{display:block;width:100%;border:0;background:#fff;padding:12px;text-align:start}.lang-menu button:hover{background:var(--soft)}
-.setup{width:min(720px,95vw);background:#fff;border-radius:28px;padding:35px;box-shadow:var(--shadow)}
-.setup h2{text-align:center;margin-bottom:8px}.setup .sub{text-align:center;color:var(--muted);margin-bottom:25px}
-.field{margin:16px 0}.field label{display:block;font-weight:700;margin-bottom:7px}
-input,select,textarea{width:100%;border:2px solid var(--border);border-radius:12px;padding:12px;background:#fff;outline:0;color:var(--text)}
-input:focus,select:focus,textarea:focus{border-color:var(--primary)}
-.gender{display:grid;grid-template-columns:1fr 1fr;gap:10px}.gender button{border:2px solid var(--border);background:#fff;border-radius:12px;padding:13px}.gender button.sel{border-color:var(--primary);background:var(--soft)}
-.step-actions{display:flex;gap:10px;margin-top:24px}.step-actions button{flex:1}
-.character-preview{display:flex;justify-content:center;margin:15px}.avatar{width:180px;height:260px;position:relative}
-.a-head{position:absolute;width:84px;height:84px;border-radius:50%;background:#d89b76;top:15px;left:48px;z-index:3}
-.a-hair{position:absolute;width:92px;height:50px;border-radius:50px 50px 22px 22px;background:#3a2921;top:8px;left:44px;z-index:4}
-.a-eye{position:absolute;width:8px;height:8px;border-radius:50%;background:#222;top:55px;z-index:5}.a-eye.l{left:72px}.a-eye.r{left:105px}
-.a-body{position:absolute;width:112px;height:105px;border-radius:32px 32px 20px 20px;background:#5d91c8;top:98px;left:34px}
-.a-arm{position:absolute;width:25px;height:82px;border-radius:20px;background:#d89b76;top:110px}.a-arm.l{left:15px;transform:rotate(12deg)}.a-arm.r{right:15px;transform:rotate(-12deg)}
-.a-leg{position:absolute;width:40px;height:75px;border-radius:10px;background:#354052;top:195px}.a-leg.l{left:49px}.a-leg.r{right:49px}
-.options{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.options button{border:2px solid var(--border);background:#fff;border-radius:13px;padding:12px}.options button.sel{border-color:var(--primary);background:var(--soft)}
-.subject-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-height:420px;overflow:auto}
-.subject{display:flex;gap:9px;align-items:center;border:2px solid var(--border);padding:12px;border-radius:12px;background:#fff}.subject.sel{border-color:var(--primary);background:var(--soft)}
-.subject .tick{width:22px;height:22px;border:2px solid #cbd8d0;border-radius:6px;display:grid;place-items:center}.subject.sel .tick{background:var(--primary);color:#fff;border-color:var(--primary)}
-#dashboard{display:none;min-height:100vh}.layout{display:flex;min-height:100vh}.sidebar{width:255px;background:#fff;border-inline-end:1px solid var(--border);padding:20px;position:fixed;inset-block:0;z-index:30}
-.brand{font-weight:900;font-size:22px;padding:8px 4px 20px}.nav button{display:flex;gap:10px;width:100%;border:0;background:transparent;padding:12px;border-radius:12px;color:var(--text);text-align:start;margin:3px 0}.nav button:hover,.nav button.active{background:var(--soft);color:var(--primary);font-weight:700}
-.nav-section{font-size:12px;color:var(--muted);margin:18px 5px 5px}.main{margin-inline-start:255px;width:calc(100% - 255px);padding:25px;max-width:1500px}.top{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px}.profile-mini{display:flex;align-items:center;gap:10px}.mini-avatar{width:48px;height:48px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font-size:25px}
-.page{display:none}.page.active{display:block}.welcome-line h1{font-size:30px;margin-bottom:5px}.muted{color:var(--muted)}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0}.stat{background:#fff;border:1px solid var(--border);border-radius:18px;padding:18px;box-shadow:var(--shadow)}.stat b{display:block;font-size:25px;margin-top:8px}.grid2{display:grid;grid-template-columns:1.35fr 1fr;gap:16px}.card{background:#fff;border:1px solid var(--border);border-radius:20px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px}.card h3{margin-bottom:14px}.progress{height:10px;background:#e8eee9;border-radius:20px;overflow:hidden}.progress i{display:block;height:100%;background:var(--primary);border-radius:20px}.task{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--border)}.task:last-child{border-bottom:0}.task.done span{text-decoration:line-through;color:var(--muted)}.task input{width:19px;height:19px}.tag{padding:5px 9px;background:var(--soft);color:var(--primary);border-radius:9px;font-size:12px}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.actions{display:flex;gap:8px;flex-wrap:wrap}.danger{border:0;background:#fff0f0;color:var(--danger);padding:10px 14px;border-radius:11px;font-weight:700}
-.week{display:grid;grid-template-columns:repeat(7,1fr);gap:9px}.day{border:1px solid var(--border);border-radius:15px;padding:12px;background:#fff;min-height:150px}.day strong{display:block;margin-bottom:10px}.lesson{background:var(--soft);padding:8px;border-radius:9px;font-size:13px;margin:7px 0}
-.subject-list{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.subject-box{border:1px solid var(--border);border-radius:17px;padding:17px;background:#fff}.subject-box h4{margin-bottom:9px}.subject-box button{margin-top:10px}
-.timer{text-align:center;padding:20px}.timer-num{font-size:72px;font-weight:900;letter-spacing:2px;margin:15px}.timer-mode{font-weight:700;color:var(--primary)}.modes{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.modes button.sel{background:var(--primary);color:#fff}
-.notes{min-height:180px;resize:vertical}.flash{min-height:180px;display:grid;place-items:center;text-align:center;border:2px dashed var(--border);border-radius:17px;padding:20px;cursor:pointer}.flash .answer{display:none}.flash.show .question{display:none}.flash.show .answer{display:block}
-.table{width:100%;border-collapse:collapse}.table th,.table td{padding:11px;border-bottom:1px solid var(--border);text-align:start}
-.achievement{display:flex;gap:12px;align-items:center;padding:13px;border:1px solid var(--border);border-radius:13px;margin:8px 0}.locked{opacity:.45}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.35);display:none;place-items:center;z-index:100;padding:20px}.modal.open{display:grid}.modal-box{background:#fff;border-radius:20px;padding:25px;width:min(520px,95vw)}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#18352a;color:#fff;padding:12px 18px;border-radius:12px;display:none;z-index:200}
-@media(max-width:900px){.sidebar{width:75px;padding:12px 8px}.brand{font-size:0}.brand:after{content:"📚";font-size:25px}.nav button span.txt,.nav-section{display:none}.main{margin-inline-start:75px;width:calc(100% - 75px)}.stats{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}.subject-list{grid-template-columns:repeat(2,1fr)}.week{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:550px){.welcome-card{padding:40px 22px}.welcome-card h1{font-size:34px}.setup{padding:24px 18px}.subject-grid,.options{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.subject-list{grid-template-columns:1fr}.week{grid-template-columns:1fr}.main{padding:15px}.top{align-items:flex-start}.timer-num{font-size:55px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Quest 🎓</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #eef2ff, #ffffff);
+      color: #202438;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      width: 100%;
+      max-width: 430px;
+      padding: 30px;
+      border-radius: 25px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 60px;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin: 10px 0;
+    }
+
+    p {
+      color: #70778a;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 15px;
+      margin: 8px 0;
+      border: 1px solid #ddd;
+      border-radius: 14px;
+      font-size: 16px;
+    }
+
+    .gender {
+      display: flex;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .gender button {
+      flex: 1;
+      padding: 14px;
+      border: 0;
+      border-radius: 14px;
+      cursor: pointer;
+      font-size: 16px;
+      background: #f0f1f6;
+    }
+
+    .gender button.selected {
+      background: #dedaff;
+      outline: 3px solid #6c63ff;
+    }
+
+    .start {
+      width: 100%;
+      padding: 15px;
+      border: 0;
+      border-radius: 14px;
+      background: #6c63ff;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* Dashboard */
+
+    #dashboard {
+      min-height: 100vh;
+      padding: 25px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .avatar {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 5px 15px rgba(0,0,0,.1);
+    }
+
+    .hero {
+      margin-top: 20px;
+      padding: 25px;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #6c63ff, #928aff);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .hero p {
+      color: white;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 15px 0;
+    }
+
+    .stat {
+      background: white;
+      padding: 18px;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,.06);
+    }
+
+    .stat b {
+      display: block;
+      font-size: 25px;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .feature {
+      border: 0;
+      background: white;
+      padding: 25px;
+      border-radius: 20px;
+      font-size: 30px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,.06);
+    }
+
+    .feature span {
+      display: block;
+      font-size: 15px;
+      margin-top: 8px;
+      font-weight: bold;
+    }
+
+    @media(max-width:600px) {
+      .stats {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .hero {
+        padding: 18px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<div id="toast" class="toast"></div>
 
-<div id="langWrap" class="lang-wrap">
-  <button class="lang-btn" onclick="toggleLang()">🌐 <span id="langBtnText">العربية</span></button>
-  <div id="langMenu" class="lang-menu hidden">
-    <button onclick="setLang('ar')">🇪🇬 العربية</button>
-    <button onclick="setLang('en')">🇬🇧 English</button>
-  </div>
-</div>
+<!-- صفحة البداية -->
 
-<section id="welcome" class="screen">
-  <div class="welcome-card">
-    <div class="logo">📚</div>
+<div id="welcome" class="page">
+
+  <div class="card">
+
+    <div class="logo">🎓</div>
+
     <h1>Study Quest</h1>
-    <p class="subtitle" data-ar="رحلتك في المذاكرة تبدأ من هنا ✨" data-en="Your study journey starts here ✨"></p>
-    <button class="primary" onclick="startSetup()" data-ar="ابدأ رحلتك 🚀" data-en="Start Your Journey 🚀"></button>
+
+    <p>مذاكرتك... بس بطريقة أمتع 🚀</p>
+
+    <input
+      id="name"
+      type="text"
+      placeholder="اكتب اسمك"
+    >
+
+    <select id="grade">
+      <option value="">اختار السنة الدراسية</option>
+      <option>أولى إعدادي</option>
+      <option>تانية إعدادي</option>
+      <option>تالتة إعدادي</option>
+      <option>أولى ثانوي</option>
+      <option>تانية ثانوي</option>
+      <option>تالتة ثانوي</option>
+    </select>
+
+    <div class="gender">
+
+      <button id="boyBtn" onclick="chooseGender('boy')">
+        👦 ولد
+      </button>
+
+      <button id="girlBtn" onclick="chooseGender('girl')">
+        👧 بنت
+      </button>
+
+    </div>
+
+    <button class="start" onclick="startApp()">
+      ابدأ 🚀
+    </button>
+
   </div>
-</section>
 
-<section id="setupProfile" class="screen hidden">
-<div class="setup">
-<h2 data-ar="أهلاً بيك! 👋" data-en="Welcome! 👋"></h2>
-<p class="sub" data-ar="خلينا نجهز حسابك" data-en="Let's set up your profile"></p>
-<div class="field"><label data-ar="👤 اسمك" data-en="👤 Your name"></label><input id="pName" data-ph-ar="اكتب اسمك" data-ph-en="Enter your name"></div>
-<div class="field"><label data-ar="🎂 سنك" data-en="🎂 Your age"></label><input id="pAge" type="number" data-ph-ar="اكتب سنك" data-ph-en="Enter your age"></div>
-<div class="field"><label data-ar="🧑 أنت" data-en="🧑 You are"></label><div class="gender"><button id="boy" onclick="pickGender('boy')" data-ar="👦 ولد" data-en="👦 Boy"></button><button id="girl" onclick="pickGender('girl')" data-ar="👧 بنت" data-en="👧 Girl"></button></div></div>
-<div class="field"><label data-ar="🎓 صفك الدراسي" data-en="🎓 Your grade"></label>
-<select id="pGrade"><option value="" data-ar="اختار الصف" data-en="Choose your grade"></option><option value="prep1">أولى إعدادي / Prep 1</option><option value="prep2">تانية إعدادي / Prep 2</option><option value="prep3">تالتة إعدادي / Prep 3</option></select></div>
-<div class="step-actions"><button class="primary" onclick="toCharacter()" data-ar="التالي ➜" data-en="Next ➜"></button></div>
-</div></section>
-
-<section id="setupCharacter" class="screen hidden"><div class="setup">
-<h2 data-ar="اختار شخصيتك 🧍" data-en="Choose your character 🧍"></h2>
-<p class="sub" data-ar="خصص الـ Avatar بتاعك" data-en="Customize your avatar"></p>
-<div class="character-preview"><div class="avatar"><div class="a-head"></div><div class="a-hair" id="hair"></div><div class="a-eye l"></div><div class="a-eye r"></div><div class="a-body" id="aBody"></div><div class="a-arm l"></div><div class="a-arm r"></div><div class="a-leg l" id="legL"></div><div class="a-leg r" id="legR"></div></div></div>
-<div class="field"><label data-ar="الشخصية" data-en="Character"></label><div class="options"><button id="avBoy" onclick="avatarGender('boy')" data-ar="👦 ولد" data-en="👦 Boy"></button><button id="avGirl" onclick="avatarGender('girl')" data-ar="👧 بنت" data-en="👧 Girl"></button></div></div>
-<div class="field"><label data-ar="تسريحة الشعر" data-en="Hair"></label><div class="options"><button onclick="hairStyle(1)">💇 1</button><button onclick="hairStyle(2)">💇 2</button><button onclick="hairStyle(3)">💇 3</button><button onclick="hairStyle(4)">💇 4</button></div></div>
-<div class="field"><label data-ar="لون الملابس" data-en="Clothes color"></label><div class="options"><button onclick="clothes('#5d91c8')">🔵</button><button onclick="clothes('#6fa85c')">🟢</button><button onclick="clothes('#d17aa8')">🩷</button><button onclick="clothes('#e2a44e')">🟠</button><button onclick="clothes('#785fb8')">🟣</button></div></div>
-<div class="field"><label data-ar="لون البنطلون" data-en="Pants color"></label><div class="options"><button onclick="pants('#354052')">⚫</button><button onclick="pants('#456b9b')">🔵</button><button onclick="pants('#7c5a43')">🟤</button></div></div>
-<div class="step-actions"><button class="secondary" onclick="show('setupProfile')" data-ar="رجوع" data-en="Back"></button><button class="primary" onclick="toSubjects()" data-ar="التالي ➜" data-en="Next ➜"></button></div>
-</div></section>
-
-<section id="setupSubjects" class="screen hidden"><div class="setup">
-<h2 data-ar="موادك الدراسية 📚" data-en="Your Subjects 📚"></h2><p class="sub" data-ar="اختار المواد اللي بتدرسها" data-en="Choose the subjects you study"></p>
-<div class="subject-grid" id="subjectGrid"></div>
-<div class="step-actions"><button class="secondary" onclick="show('setupCharacter')" data-ar="رجوع" data-en="Back"></button><button class="primary" onclick="finishSetup()" data-ar="دخول إلى Study Quest 🚀" data-en="Enter Study Quest 🚀"></button></div>
-</div></section>
-
-<div id="dashboard">
-<div class="layout">
-<aside class="sidebar">
-<div class="brand">📚 Study Quest</div>
-<div class="nav" id="nav">
-<button class="active" onclick="page('home',this)">🏠 <span class="txt" data-ar="الرئيسية" data-en="Home"></span></button>
-<button onclick="page('tasks',this)">📋 <span class="txt" data-ar="المهام" data-en="Tasks"></span></button>
-<button onclick="page('calendar',this)">📅 <span class="txt" data-ar="الجدول الأسبوعي" data-en="Weekly Schedule"></span></button>
-<button onclick="page('focus',this)">⏱️ <span class="txt" data-ar="جلسة المذاكرة" data-en="Study Session"></span></button>
-<button onclick="page('subjects',this)">📚 <span class="txt" data-ar="المواد" data-en="Subjects"></span></button>
-<button onclick="page('flashcards',this)">🧠 <span class="txt" data-ar="Flashcards" data-en="Flashcards"></span></button>
-<button onclick="page('mistakes',this)">❌ <span class="txt" data-ar="دفتر الأخطاء" data-en="Mistake Book"></span></button>
-<button onclick="page('notes',this)">📝 <span class="txt" data-ar="الملاحظات" data-en="Notes"></span></button>
-<button onclick="page('stats',this)">📊 <span class="txt" data-ar="الإحصائيات" data-en="Statistics"></span></button>
-<button onclick="page('achievements',this)">🏆 <span class="txt" data-ar="الإنجازات" data-en="Achievements"></span></button>
-<div class="nav-section" data-ar="الإعدادات" data-en="Settings"></div>
-<button onclick="page('settings',this)">⚙️ <span class="txt" data-ar="Settings" data-en="Settings"></span></button>
 </div>
-</aside>
 
-<main class="main">
-<div class="top"><div class="welcome-line"><h1 id="hello"></h1><div class="muted" id="dateLine"></div></div><div class="profile-mini"><div class="mini-avatar" id="miniAvatar">🧍</div><b id="miniName"></b></div></div>
 
-<section id="home" class="page active">
-<div class="stats">
-<div class="stat">🎯 <span data-ar="إنجاز اليوم" data-en="Today's progress"></span><b id="todayPct">0%</b><div class="progress"><i id="todayBar" style="width:0%"></i></div></div>
-<div class="stat">⏱️ <span data-ar="وقت المذاكرة" data-en="Study time"></span><b id="studyTime">0m</b></div>
-<div class="stat">🔥 <span data-ar="Streak" data-en="Streak"></span><b id="streak">0</b></div>
-<div class="stat">⭐ <span data-ar="XP" data-en="XP"></span><b id="xp">0</b></div>
+<!-- Dashboard -->
+
+<div id="dashboard" class="hidden">
+
+  <div class="top">
+
+    <div>
+      <small>أهلاً بيك 👋</small>
+      <h2 id="hello"></h2>
+    </div>
+
+    <div class="avatar" id="avatar">
+      🎓
+    </div>
+
+  </div>
+
+
+  <div class="hero">
+
+    <div>
+      <h2>جاهز تنجز؟ 🔥</h2>
+      <p>خلّي النهارده خطوة جديدة!</p>
+    </div>
+
+    <div>
+      🔥 <b>1</b>
+      <br>
+      <small>Streak</small>
+    </div>
+
+  </div>
+
+
+  <div class="stats">
+
+    <div class="stat">
+      <b id="tasks">0</b>
+      <span>مهام منجزة</span>
+    </div>
+
+    <div class="stat">
+      <b id="xp">0</b>
+      <span>XP ⭐</span>
+    </div>
+
+    <div class="stat">
+      <b>0</b>
+      <span>دقيقة مذاكرة</span>
+    </div>
+
+  </div>
+
+
+  <div class="features">
+
+    <button class="feature" onclick="tasks()">
+      ✅
+      <span>المهام</span>
+    </button>
+
+    <button class="feature" onclick="focusMode()">
+      ⏱️
+      <span>Focus Mode</span>
+    </button>
+
+    <button class="feature" onclick="subjects()">
+      📚
+      <span>المواد</span>
+    </button>
+
+    <button class="feature" onclick="quiz()">
+      🧠
+      <span>Quiz</span>
+    </button>
+
+  </div>
+
 </div>
-<div class="grid2">
-<div class="card"><div class="row"><h3 data-ar="📋 مهام اليوم" data-en="📋 Today's tasks"></h3><button class="secondary" onclick="pageById('tasks')" data-ar="عرض الكل" data-en="View all"></button></div><div id="homeTasks"></div></div>
-<div class="card"><h3 data-ar="🎯 ماذا أذاكر الآن؟" data-en="🎯 What should I study now?"></h3><p id="recommendation" class="muted"></p><button class="primary" onclick="pageById('focus')" style="margin-top:15px" data-ar="▶ ابدأ جلسة" data-en="▶ Start session"></button></div>
-</div>
-<div class="grid2"><div class="card"><h3 data-ar="📅 هذا الأسبوع" data-en="📅 This week"></h3><div id="homeWeek"></div></div><div class="card"><h3 data-ar="🌱 Focus Tree" data-en="🌱 Focus Tree"></h3><div style="font-size:85px;text-align:center" id="tree">🌱</div><p class="muted" id="treeText" style="text-align:center"></p></div></div>
-</section>
 
-<section id="tasks" class="page"><div class="card"><div class="row"><h2 data-ar="📋 المهام" data-en="📋 Tasks"></h2><button class="primary" onclick="openTask()" data-ar="+ إضافة مهمة" data-en="+ Add task"></button></div><div id="taskList" style="margin-top:15px"></div></div></section>
-
-<section id="calendar" class="page"><div class="card"><div class="row"><h2 data-ar="📅 الجدول الأسبوعي" data-en="📅 Weekly Schedule"></h2><button class="primary" onclick="openSchedule()" data-ar="+ إضافة حصة/مهمة" data-en="+ Add lesson/task"></button></div><div class="week" id="week" style="margin-top:18px"></div></div></section>
-
-<section id="focus" class="page"><div class="card timer"><h2 data-ar="⏱️ جلسة المذاكرة" data-en="⏱️ Study Session"></h2><p class="timer-mode" id="timerMode">Pomodoro 25/5</p><div class="timer-num" id="timerNum">25:00</div><div class="modes"><button class="secondary sel" onclick="setTimer(25,5,this)">25/5</button><button class="secondary" onclick="setTimer(45,15,this)">45/15</button><button class="secondary" onclick="setTimer(50,10,this)">50/10</button><button class="secondary" onclick="customTimer()">Custom</button></div><div class="actions" style="justify-content:center;margin-top:18px"><button class="primary" id="timerStart" onclick="timerStart()">▶ Start</button><button class="secondary" onclick="timerPause()">⏸ Pause</button><button class="danger" onclick="timerStop()">⏹ Stop</button></div><p class="muted" style="margin-top:15px" data-ar="عند إنهاء جلسة كاملة يضاف وقتها تلقائيًا للإحصائيات." data-en="Completed sessions are automatically added to your statistics."></p></div></section>
-
-<section id="subjects" class="page"><div class="card"><h2 data-ar="📚 المواد" data-en="📚 Subjects"></h2><p class="muted" data-ar="كل مادة لها تقدم ومهام وملاحظات." data-en="Each subject has progress, tasks and notes."></p><div class="subject-list" id="subjectList" style="margin-top:18px"></div></div></section>
-
-<section id="flashcards" class="page"><div class="card"><div class="row"><h2>🧠 Flashcards</h2><button class="primary" onclick="openFlash()" data-ar="+ إضافة كارت" data-en="+ Add card"></button></div><div id="flashList" style="margin-top:15px"></div></div></section>
-
-<section id="mistakes" class="page"><div class="card"><div class="row"><h2 data-ar="❌ دفتر الأخطاء" data-en="❌ Mistake Book"></h2><button class="primary" onclick="openMistake()" data-ar="+ إضافة خطأ" data-en="+ Add mistake"></button></div><div id="mistakeList" style="margin-top:15px"></div></div></section>
-
-<section id="notes" class="page"><div class="card"><h2 data-ar="📝 الملاحظات" data-en="📝 Notes"></h2><p class="muted" data-ar="اكتب ملاحظاتك هنا وسيتم حفظها تلقائيًا." data-en="Write your notes here. They are saved automatically."></p><textarea id="notesText" class="notes" style="margin-top:15px" oninput="saveNotes()"></textarea></div></section>
-
-<section id="stats" class="page"><div class="card"><h2 data-ar="📊 الإحصائيات" data-en="📊 Statistics"></h2><div class="stats" style="margin-top:18px"><div class="stat">⏱️ <span data-ar="إجمالي الوقت" data-en="Total time"></span><b id="totalTime"></b></div><div class="stat">📋 <span data-ar="مهام مكتملة" data-en="Completed tasks"></span><b id="doneTasks"></b></div><div class="stat">📚 <span data-ar="المواد المختارة" data-en="Subjects"></span><b id="subCount"></b></div><div class="stat">🏆 <span data-ar="الإنجازات" data-en="Achievements"></span><b id="achCount"></b></div></div><h3 data-ar="وقت المذاكرة حسب المادة" data-en="Study time by subject"></h3><div id="subjectStats" style="margin-top:15px"></div></div></section>
-
-<section id="achievements" class="page"><div class="card"><h2 data-ar="🏆 الإنجازات" data-en="🏆 Achievements"></h2><div id="achievementList" style="margin-top:15px"></div></div></section>
-
-<section id="settings" class="page"><div class="card"><h2 data-ar="⚙️ الإعدادات" data-en="⚙️ Settings"></h2>
-<div class="task"><span>🌐 <span data-ar="اللغة" data-en="Language"></span></span><button class="secondary" onclick="toggleLang()">العربية / English</button></div>
-<div class="task"><span>🔊 <span data-ar="الصوت" data-en="Sound"></span></span><button class="secondary" id="soundBtn" onclick="toggleSetting('sound')"></button></div>
-<div class="task"><span>🌙 <span data-ar="الوضع الليلي" data-en="Dark mode"></span></span><button class="secondary" id="darkBtn" onclick="toggleDark()"></button></div>
-<div class="task"><span>🎨 <span data-ar="الخلفية" data-en="Background"></span></span><div class="actions"><button class="secondary" onclick="bg('green')">🌿</button><button class="secondary" onclick="bg('blue')">🌊</button><button class="secondary" onclick="bg('warm')">☀️</button></div></div>
-<div class="task"><span>👤 <span data-ar="الحساب" data-en="Account"></span></span><button class="secondary" onclick="editAccount()" data-ar="تعديل" data-en="Edit"></button></div>
-<div class="task"><span>➕ <span data-ar="إنشاء حساب جديد" data-en="Create new account"></span></span><button class="secondary" onclick="newAccount()" data-ar="إنشاء" data-en="Create"></button></div>
-<div class="task"><span>🗑️ <span data-ar="حذف الحساب" data-en="Delete account"></span></span><button class="danger" onclick="deleteAccount()" data-ar="حذف" data-en="Delete"></button></div>
-</div></section>
-
-</main></div></div>
-
-<div id="modal" class="modal"><div class="modal-box" id="modalBox"></div></div>
 
 <script>
-const subjects=[
-"القرآن الكريم وتجويده","أصول الدين","الفقه","النحو","الصرف",
-"المطالعة والنصوص والقصة","الإنشاء","الإملاء","الخط","الدراسات الاجتماعية",
-"العلوم","الرياضيات","اللغة الإنجليزية","الحاسب الآلي","التربية الفنية"
-];
-const days=["السبت","الأحد","الاثنين","الثلاثاء","الأربعاء","الخميس","الجمعة"];
-let lang=localStorage.getItem("sq_lang")||"ar";
-let gender="",avGender="",hair=1,taskData=[],schedule=[],flashcards=[],mistakes=[],studySeconds=0,xp=0,streak=0;
-let timerInterval=null,timerLeft=1500,timerMinutes=25,timerBreak=5,timerRunning=false,timerStartedAt=0;
-let settings={sound:true,dark:false,bg:"green"};
 
-function $(id){return document.getElementById(id)}
-function save(){localStorage.setItem("studyQuest",JSON.stringify({name:$("pName")?.value,age:$("pAge")?.value,grade:$("pGrade")?.value,gender,avGender,hair,subjects:getSelectedSubjects(),taskData,schedule,flashcards,mistakes,studySeconds,xp,streak,settings,notes:$("notesText")?.value||""}))}
-function load(){
- let d=JSON.parse(localStorage.getItem("studyQuest")||"null"); if(!d)return;
- gender=d.gender||"";avGender=d.avGender||gender;hair=d.hair||1;taskData=d.taskData||[];schedule=d.schedule||[];flashcards=d.flashcards||[];mistakes=d.mistakes||[];studySeconds=d.studySeconds||0;xp=d.xp||0;streak=d.streak||0;settings=d.settings||settings;
- if($("pName")){$("pName").value=d.name||"";$("pAge").value=d.age||"";$("pGrade").value=d.grade||""}
- if($("notesText"))$("notesText").value=d.notes||"";
- applySettings();renderAll();
+let gender = "";
+let completedTasks = 0;
+let XP = 0;
+
+
+function chooseGender(type) {
+
+  gender = type;
+
+  document
+    .getElementById("boyBtn")
+    .classList.remove("selected");
+
+  document
+    .getElementById("girlBtn")
+    .classList.remove("selected");
+
+
+  if(type === "boy") {
+
+    document
+      .getElementById("boyBtn")
+      .classList.add("selected");
+
+  }
+
+  if(type === "girl") {
+
+    document
+      .getElementById("girlBtn")
+      .classList.add("selected");
+
+  }
+
 }
-function show(id){document.querySelectorAll(".screen").forEach(x=>x.classList.add("hidden"));$(id).classList.remove("hidden")}
-function startSetup(){show("setupProfile")}
-function pickGender(g){gender=g;$("boy").classList.toggle("sel",g==="boy");$("girl").classList.toggle("sel",g==="girl")}
-function toCharacter(){
- if(!$("pName").value.trim()||!$("pAge").value||!gender||!$("pGrade").value){alert(lang==="ar"?"كمّل كل البيانات الأول ❤️":"Please complete all information first ❤️");return}
- avGender=gender;show("setupCharacter");avatarGender(gender)
+
+
+function startApp() {
+
+  let name =
+    document.getElementById("name").value.trim();
+
+  let grade =
+    document.getElementById("grade").value;
+
+
+  if(name === "" || grade === "" || gender === "") {
+
+    alert("اكتب اسمك واختار السنة والنوع الأول 😊");
+
+    return;
+
+  }
+
+
+  document
+    .getElementById("welcome")
+    .classList.add("hidden");
+
+
+  document
+    .getElementById("dashboard")
+    .classList.remove("hidden");
+
+
+  document
+    .getElementById("hello")
+    .innerText =
+      name + " 👋";
+
+
+  if(gender === "girl") {
+
+    document
+      .getElementById("avatar")
+      .innerText = "🎀";
+
+    document.body.style.background =
+      "linear-gradient(135deg,#fff0f7,#f6efff)";
+
+  }
+
+
+  if(gender === "boy") {
+
+    document
+      .getElementById("avatar")
+      .innerText = "🏎️";
+
+    document.body.style.background =
+      "linear-gradient(135deg,#eef3ff,#f5f7fb)";
+
+  }
+
 }
-function avatarGender(g){avGender=g;$("avBoy").classList.toggle("sel",g==="boy");$("avGirl").classList.toggle("sel",g==="girl");}
-function hairStyle(n){hair=n;let h=$("hair");h.style.height=n===1?"50px":n===2?"35px":n===3?"58px":"28px";h.style.borderRadius=n===4?"25px":"50px 50px 22px 22px";h.style.top=n===3?"0":"8px"}
-function clothes(c){$("aBody").style.background=c}
-function pants(c){$("legL").style.background=c;$("legR").style.background=c}
-function toSubjects(){show("setupSubjects");renderSubjectChooser()}
-function getSelectedSubjects(){return [...document.querySelectorAll("#subjectGrid .subject.sel")].map(x=>x.dataset.name)}
-function renderSubjectChooser(){$("subjectGrid").innerHTML=subjects.map(s=>`<div class="subject ${getSelectedSubjects().includes(s)?"sel":""}" data-name="${s}" onclick="this.classList.toggle('sel')"><span class="tick">✓</span><span>${s}</span></div>`).join("")}
-function finishSetup(){
- if(!getSelectedSubjects().length){alert(lang==="ar"?"اختار مادة واحدة على الأقل 📚":"Choose at least one subject 📚");return}
- save();$("welcome").classList.add("hidden");$("setupProfile").classList.add("hidden");$("setupCharacter").classList.add("hidden");$("setupSubjects").classList.add("hidden");$("langWrap").classList.add("hidden");$("dashboard").style.display="block";renderAll()
+
+
+function tasks() {
+
+  completedTasks++;
+
+  XP += 20;
+
+  document.getElementById("tasks").innerText =
+    completedTasks;
+
+  document.getElementById("xp").innerText =
+    XP;
+
+  alert("🎉 أحسنت! أنجزت مهمة وكسبت 20 XP");
+
 }
-function page(id,btn){document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));$(id).classList.add("active");document.querySelectorAll("#nav button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");renderAll()}
-function pageById(id){let b=[...document.querySelectorAll("#nav button")].find(x=>x.getAttribute("onclick")?.includes("'"+id+"'"));page(id,b)}
-function toggleLang(){$("langMenu").classList.toggle("hidden")}
-function setLang(l){lang=l;localStorage.setItem("sq_lang",l);$("langMenu").classList.add("hidden");applyLang();renderAll()}
-function applyLang(){
- document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";$("langBtnText").textContent=lang==="ar"?"العربية":"English";
- document.querySelectorAll("[data-ar]").forEach(e=>e.textContent=e.dataset[lang]);
- document.querySelectorAll("[data-ph-ar]").forEach(e=>e.placeholder=e.dataset["ph-"+lang]);
- if($("dateLine"))$("dateLine").textContent=new Date().toLocaleDateString(lang==="ar"?"ar-EG":"en-US",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+
+
+function focusMode() {
+
+  alert(
+    "⏱️ Focus Mode\n\nPomodoro قريبًا 🔥"
+  );
+
 }
-function toast(t){$("toast").textContent=t;$("toast").style.display="block";setTimeout(()=>$("toast").style.display="none",1800)}
-function openModal(content){$("modalBox").innerHTML=content;$("modal").classList.add("open")}
-function closeModal(){$("modal").classList.remove("open")}
-function openTask(){openModal(`<h3>${lang==="ar"?"إضافة مهمة":"Add task"}</h3><div class="field"><label>${lang==="ar"?"المهمة":"Task"}</label><input id="mTask"></div><div class="field"><label>${lang==="ar"?"المادة":"Subject"}</label><select id="mSub">${getSelectedSubjects().map(s=>`<option>${s}</option>`).join("")}</select></div><div class="field"><label>${lang==="ar"?"الأولوية":"Priority"}</label><select id="mPri"><option>⭐ ${lang==="ar"?"عالية":"High"}</option><option>➖ ${lang==="ar"?"متوسطة":"Medium"}</option><option>🔹 ${lang==="ar"?"منخفضة":"Low"}</option></select></div><div class="field"><label>${lang==="ar"?"الموعد":"Due date"}</label><input id="mDate" type="date"></div><div class="actions"><button class="primary" onclick="addTask()">${lang==="ar"?"إضافة":"Add"}</button><button class="secondary" onclick="closeModal()">${lang==="ar"?"إلغاء":"Cancel"}</button></div>`)}
-function addTask(){let t=$("mTask").value.trim();if(!t)return;taskData.push({id:Date.now(),text:t,subject:$("mSub").value,priority:$("mPri").value,date:$("mDate").value,done:false});xp+=5;save();closeModal();renderAll()}
-function renderTasks(){
- let list=taskData.length?taskData.map(t=>`<div class="task ${t.done?"done":""}"><input type="checkbox" ${t.done?"checked":""} onchange="toggleTask(${t.id})"><span style="flex:1">${t.text}</span><span class="tag">${t.subject}</span><span class="muted">${t.date||""}</span><button class="danger" onclick="removeTask(${t.id})">🗑️</button></div>`).join(""):`<p class="muted">${lang==="ar"?"مفيش مهام لسه. أضف أول مهمة ✨":"No tasks yet. Add your first task ✨"}</p>`;
- $("taskList").innerHTML=list;
- let today=taskData.filter(t=>!t.done).slice(0,4);$("homeTasks").innerHTML=today.length?today.map(t=>`<div class="task"><span style="flex:1">${t.text}</span><span class="tag">${t.subject}</span></div>`).join(""):`<p class="muted">${lang==="ar"?"خلصت كل مهامك 🎉":"All caught up 🎉"}</p>`;
- let done=taskData.filter(t=>t.done).length,p=taskData.length?Math.round(done/taskData.length*100):0;$("todayPct").textContent=p+"%";$("todayBar").style.width=p+"%";$("doneTasks").textContent=done;
+
+
+function subjects() {
+
+  alert(
+    "📚 المواد\n\nMath\nScience\nEnglish\nArabic\nFrench"
+  );
+
 }
-function toggleTask(id){let t=taskData.find(x=>x.id===id);if(t){t.done=!t.done;if(t.done){xp+=20;streak=Math.max(streak,1);toast(lang==="ar"?"+20 XP 🎉":"+20 XP 🎉")}save();renderAll()}}
-function removeTask(id){taskData=taskData.filter(x=>x.id!==id);save();renderAll()}
-function openSchedule(){openModal(`<h3>${lang==="ar"?"إضافة إلى الجدول":"Add to schedule"}</h3><div class="field"><label>${lang==="ar"?"اليوم":"Day"}</label><select id="sDay">${days.map((d,i)=>`<option value="${i}">${lang==="ar"?d:["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"][i]}</option>`).join("")}</select></div><div class="field"><label>${lang==="ar"?"المادة":"Subject"}</label><select id="sSub">${getSelectedSubjects().map(s=>`<option>${s}</option>`).join("")}</select></div><div class="field"><label>${lang==="ar"?"الدرس / المهمة":"Lesson / task"}</label><input id="sText"></div><div class="actions"><button class="primary" onclick="addSchedule()">${lang==="ar"?"إضافة":"Add"}</button><button class="secondary" onclick="closeModal()">${lang==="ar"?"إلغاء":"Cancel"}</button></div>`)}
-function addSchedule(){let x=$("sText").value.trim();if(!x)return;schedule.push({id:Date.now(),day:+$("sDay").value,subject:$("sSub").value,text:x});save();closeModal();renderAll()}
-function renderWeek(){
- $("week").innerHTML=days.map((d,i)=>`<div class="day"><strong>${lang==="ar"?d:["Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"][i]}</strong>${schedule.filter(x=>x.day===i).map(x=>`<div class="lesson">${x.subject}<br>${x.text} <button onclick="delSchedule(${x.id})" style="border:0;background:none">×</button></div>`).join("")||`<span class="muted">—</span>`}</div>`).join("");
- $("homeWeek").innerHTML=`<div class="week">${days.map((d,i)=>`<div class="day"><strong>${(lang==="ar"?d:["Sat","Sun","Mon","Tue","Wed","Thu","Fri"][i])}</strong>${schedule.filter(x=>x.day===i).slice(0,2).map(x=>`<div class="lesson">${x.subject}</div>`).join("")}</div>`).join("")}</div>`;
+
+
+function quiz() {
+
+  let answer =
+    confirm("🧠 Quiz سريع\n\nما ناتج 5 × 6 ؟\n\nاضغط OK للإجابة 30");
+
+  if(answer) {
+
+    XP += 30;
+
+    document.getElementById("xp").innerText =
+      XP;
+
+    alert("🎉 إجابة صحيحة! +30 XP");
+
+  }
+
 }
-function delSchedule(id){schedule=schedule.filter(x=>x.id!==id);save();renderAll()}
-function setTimer(min,br,btn){if(timerRunning)return;timerMinutes=min;timerBreak=br;timerLeft=min*60;$("timerNum").textContent=formatTime(timerLeft);$("timerMode").textContent=`${min}/${br}`;document.querySelectorAll(".modes button").forEach(b=>b.classList.remove("sel"));btn.classList.add("sel")}
-function customTimer(){let m=prompt(lang==="ar"?"كام دقيقة؟":"How many minutes?",30);m=Number(m);if(m>0)setTimer(m,5,document.querySelector(".modes button"))}
-function formatTime(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
-function timerStart(){if(timerRunning)return;timerRunning=true;timerStartedAt=Date.now();timerInterval=setInterval(()=>{timerLeft--;studySeconds++;$("timerNum").textContent=formatTime(timerLeft);if(timerLeft<=0){clearInterval(timerInterval);timerRunning=false;xp+=50;save();toast(lang==="ar"?"+50 XP! جلسة مكتملة 🎉":"+50 XP! Session complete 🎉");timerLeft=timerMinutes*60;$("timerNum").textContent=formatTime(timerLeft);renderAll()}},1000)}
-function timerPause(){if(!timerRunning)return;clearInterval(timerInterval);timerRunning=false;save();renderAll()}
-function timerStop(){if(timerRunning){clearInterval(timerInterval);timerRunning=false}save();renderAll();$("timerNum").textContent=formatTime(timerLeft)}
-function openFlash(){openModal(`<h3>${lang==="ar"?"إضافة Flashcard":"Add Flashcard"}</h3><div class="field"><label>${lang==="ar"?"السؤال":"Question"}</label><input id="fQ"></div><div class="field"><label>${lang==="ar"?"الإجابة":"Answer"}</label><textarea id="fA"></textarea></div><div class="actions"><button class="primary" onclick="addFlash()">${lang==="ar"?"إضافة":"Add"}</button><button class="secondary" onclick="closeModal()">${lang==="ar"?"إلغاء":"Cancel"}</button></div>`)}
-function addFlash(){let q=$("fQ").value.trim(),a=$("fA").value.trim();if(!q||!a)return;flashcards.push({id:Date.now(),q,a});save();closeModal();renderAll()}
-function renderFlash(){$("flashList").innerHTML=flashcards.length?flashcards.map(f=>`<div class="flash" onclick="this.classList.toggle('show')"><div class="question"><b>❓ ${f.q}</b><p class="muted">${lang==="ar"?"اضغط لإظهار الإجابة":"Click to reveal answer"}</p></div><div class="answer"><b>✅ ${f.a}</b><p class="muted">${lang==="ar"?"اضغط للرجوع للسؤال":"Click to show question"}</p></div></div><button class="danger" style="margin:6px 0 14px" onclick="deleteFlash(${f.id})">🗑️</button>`).join(""):`<p class="muted">${lang==="ar"?"أضف أول Flashcard 📚":"Add your first flashcard 📚"}</p>`}
-function deleteFlash(id){flashcards=flashcards.filter(x=>x.id!==id);save();renderAll()}
-function openMistake(){openModal(`<h3>${lang==="ar"?"إضافة خطأ":"Add mistake"}</h3><div class="field"><label>${lang==="ar"?"السؤال":"Question"}</label><textarea id="eQ"></textarea></div><div class="field"><label>${lang==="ar"?"إجابتي":"My answer"}</label><textarea id="eA"></textarea></div><div class="field"><label>${lang==="ar"?"الإجابة الصحيحة":"Correct answer"}</label><textarea id="eC"></textarea></div><div class="field"><label>${lang==="ar"?"سبب الغلط":"Why I got it wrong"}</label><input id="eR"></div><div class="actions"><button class="primary" onclick="addMistake()">${lang==="ar"?"إضافة":"Add"}</button><button class="secondary" onclick="closeModal()">${lang==="ar"?"إلغاء":"Cancel"}</button></div>`)}
-function addMistake(){let q=$("eQ").value.trim();if(!q)return;mistakes.push({id:Date.now(),q,a:$("eA").value,c:$("eC").value,r:$("eR").value});save();closeModal();renderAll()}
-function renderMistakes(){$("mistakeList").innerHTML=mistakes.length?mistakes.map(m=>`<div class="card" style="box-shadow:none;border:1px solid var(--border)"><div class="row"><b>❌ ${m.q}</b><button class="danger" onclick="deleteMistake(${m.id})">🗑️</button></div><p style="margin-top:8px"><b>${lang==="ar"?"إجابتي:":"My answer:"}</b> ${m.a}</p><p><b>${lang==="ar"?"الصحيح:":"Correct:"}</b> ${m.c}</p><p><b>${lang==="ar"?"السبب:":"Reason:"}</b> ${m.r}</p></div>`).join(""):`<p class="muted">${lang==="ar"?"دفتر الأخطاء فاضي حاليًا 🎉":"Your mistake book is empty 🎉"}`}
-function deleteMistake(id){mistakes=mistakes.filter(x=>x.id!==id);save();renderAll()}
-function saveNotes(){let d=JSON.parse(localStorage.getItem("studyQuest")||"{}");d.notes=$("notesText").value;localStorage.setItem("studyQuest",JSON.stringify(d))}
-function renderSubjects(){let ss=getSelectedSubjects();$("subjectList").innerHTML=ss.map(s=>{let done=taskData.filter(t=>t.subject===s&&t.done).length,total=taskData.filter(t=>t.subject===s).length,p=total?Math.round(done/total*100):0;return `<div class="subject-box"><h4>📚 ${s}</h4><div class="progress"><i style="width:${p}%"></i></div><p class="muted" style="margin-top:7px">${p}% ${lang==="ar"?"تقدم":"progress"}</p><button class="secondary" onclick="pageById('tasks')">${lang==="ar"?"مهام المادة":"Subject tasks"}</button></div>`}).join("")}
-function renderStats(){let total=Math.floor(studySeconds/60);$("studyTime").textContent=total+"m";$("totalTime").textContent=total+"m";$("subCount").textContent=getSelectedSubjects().length;$("xp").textContent=xp;$("streak").textContent=streak;let max=Math.max(1,...getSelectedSubjects().map(s=>taskData.filter(t=>t.subject===s&&t.done).length));$("subjectStats").innerHTML=getSelectedSubjects().map(s=>{let n=taskData.filter(t=>t.subject===s&&t.done).length;return `<div style="margin:12px 0"><div class="row"><span>${s}</span><b>${n}</b></div><div class="progress"><i style="width:${n/max*100}%"></i></div></div>`}).join("")}
-function renderAchievements(){let ach=[["🌱","أول 10 دقائق",studySeconds>=600],["🔥","أول Streak",streak>=1],["📋","أكمل 5 مهام",taskData.filter(t=>t.done).length>=5],["⏱️","ساعة مذاكرة",studySeconds>=3600],["⭐","100 XP",xp>=100],["🧠","أول Flashcard",flashcards.length>=1],["❌","أول خطأ محفوظ",mistakes.length>=1]];$("achCount").textContent=ach.filter(x=>x[2]).length;$("achievementList").innerHTML=ach.map(a=>`<div class="achievement ${a[2]?"":"locked"}"><span style="font-size:30px">${a[0]}</span><div><b>${a[1]}</b><div class="muted">${a[2]?(lang==="ar"?"تم فتحه! 🎉":"Unlocked! 🎉"):(lang==="ar"?"مغلق":"Locked")}</div></div></div>`).join("");let t=studySeconds<600?"🌱":studySeconds<1800?"🌿":studySeconds<3600?"🌳":"🌳🌳";$("tree").textContent=t;$("treeText").textContent=lang==="ar"?`شجرتك تنمو مع ${Math.floor(studySeconds/60)} دقيقة مذاكرة`:`Your tree grows with ${Math.floor(studySeconds/60)} study minutes`}
-function renderAll(){
- applyLang();
- let d=JSON.parse(localStorage.getItem("studyQuest")||"{}");if(d.name){$("hello").textContent=(lang==="ar"?"👋 أهلاً يا ":"👋 Hi ")+d.name;$("miniName").textContent=d.name}
- $("miniAvatar").textContent=avGender==="girl"?"👧":"👦";$("recommendation").textContent=getRecommendation();
- renderTasks();renderWeek();renderSubjects();renderFlash();renderMistakes();renderStats();renderAchievements();
- if($("notesText")&&d.notes)$("notesText").value=d.notes;
- $("soundBtn").textContent=settings.sound?(lang==="ar"?"مفعل 🔊":"On 🔊"):(lang==="ar"?"مغلق 🔇":"Off 🔇");
- $("darkBtn").textContent=settings.dark?(lang==="ar"?"مفعل 🌙":"On 🌙"):(lang==="ar"?"مغلق ☀️":"Off ☀️");
-}
-function getRecommendation(){let pending=taskData.find(t=>!t.done);if(pending)return lang==="ar"?`ابدأ بـ ${pending.subject}: ${pending.text}`:`Start with ${pending.subject}: ${pending.text}`;let ss=getSelectedSubjects();return ss.length?(lang==="ar"?`راجع ${ss[0]} لمدة 20 دقيقة.`:`Review ${ss[0]} for 20 minutes.`):(lang==="ar"?"أضف مادة أولًا.":"Add a subject first.")}
-function toggleSetting(k){settings[k]=!settings[k];save();renderAll()}
-function toggleDark(){settings.dark=!settings.dark;applySettings();save();renderAll()}
-function bg(x){settings.bg=x;applySettings();save()}
-function applySettings(){document.body.style.background=settings.dark?"#17211d":settings.bg==="blue"?"linear-gradient(135deg,#edf5fb,#e8f0f7)":settings.bg==="warm"?"linear-gradient(135deg,#fff7e9,#f7efe5)":"linear-gradient(135deg,#edf7ef,#f1f6fb)";document.body.style.color=settings.dark?"#eef7f1":"var(--text)"}
-function editAccount(){openModal(`<h3>${lang==="ar"?"تعديل الحساب":"Edit account"}</h3><div class="field"><label>${lang==="ar"?"الاسم":"Name"}</label><input id="edName" value="${$("pName").value}"></div><div class="field"><label>${lang==="ar"?"السن":"Age"}</label><input id="edAge" type="number" value="${$("pAge").value}"></div><button class="primary" onclick="saveEdit()">${lang==="ar"?"حفظ":"Save"}</button>`)}
-function saveEdit(){$("pName").value=$("edName").value;$("pAge").value=$("edAge").value;save();closeModal();renderAll()}
-function newAccount(){if(!confirm(lang==="ar"?"إنشاء حساب جديد؟ سيتم مسح الحساب الحالي من هذا الجهاز.":"Create a new account? Current local account will be removed."))return;localStorage.removeItem("studyQuest");location.reload()}
-function deleteAccount(){if(!confirm(lang==="ar"?"متأكد إنك عايز تحذف الحساب؟":"Are you sure you want to delete the account?"))return;localStorage.removeItem("studyQuest");location.reload()}
-$("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal()});
-applyLang();load();
+
 </script>
+
 </body>
 </html>
