@@ -1,132 +1,1474 @@
-from pathlib import Path
-
-html = r'''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Study Quest</title>
+
 <style>
-:root{--bg:#f5f7fb;--card:#fff;--text:#182230;--muted:#667085;--accent:#5b5bd6;--soft:#eef0ff;--line:#e5e7eb;--good:#20a66a}
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
-button,input,textarea,select{font:inherit}button{cursor:pointer;border:0}
-.hidden{display:none!important}.app{min-height:100vh}.top{height:68px;background:var(--card);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 22px;position:sticky;top:0;z-index:10}
-.brand{font-weight:800;font-size:20px}.top button,.iconbtn{background:var(--soft);padding:10px 14px;border-radius:12px}
-.layout{display:flex;min-height:calc(100vh - 68px)}.side{width:235px;background:var(--card);border-left:1px solid var(--line);padding:18px 12px;position:sticky;top:68px;height:calc(100vh - 68px);overflow:auto}
-.nav{display:flex;gap:9px;align-items:center;width:100%;padding:12px 13px;margin:3px 0;background:transparent;border-radius:13px;text-align:right;color:var(--text)}
-.nav:hover,.nav.active{background:var(--soft);color:var(--accent);font-weight:700}.main{flex:1;padding:30px;max-width:1200px;margin:auto;width:100%}
-.page{display:none}.page.active{display:block}.hero{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px;display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-.hero h1{margin:0 0 8px;font-size:30px}.muted{color:var(--muted)}.avatar{font-size:58px;background:var(--soft);width:100px;height:100px;border-radius:28px;display:grid;place-items:center}
-.primary{background:var(--accent);color:white;padding:14px 22px;border-radius:14px;font-weight:700}.secondary{background:var(--soft);color:var(--accent);padding:12px 18px;border-radius:13px;font-weight:700}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px}.feature{min-height:145px;text-align:right}.feature h3{margin:8px 0}.feature p{color:var(--muted);line-height:1.5}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}.stat{text-align:center}.stat b{font-size:28px;display:block}.section-title{margin:0 0 18px;font-size:27px}
-.list{display:grid;gap:12px}.row{display:flex;justify-content:space-between;align-items:center;background:var(--card);border:1px solid var(--line);padding:16px;border-radius:16px}
-.progress{height:10px;background:#e8eaf0;border-radius:99px;overflow:hidden}.bar{height:100%;background:var(--accent);width:0}
-input,textarea,select{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--card);margin:6px 0 12px}textarea{min-height:180px;resize:vertical}
-.actions{display:flex;gap:10px;flex-wrap:wrap}.pill{display:inline-block;background:var(--soft);padding:7px 10px;border-radius:99px;color:var(--accent);font-size:13px}
-.timer{text-align:center;font-size:70px;font-weight:800;margin:25px}.choice{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.choice button{background:var(--card);border:1px solid var(--line);padding:22px;border-radius:17px;text-align:right}.choice button:hover{border-color:var(--accent)}
-.tree{text-align:center;font-size:150px;padding:30px}.level{text-align:center;font-size:24px;font-weight:800}.achievement{display:flex;align-items:center;gap:14px}.lock{opacity:.45}
-@media(max-width:800px){.side{width:72px}.nav span{display:none}.main{padding:18px}.grid,.stats{grid-template-columns:1fr}.hero{gap:15px}.hero h1{font-size:23px}.top{padding:0 12px}}
+:root{
+  --bg:#f5f7fb;
+  --card:#fff;
+  --text:#182230;
+  --muted:#667085;
+  --accent:#5b5bd6;
+  --soft:#eef0ff;
+  --line:#e5e7eb;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;border:0}
+.hidden{display:none!important}
+
+.app{min-height:100vh}
+
+.top{
+  height:68px;
+  background:var(--card);
+  border-bottom:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 22px;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.brand{
+  font-weight:800;
+  font-size:20px;
+}
+
+.top button,.iconbtn{
+  background:var(--soft);
+  padding:10px 14px;
+  border-radius:12px;
+}
+
+.layout{
+  display:flex;
+  min-height:calc(100vh - 68px);
+}
+
+.side{
+  width:235px;
+  background:var(--card);
+  border-left:1px solid var(--line);
+  padding:18px 12px;
+  position:sticky;
+  top:68px;
+  height:calc(100vh - 68px);
+  overflow:auto;
+}
+
+.nav{
+  display:flex;
+  gap:9px;
+  align-items:center;
+  width:100%;
+  padding:12px 13px;
+  margin:3px 0;
+  background:transparent;
+  border-radius:13px;
+  text-align:right;
+  color:var(--text);
+}
+
+.nav:hover,.nav.active{
+  background:var(--soft);
+  color:var(--accent);
+  font-weight:700;
+}
+
+.main{
+  flex:1;
+  padding:30px;
+  max-width:1200px;
+  margin:auto;
+  width:100%;
+}
+
+.page{display:none}
+.page.active{display:block}
+
+.hero{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:28px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  margin:0 0 8px;
+  font-size:30px;
+}
+
+.muted{color:var(--muted)}
+
+.avatar{
+  font-size:58px;
+  background:var(--soft);
+  width:100px;
+  height:100px;
+  border-radius:28px;
+  display:grid;
+  place-items:center;
+}
+
+.primary{
+  background:var(--accent);
+  color:white;
+  padding:14px 22px;
+  border-radius:14px;
+  font-weight:700;
+}
+
+.secondary{
+  background:var(--soft);
+  color:var(--accent);
+  padding:12px 18px;
+  border-radius:13px;
+  font-weight:700;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:20px;
+}
+
+.feature{
+  min-height:145px;
+  text-align:right;
+}
+
+.feature h3{margin:8px 0}
+
+.feature p{
+  color:var(--muted);
+  line-height:1.5;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.stat{text-align:center}
+
+.stat b{
+  font-size:28px;
+  display:block;
+}
+
+.section-title{
+  margin:0 0 18px;
+  font-size:27px;
+}
+
+.list{
+  display:grid;
+  gap:12px;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:var(--card);
+  border:1px solid var(--line);
+  padding:16px;
+  border-radius:16px;
+}
+
+.progress{
+  height:10px;
+  background:#e8eaf0;
+  border-radius:99px;
+  overflow:hidden;
+}
+
+.bar{
+  height:100%;
+  background:var(--accent);
+  width:0;
+}
+
+input,textarea,select{
+  width:100%;
+  padding:13px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--card);
+  margin:6px 0 12px;
+}
+
+textarea{
+  min-height:180px;
+  resize:vertical;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.pill{
+  display:inline-block;
+  background:var(--soft);
+  padding:7px 10px;
+  border-radius:99px;
+  color:var(--accent);
+  font-size:13px;
+}
+
+.timer{
+  text-align:center;
+  font-size:70px;
+  font-weight:800;
+  margin:25px;
+}
+
+.tree{
+  text-align:center;
+  font-size:150px;
+  padding:30px;
+}
+
+.level{
+  text-align:center;
+  font-size:24px;
+  font-weight:800;
+}
+
+.achievement{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+@media(max-width:800px){
+
+  .side{
+    width:72px;
+  }
+
+  .nav span{
+    display:none;
+  }
+
+  .main{
+    padding:18px;
+  }
+
+  .grid,.stats{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    gap:15px;
+  }
+
+  .hero h1{
+    font-size:23px;
+  }
+
+  .top{
+    padding:0 12px;
+  }
+}
 </style>
 </head>
-<body>
-<div id="setup" class="main" style="max-width:600px;padding-top:70px">
-<div class="card" style="text-align:center">
-<div style="font-size:70px">📚</div><h1>Study Quest</h1><p class="muted">مكان منظم يساعدك تبدأ وتكمل مذاكرتك.</p>
-<input id="name" placeholder="اسمك">
-<select id="grade"><option value="">اختار صفك</option><option>أولى إعدادي</option><option>تانية إعدادي</option><option>تالتة إعدادي</option></select>
-<button class="primary" onclick="startApp()">ابدأ رحلتك 🚀</button>
-</div></div>
 
+<body>
+
+<!-- صفحة البداية -->
+<div id="setup" class="main" style="max-width:600px;padding-top:70px">
+
+  <div class="card" style="text-align:center">
+
+    <div style="font-size:70px">📚</div>
+
+    <h1>Study Quest</h1>
+
+    <p class="muted">
+      مكان منظم يساعدك تبدأ وتكمل مذاكرتك.
+    </p>
+
+    <input id="name" placeholder="اسمك">
+
+    <select id="grade">
+      <option value="">اختار صفك</option>
+      <option>أولى إعدادي</option>
+      <option>تانية إعدادي</option>
+      <option>تالتة إعدادي</option>
+    </select>
+
+    <button class="primary" onclick="startApp()">
+      ابدأ رحلتك 🚀
+    </button>
+
+  </div>
+</div>
+
+
+<!-- التطبيق -->
 <div id="app" class="app hidden">
-<header class="top"><div class="brand">📚 Study Quest</div><button onclick="show('settings')">⚙️ Settings</button></header>
+
+<header class="top">
+
+  <div class="brand">
+    📚 Study Quest
+  </div>
+
+  <button onclick="show('settings')">
+    ⚙️ Settings
+  </button>
+
+</header>
+
+
 <div class="layout">
+
 <aside class="side">
-<button class="nav active" data-page="home" onclick="show('home')">🏠 <span>الرئيسية</span></button>
-<button class="nav" data-page="study" onclick="show('study')">📚 <span>المذاكرة</span></button>
-<button class="nav" data-page="development" onclick="show('development')">🧠 <span>التطور</span></button>
-<button class="nav" data-page="planning" onclick="show('planning')">📅 <span>التخطيط</span></button>
-<button class="nav" data-page="subjects" onclick="show('subjects')">📖 <span>المواد</span></button>
-<button class="nav" data-page="review" onclick="show('review')">🃏 <span>المراجعة</span></button>
-<button class="nav" data-page="notes" onclick="show('notes')">📝 <span>ملاحظاتي</span></button>
-<button class="nav" data-page="library" onclick="show('library')">📂 <span>المكتبة</span></button>
-<button class="nav" data-page="achievements" onclick="show('achievements')">🏆 <span>الإنجازات</span></button>
-<button class="nav" data-page="garden" onclick="show('garden')">🌳 <span>حديقتي</span></button>
+
+<button class="nav active" data-page="home" onclick="show('home')">
+🏠 <span>الرئيسية</span>
+</button>
+
+<button class="nav" data-page="study" onclick="show('study')">
+📚 <span>المذاكرة</span>
+</button>
+
+<button class="nav" data-page="development" onclick="show('development')">
+🧠 <span>التطور</span>
+</button>
+
+<button class="nav" data-page="planning" onclick="show('planning')">
+📅 <span>التخطيط</span>
+</button>
+
+<button class="nav" data-page="subjects" onclick="show('subjects')">
+📖 <span>المواد</span>
+</button>
+
+<button class="nav" data-page="review" onclick="show('review')">
+🃏 <span>المراجعة</span>
+</button>
+
+<button class="nav" data-page="notes" onclick="show('notes')">
+📝 <span>ملاحظاتي</span>
+</button>
+
+<button class="nav" data-page="library" onclick="show('library')">
+📂 <span>المكتبة</span>
+</button>
+
+<button class="nav" data-page="achievements" onclick="show('achievements')">
+🏆 <span>الإنجازات</span>
+</button>
+
+<button class="nav" data-page="garden" onclick="show('garden')">
+🌳 <span>حديقتي</span>
+</button>
+
 </aside>
 
+
 <main class="main">
+
+
+<!-- الرئيسية -->
 <section id="home" class="page active">
-<div class="hero"><div><h1 id="hello">أهلاً 👋</h1><p class="muted">جاهز تعمل إنجاز جديد؟</p><button class="primary" onclick="show('study')">🚀 ابدأ المذاكرة</button></div><div class="avatar">🧑‍🎓</div></div>
-<div class="card"><h2>ملخصك اليوم</h2><p class="muted">الجلسات المكتملة: <b id="sessions">0</b> · XP: <b id="xpHome">0</b></p><div class="progress"><div class="bar" id="barHome"></div></div></div>
+
+<div class="hero">
+
+<div>
+
+<h1 id="hello">
+أهلاً 👋
+</h1>
+
+<p class="muted">
+جاهز تعمل إنجاز جديد؟
+</p>
+
+<button class="primary" onclick="show('study')">
+🚀 ابدأ المذاكرة
+</button>
+
+</div>
+
+<div class="avatar">
+🧑‍🎓
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>ملخصك اليوم</h2>
+
+<p class="muted">
+الجلسات المكتملة:
+<b id="sessions">0</b>
+
+· XP:
+
+<b id="xpHome">0</b>
+</p>
+
+<div class="progress">
+<div class="bar" id="barHome"></div>
+</div>
+
+</div>
+
 </section>
 
-<section id="study" class="page"><h2 class="section-title">📚 المذاكرة</h2>
+
+<!-- المذاكرة -->
+<section id="study" class="page">
+
+<h2 class="section-title">
+📚 المذاكرة
+</h2>
+
 <div class="grid">
-<div class="card feature"><div style="font-size:32px">🤖</div><h3>Study Copilot</h3><p>اختار وقتك، وأنا أقترح لك بداية مناسبة.</p><button class="secondary" onclick="copilot()">مساعدني</button></div>
-<div class="card feature"><div style="font-size:32px">🎯</div><h3>ماذا أذاكر الآن؟</h3><p id="suggestion">اضغط للحصول على اقتراح.</p><button class="secondary" onclick="suggest()">اقترح لي</button></div>
-<div class="card feature"><div style="font-size:32px">📖</div><h3>Learn → Practice → Test → Review</h3><p>مسار متكامل للدرس.</p><button class="secondary" onclick="startSession()">ابدأ جلسة</button></div>
-<div class="card feature"><div style="font-size:32px">🧑‍🏫</div><h3>Teach Me</h3><p>اكتب ما فهمته من درس، ثم راجعه بنفسك.</p><button class="secondary" onclick="teach()">ابدأ</button></div>
-<div class="card feature"><div style="font-size:32px">⏱️</div><h3>Quick Study</h3><p>جلسة قصيرة تناسب الوقت المتاح.</p><button class="secondary" onclick="quick()">15 دقيقة</button></div>
-</div></section>
 
-<section id="development" class="page"><h2 class="section-title">🧠 التطور</h2><div class="grid">
-<div class="card"><h3>🎯 Weak Points</h3><p class="muted">سجل أخطائك هنا لتعرف ما يحتاج مراجعة.</p><button class="secondary" onclick="alert('بعد كل اختبار، أضف الأخطاء هنا.')">إضافة ملاحظة</button></div>
-<div class="card"><h3>🧠 Forgetting Radar</h3><p>🔄 مراجعة مقترحة: الدرس الذي مر عليه وقت.</p></div>
-<div class="card"><h3>🗺️ Syllabus Map</h3><p>الوحدات والدروس تظهر كتقدم تدريجي.</p><div class="progress"><div class="bar" style="width:35%"></div></div></div>
-<div class="card"><h3>📊 Personal Study Profile</h3><p class="muted">جلساتك: <b id="sessions2">0</b><br>XP: <b id="xp2">0</b></p></div>
-</div></section>
 
-<section id="planning" class="page"><h2 class="section-title">📅 التخطيط</h2><div class="grid">
-<div class="card"><h3>🚨 Exam Mode</h3><input id="exam" placeholder="اسم الامتحان"><input id="examDate" type="date"><button class="primary" onclick="addExam()">إضافة الامتحان</button><p id="examResult"></p></div>
-<div class="card"><h3>🩹 Catch-up Mode</h3><p class="muted">اكتب عدد المهام المتراكمة.</p><input id="backlog" type="number" placeholder="مثلاً 6"><button class="secondary" onclick="catchup()">رتبها لي</button><p id="catchResult"></p></div>
-<div class="card"><h3>⏱️ Quick Study</h3><p>اختار 15 أو 30 أو 60 دقيقة وسنقترح نشاطًا مناسبًا.</p><div class="actions"><button class="secondary" onclick="quick(15)">15</button><button class="secondary" onclick="quick(30)">30</button><button class="secondary" onclick="quick(60)">60</button></div></div>
-</div></section>
+<div class="card feature">
 
-<section id="subjects" class="page"><h2 class="section-title">📖 المواد</h2><div class="list">
-<div class="row">📚 القرآن الكريم وتجويده <span class="pill">مادة</span></div><div class="row">🕌 أصول الدين <span class="pill">مادة</span></div><div class="row">⚖️ الفقه <span class="pill">مادة</span></div><div class="row">✍️ النحو والصرف <span class="pill">لغة عربية</span></div><div class="row">📖 المطالعة والنصوص والقصة <span class="pill">لغة عربية</span></div><div class="row">🌍 الدراسات الاجتماعية <span class="pill">مادة</span></div><div class="row">🔬 العلوم <span class="pill">مادة</span></div><div class="row">➗ الرياضيات <span class="pill">مادة</span></div><div class="row">🇬🇧 اللغة الإنجليزية <span class="pill">لغة</span></div><div class="row">💻 الحاسب الآلي <span class="pill">مادة</span></div><div class="row">🎨 التربية الفنية <span class="pill">مادة</span></div>
-</div></section>
+<div style="font-size:32px">
+🤖
+</div>
 
-<section id="review" class="page"><h2 class="section-title">🃏 المراجعة</h2><div class="card" style="text-align:center"><div id="flash" style="font-size:25px;margin:30px">ما هو ناتج 2 × 8 ؟</div><button class="primary" onclick="flip()">اقلب البطاقة</button> <button class="secondary" onclick="nextCard()">بطاقة جديدة</button></div></section>
+<h3>
+Study Copilot
+</h3>
 
-<section id="notes" class="page"><h2 class="section-title">📝 ملاحظاتي</h2><div class="card"><textarea id="notesArea" placeholder="اكتب ملاحظاتك هنا..."></textarea><button class="primary" onclick="saveNotes()">💾 حفظ</button><span id="saved" class="pill"></span></div></section>
+<p>
+اختار وقتك، وأنا أقترح لك بداية مناسبة.
+</p>
 
-<section id="library" class="page"><h2 class="section-title">📂 المكتبة</h2><div class="grid"><div class="card"><h3>📁 الملفات</h3><p class="muted">مكان منظم لمصادرك.</p><input type="file"></div><div class="card"><h3>📸 Scan → Understand</h3><p class="muted">ارفع صورة لصفحة هنا. تحويلها لمحتوى ذكي يحتاج ربط خدمة AI لاحقًا.</p><input type="file" accept="image/*"></div></div></section>
+<button class="secondary" onclick="copilot()">
+مساعدني
+</button>
 
-<section id="achievements" class="page"><h2 class="section-title">🏆 الإنجازات</h2><div class="grid"><div class="card achievement">🥇 <div><h3>أول جلسة</h3><p class="muted">أكمل أول جلسة مذاكرة.</p></div></div><div class="card achievement">🔥 <div><h3>Streak</h3><p class="muted">حافظ على الاستمرارية.</p></div></div><div class="card achievement">⭐ <div><h3>Level Up</h3><p class="muted">ارفع مستواك.</p></div></div></div></section>
+</div>
 
-<section id="garden" class="page"><h2 class="section-title">🌳 حديقتي</h2><div class="card"><div class="tree" id="tree">🌱</div><div class="level">Level <span id="level">1</span> · <span id="xpGarden">0</span> XP</div><div style="margin:18px 0" class="progress"><div class="bar" id="xpBar"></div></div><p class="muted" style="text-align:center">كلما زاد XP، تكبر الشجرة وتتطور 🌱 → 🌿 → 🌳</p></div></section>
 
-<section id="session" class="page"><h2 class="section-title">🎯 جلسة مذاكرة</h2><div class="card" style="text-align:center"><input id="task" placeholder="إيه اللي هتذاكره؟"><div class="timer" id="timer">25:00</div><div class="actions" style="justify-content:center"><button class="primary" onclick="startTimer()">▶️ ابدأ</button><button class="secondary" onclick="stopTimer()">⏸️ إيقاف</button><button class="secondary" onclick="finishSession()">✅ خلصت</button></div></div></section>
+<div class="card feature">
 
-<section id="settings" class="page"><h2 class="section-title">⚙️ الإعدادات</h2><div class="grid"><div class="card"><h3>👤 الحساب</h3><input id="editName"><button class="primary" onclick="saveName()">حفظ الاسم</button></div><div class="card"><h3>🌙 المظهر</h3><button class="secondary" onclick="toggleDark()">تبديل الوضع</button></div><div class="card"><h3>🌐 اللغة</h3><p class="muted">واجهة النسخة الحالية بالعربية.</p></div></div></section>
-</main></div></div>
+<div style="font-size:32px">
+🎯
+</div>
+
+<h3>
+ماذا أذاكر الآن؟
+</h3>
+
+<p id="suggestion">
+اضغط للحصول على اقتراح.
+</p>
+
+<button class="secondary" onclick="suggest()">
+اقترح لي
+</button>
+
+</div>
+
+
+<div class="card feature">
+
+<div style="font-size:32px">
+📖
+</div>
+
+<h3>
+Learn → Practice → Test → Review
+</h3>
+
+<p>
+مسار متكامل للدرس.
+</p>
+
+<button class="secondary" onclick="startSession()">
+ابدأ جلسة
+</button>
+
+</div>
+
+
+<div class="card feature">
+
+<div style="font-size:32px">
+🧑‍🏫
+</div>
+
+<h3>
+Teach Me
+</h3>
+
+<p>
+اكتب ما فهمته من درس، ثم راجعه بنفسك.
+</p>
+
+<button class="secondary" onclick="teach()">
+ابدأ
+</button>
+
+</div>
+
+
+<div class="card feature">
+
+<div style="font-size:32px">
+⏱️
+</div>
+
+<h3>
+Quick Study
+</h3>
+
+<p>
+جلسة قصيرة تناسب الوقت المتاح.
+</p>
+
+<button class="secondary" onclick="quick()">
+15 دقيقة
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- التطور -->
+<section id="development" class="page">
+
+<h2 class="section-title">
+🧠 التطور
+</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>
+🎯 Weak Points
+</h3>
+
+<p class="muted">
+سجل أخطائك هنا لتعرف ما يحتاج مراجعة.
+</p>
+
+<button class="secondary"
+onclick="alert('بعد كل اختبار، أضف الأخطاء هنا.')">
+إضافة ملاحظة
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+🧠 Forgetting Radar
+</h3>
+
+<p>
+🔄 مراجعة مقترحة: الدرس الذي مر عليه وقت.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+🗺️ Syllabus Map
+</h3>
+
+<p>
+الوحدات والدروس تظهر كتقدم تدريجي.
+</p>
+
+<div class="progress">
+
+<div class="bar" style="width:35%"></div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+📊 Personal Study Profile
+</h3>
+
+<p class="muted">
+
+جلسات:
+
+<b id="sessions2">0</b>
+
+<br>
+
+XP:
+
+<b id="xp2">0</b>
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- التخطيط -->
+<section id="planning" class="page">
+
+<h2 class="section-title">
+📅 التخطيط
+</h2>
+
+<div class="grid">
+
+
+<div class="card">
+
+<h3>
+🚨 Exam Mode
+</h3>
+
+<input id="exam" placeholder="اسم الامتحان">
+
+<input id="examDate" type="date">
+
+<button class="primary" onclick="addExam()">
+إضافة الامتحان
+</button>
+
+<p id="examResult"></p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+🩹 Catch-up Mode
+</h3>
+
+<p class="muted">
+اكتب عدد المهام المتراكمة.
+</p>
+
+<input id="backlog"
+type="number"
+placeholder="مثلاً 6">
+
+<button class="secondary" onclick="catchup()">
+رتبها لي
+</button>
+
+<p id="catchResult"></p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+⏱️ Quick Study
+</h3>
+
+<p>
+اختار 15 أو 30 أو 60 دقيقة.
+</p>
+
+<div class="actions">
+
+<button class="secondary"
+onclick="quick(15)">
+15
+</button>
+
+<button class="secondary"
+onclick="quick(30)">
+30
+</button>
+
+<button class="secondary"
+onclick="quick(60)">
+60
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- المواد -->
+<section id="subjects" class="page">
+
+<h2 class="section-title">
+📖 المواد
+</h2>
+
+<div class="list">
+
+<div class="row">
+📚 القرآن الكريم وتجويده
+<span class="pill">مادة</span>
+</div>
+
+<div class="row">
+🕌 أصول الدين
+<span class="pill">مادة</span>
+</div>
+
+<div class="row">
+⚖️ الفقه
+<span class="pill">مادة</span>
+</div>
+
+<div class="row">
+✍️ النحو والصرف
+<span class="pill">لغة عربية</span>
+</div>
+
+<div class="row">
+📖 المطالعة والنصوص والقصة
+<span class="pill">لغة عربية</span>
+</div>
+
+<div class="row">
+🌍 الدراسات الاجتماعية
+<span class="pill">مادة</span>
+</div>
+
+<div class="row">
+🔬 العلوم
+<span class="pill">مادة</span>
+</div>
+
+<div class="row">
+➗ الرياضيات
+<span class="pill">مادة</span>
+</div>
+
+<div class="row">
+🇬🇧 اللغة الإنجليزية
+<span class="pill">لغة</span>
+</div>
+
+<div class="row">
+💻 الحاسب الآلي
+<span class="pill">مادة</span>
+</div>
+
+<div class="row">
+🎨 التربية الفنية
+<span class="pill">مادة</span>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- المراجعة -->
+<section id="review" class="page">
+
+<h2 class="section-title">
+🃏 المراجعة
+</h2>
+
+<div class="card" style="text-align:center">
+
+<div id="flash"
+style="font-size:25px;margin:30px">
+
+ما هو ناتج 2 × 8 ؟
+
+</div>
+
+<button class="primary" onclick="flip()">
+اقلب البطاقة
+</button>
+
+<button class="secondary" onclick="nextCard()">
+بطاقة جديدة
+</button>
+
+</div>
+
+</section>
+
+
+<!-- الملاحظات -->
+<section id="notes" class="page">
+
+<h2 class="section-title">
+📝 ملاحظاتي
+</h2>
+
+<div class="card">
+
+<textarea
+id="notesArea"
+placeholder="اكتب ملاحظاتك هنا...">
+</textarea>
+
+<button class="primary" onclick="saveNotes()">
+💾 حفظ
+</button>
+
+<span id="saved" class="pill"></span>
+
+</div>
+
+</section>
+
+
+<!-- المكتبة -->
+<section id="library" class="page">
+
+<h2 class="section-title">
+📂 المكتبة
+</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>
+📁 الملفات
+</h3>
+
+<p class="muted">
+مكان منظم لمصادرك.
+</p>
+
+<input type="file">
+
+</div>
+
+
+<div class="card">
+
+<h3>
+📸 Scan → Understand
+</h3>
+
+<p class="muted">
+ارفع صورة لصفحة هنا.
+تحويلها لمحتوى ذكي يحتاج ربط خدمة AI لاحقًا.
+</p>
+
+<input type="file" accept="image/*">
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- الإنجازات -->
+<section id="achievements" class="page">
+
+<h2 class="section-title">
+🏆 الإنجازات
+</h2>
+
+<div class="grid">
+
+<div class="card achievement">
+
+🥇
+
+<div>
+
+<h3>
+أول جلسة
+</h3>
+
+<p class="muted">
+أكمل أول جلسة مذاكرة.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="card achievement">
+
+🔥
+
+<div>
+
+<h3>
+Streak
+</h3>
+
+<p class="muted">
+حافظ على الاستمرارية.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="card achievement">
+
+⭐
+
+<div>
+
+<h3>
+Level Up
+</h3>
+
+<p class="muted">
+ارفع مستواك.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- الحديقة -->
+<section id="garden" class="page">
+
+<h2 class="section-title">
+🌳 حديقتي
+</h2>
+
+<div class="card">
+
+<div class="tree" id="tree">
+🌱
+</div>
+
+<div class="level">
+
+Level
+
+<span id="level">
+1
+</span>
+
+·
+
+<span id="xpGarden">
+0
+</span>
+
+XP
+
+</div>
+
+<div style="margin:18px 0"
+class="progress">
+
+<div class="bar"
+id="xpBar">
+</div>
+
+</div>
+
+<p class="muted"
+style="text-align:center">
+
+كلما زاد XP،
+تكبر الشجرة وتتطور
+🌱 → 🌿 → 🌳
+
+</p>
+
+</div>
+
+</section>
+
+
+<!-- جلسة المذاكرة -->
+<section id="session" class="page">
+
+<h2 class="section-title">
+🎯 جلسة مذاكرة
+</h2>
+
+<div class="card"
+style="text-align:center">
+
+<input id="task"
+placeholder="إيه اللي هتذاكره؟">
+
+<div class="timer" id="timer">
+25:00
+</div>
+
+<div class="actions"
+style="justify-content:center">
+
+<button class="primary"
+onclick="startTimer()">
+▶️ ابدأ
+</button>
+
+<button class="secondary"
+onclick="stopTimer()">
+⏸️ إيقاف
+</button>
+
+<button class="secondary"
+onclick="finishSession()">
+✅ خلصت
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- الإعدادات -->
+<section id="settings" class="page">
+
+<h2 class="section-title">
+⚙️ الإعدادات
+</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>
+👤 الحساب
+</h3>
+
+<input id="editName">
+
+<button class="primary"
+onclick="saveName()">
+حفظ الاسم
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+🌙 المظهر
+</h3>
+
+<button class="secondary"
+onclick="toggleDark()">
+تبديل الوضع
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+🌐 اللغة
+</h3>
+
+<p class="muted">
+واجهة النسخة الحالية بالعربية.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+</div>
+
+</div>
+
 
 <script>
-let xp=0,sessions=0,level=1,seconds=1500,timerId=null,flashAnswer=false;
+
+let xp=0;
+let sessions=0;
+let level=1;
+let seconds=1500;
+let timerId=null;
+let flashAnswer=false;
+
 const pages=[...document.querySelectorAll('.page')];
-function startApp(){const n=document.getElementById('name').value.trim();if(!n)return alert('اكتب اسمك الأول ❤️');document.getElementById('hello').textContent='أهلاً '+n+' 👋';document.getElementById('editName').value=n;document.getElementById('setup').classList.add('hidden');document.getElementById('app').classList.remove('hidden');}
-function show(id){pages.forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav').forEach(b=>b.classList.toggle('active',b.dataset.page===id));}
-function addXP(n){xp+=n;level=Math.floor(xp/100)+1;document.getElementById('xpHome').textContent=xp;document.getElementById('xp2').textContent=xp;document.getElementById('xpGarden').textContent=xp;document.getElementById('level').textContent=level;document.getElementById('xpBar').style.width=(xp%100)+'%';document.getElementById('barHome').style.width=(xp%100)+'%';document.getElementById('tree').textContent=level<3?'🌱':level<6?'🌿':level<10?'🌳':'🌳✨';}
-function suggest(){document.getElementById('suggestion').textContent='الرياضيات — راجع جزء صغير ثم حل 5 أسئلة.'}
-function copilot(){const m=prompt('قد إيه عندك وقت؟ بالدقائق');if(m)alert('اقتراحي: '+m+' دقيقة مذاكرة مركزة + اختبار قصير في النهاية.')}
-function startSession(){show('session')}
-function teach(){alert('اكتب شرحك للدرس في ملاحظاتك، ثم قارنه بالكتاب وحدد النقاط التي لم تشرحها بوضوح.')}
-function quick(m=15){alert('جلسة Quick Study لمدة '+m+' دقيقة: اختر درسًا صغيرًا وركز عليه فقط.');show('session')}
-function addExam(){let n=document.getElementById('exam').value,d=document.getElementById('examDate').value;if(!n||!d)return alert('اكتب اسم الامتحان والتاريخ');document.getElementById('examResult').textContent='🚨 '+n+' — '+d+' تمت إضافته.'}
-function catchup(){let n=+document.getElementById('backlog').value||0;document.getElementById('catchResult').textContent=n?`قسّم ${n} مهمة على أيامك بدل ضغطهم في يوم واحد.`:'اكتب عدد المهام.'}
-function flip(){document.getElementById('flash').textContent=flashAnswer?'ما هو ناتج 2 × 8 ؟':'الإجابة: 16';flashAnswer=!flashAnswer}
-function nextCard(){flashAnswer=false;document.getElementById('flash').textContent=['ما هو ناتج 2 × 8 ؟','ما عاصمة مصر؟','كم عدد أيام الأسبوع؟'][Math.floor(Math.random()*3)]}
-function saveNotes(){localStorage.setItem('sqnotes',document.getElementById('notesArea').value);document.getElementById('saved').textContent='تم الحفظ ✓'}
-document.getElementById('notesArea').value=localStorage.getItem('sqnotes')||'';
-function updateTimer(){let m=Math.floor(seconds/60),s=seconds%60;document.getElementById('timer').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')}
-function startTimer(){if(timerId)return;timerId=setInterval(()=>{if(seconds>0){seconds--;updateTimer()}else stopTimer()},1000)}
-function stopTimer(){clearInterval(timerId);timerId=null}
-function finishSession(){stopTimer();sessions++;addXP(30);document.getElementById('sessions').textContent=sessions;document.getElementById('sessions2').textContent=sessions;seconds=1500;updateTimer();alert('أحسنت! +30 XP 🎉');show('home')}
-function saveName(){let n=document.getElementById('editName').value.trim();if(n){document.getElementById('hello').textContent='أهلاً '+n+' 👋';alert('تم حفظ الاسم ✓')}}
-function toggleDark(){document.body.style.background=getComputedStyle(document.documentElement).getPropertyValue('--bg')==='#111827'?'#f5f7fb':'#111827';document.body.style.color=document.body.style.background==='#111827'?'#fff':''}
+
+
+function startApp(){
+
+  const n=document
+  .getElementById('name')
+  .value
+  .trim();
+
+  if(!n)
+    return alert('اكتب اسمك الأول ❤️');
+
+  document
+  .getElementById('hello')
+  .textContent='أهلاً '+n+' 👋';
+
+  document
+  .getElementById('editName')
+  .value=n;
+
+  document
+  .getElementById('setup')
+  .classList.add('hidden');
+
+  document
+  .getElementById('app')
+  .classList.remove('hidden');
+}
+
+
+function show(id){
+
+  pages.forEach(p =>
+    p.classList.toggle(
+      'active',
+      p.id===id
+    )
+  );
+
+  document
+  .querySelectorAll('.nav')
+  .forEach(b =>
+    b.classList.toggle(
+      'active',
+      b.dataset.page===id
+    )
+  );
+}
+
+
+function addXP(n){
+
+  xp+=n;
+
+  level=Math.floor(xp/100)+1;
+
+  document.getElementById('xpHome').textContent=xp;
+
+  document.getElementById('xp2').textContent=xp;
+
+  document.getElementById('xpGarden').textContent=xp;
+
+  document.getElementById('level').textContent=level;
+
+  document.getElementById('xpBar').style.width=
+    (xp%100)+'%';
+
+  document.getElementById('barHome').style.width=
+    (xp%100)+'%';
+
+  document.getElementById('tree').textContent=
+    level<3
+    ?'🌱'
+    :level<6
+    ?'🌿'
+    :level<10
+    ?'🌳'
+    :'🌳✨';
+}
+
+
+function suggest(){
+
+  document.getElementById('suggestion')
+  .textContent=
+  'الرياضيات — راجع جزء صغير ثم حل 5 أسئلة.';
+}
+
+
+function copilot(){
+
+  const m=prompt(
+    'قد إيه عندك وقت؟ بالدقائق'
+  );
+
+  if(m)
+    alert(
+      'اقتراحي: '+m+
+      ' دقيقة مذاكرة مركزة + اختبار قصير في النهاية.'
+    );
+}
+
+
+function startSession(){
+  show('session');
+}
+
+
+function teach(){
+
+  alert(
+    'اكتب شرحك للدرس في ملاحظاتك، '+
+    'ثم قارنه بالكتاب وحدد النقاط التي لم تشرحها بوضوح.'
+  );
+
+}
+
+
+function quick(m=15){
+
+  alert(
+    'جلسة Quick Study لمدة '+
+    m+
+    ' دقيقة: اختر درسًا صغيرًا وركز عليه فقط.'
+  );
+
+  show('session');
+}
+
+
+function addExam(){
+
+  let n=
+    document.getElementById('exam').value;
+
+  let d=
+    document.getElementById('examDate').value;
+
+  if(!n || !d)
+    return alert(
+      'اكتب اسم الامتحان والتاريخ'
+    );
+
+  document.getElementById('examResult')
+  .textContent=
+    '🚨 '+n+
+    ' — '+d+
+    ' تمت إضافته.';
+}
+
+
+function catchup(){
+
+  let n=
+    +document.getElementById('backlog').value||0;
+
+  document.getElementById('catchResult')
+  .textContent=
+
+    n
+    ?`قسّم ${n} مهمة على أيامك بدل ضغطهم في يوم واحد.`
+    :'اكتب عدد المهام.';
+}
+
+
+function flip(){
+
+  document.getElementById('flash')
+  .textContent=
+
+    flashAnswer
+    ?'ما هو ناتج 2 × 8 ؟'
+    :'الإجابة: 16';
+
+  flashAnswer=!flashAnswer;
+}
+
+
+function nextCard(){
+
+  flashAnswer=false;
+
+  document.getElementById('flash')
+  .textContent=
+
+  [
+    'ما هو ناتج 2 × 8 ؟',
+    'ما عاصمة مصر؟',
+    'كم عدد أيام الأسبوع؟'
+  ][
+    Math.floor(Math.random()*3)
+  ];
+}
+
+
+function saveNotes(){
+
+  localStorage.setItem(
+    'sqnotes',
+    document.getElementById('notesArea').value
+  );
+
+  document.getElementById('saved')
+  .textContent='تم الحفظ ✓';
+}
+
+
+document.getElementById('notesArea').value=
+  localStorage.getItem('sqnotes')||'';
+
+
+function updateTimer(){
+
+  let m=Math.floor(seconds/60);
+  let s=seconds%60;
+
+  document.getElementById('timer')
+  .textContent=
+
+    String(m).padStart(2,'0')+
+    ':'+
+    String(s).padStart(2,'0');
+}
+
+
+function startTimer(){
+
+  if(timerId)return;
+
+  timerId=setInterval(()=>{
+
+    if(seconds>0){
+
+      seconds--;
+
+      updateTimer();
+
+    }else{
+
+      stopTimer();
+
+    }
+
+  },1000);
+
+}
+
+
+function stopTimer(){
+
+  clearInterval(timerId);
+
+  timerId=null;
+}
+
+
+function finishSession(){
+
+  stopTimer();
+
+  sessions++;
+
+  addXP(30);
+
+  document.getElementById('sessions')
+  .textContent=sessions;
+
+  document.getElementById('sessions2')
+  .textContent=sessions;
+
+  seconds=1500;
+
+  updateTimer();
+
+  alert('أحسنت! +30 XP 🎉');
+
+  show('home');
+}
+
+
+function saveName(){
+
+  let n=
+    document.getElementById('editName')
+    .value
+    .trim();
+
+  if(n){
+
+    document.getElementById('hello')
+    .textContent=
+    'أهلاً '+n+' 👋';
+
+    alert('تم حفظ الاسم ✓');
+
+  }
+
+}
+
+
+function toggleDark(){
+
+  const dark=
+    document.body.style.background===
+    'rgb(17, 24, 39)';
+
+  document.body.style.background=
+    dark
+    ?'#f5f7fb'
+    :'#111827';
+
+  document.body.style.color=
+    dark
+    ?'#182230'
+    :'#fff';
+
+}
+
 </script>
+
 </body>
-</html>'''
-path=Path("/mnt/data/study_quest_organized.html")
-path.write_text(html,encoding="utf-8")
-print(f"تم إنشاء الملف: {path}")
+</html>
